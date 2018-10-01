@@ -1,0 +1,42 @@
+h3 {
+  font-size: 12px; }
+
+.col-md-3:not(:last-child) {
+  border-right: 1px solid #d8d8d8; }
+
+.backlog, .develop, .test, .done {
+  margin: 20px 0;
+  padding: 10px;
+  height: calc(100vh - 114px);
+  border-radius: 5px; }
+  .backlog .backlog-task, .backlog .develop-task, .backlog .test-task, .backlog .done-task, .develop .backlog-task, .develop .develop-task, .develop .test-task, .develop .done-task, .test .backlog-task, .test .develop-task, .test .test-task, .test .done-task, .done .backlog-task, .done .develop-task, .done .test-task, .done .done-task {
+    border: 1px solid #d8d8d8;
+    margin-bottom: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 5px;
+    box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.1);
+    font-size: 12px; }
+    .backlog .backlog-task p, .backlog .develop-task p, .backlog .test-task p, .backlog .done-task p, .develop .backlog-task p, .develop .develop-task p, .develop .test-task p, .develop .done-task p, .test .backlog-task p, .test .develop-task p, .test .test-task p, .test .done-task p, .done .backlog-task p, .done .develop-task p, .done .test-task p, .done .done-task p {
+      margin: 5px 0;
+      letter-spacing: .7px; }
+  .backlog .backlog-task, .develop .backlog-task, .test .backlog-task, .done .backlog-task {
+    border-left: 8px solid #fa6e6e; }
+  .backlog .develop-task, .develop .develop-task, .test .develop-task, .done .develop-task {
+    border-left: 8px solid #fcac79; }
+  .backlog .test-task, .develop .test-task, .test .test-task, .done .test-task {
+    border-left: 8px solid #cc96ef; }
+  .backlog .done-task, .develop .done-task, .test .done-task, .done .done-task {
+    border-left: 8px solid #38e2bd; }
+
+.backlog.drop-hover {
+  background: linear-gradient(to bottom, #ffdada 1%, #f0f0f0 100%); }
+
+.develop.drop-hover {
+  background: linear-gradient(to bottom, #ffdbc4 1%, #f0f0f0 100%); }
+
+.test.drop-hover {
+  background: linear-gradient(to bottom, #eac9ff 1%, #f0f0f0 100%); }
+
+.done.drop-hover {
+  background: linear-gradient(to bottom, #bdfff1 1%, #f0f0f0 100%); }

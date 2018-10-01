@@ -1,0 +1,63 @@
+h3 {
+	font-size: 12px
+}
+
+.col-md-3 {
+	&:not(:last-child) {
+		border-right: 1px solid #d8d8d8
+	}
+}
+
+.backlog, .develop, .test, .done {
+	margin: 20px 0;
+	padding: 10px;
+	height: calc(100vh - 114px);
+	border-radius: 5px;
+	.backlog-task, .develop-task, .test-task, .done-task {
+		border: 1px solid #d8d8d8;
+		margin-bottom: 10px;
+		background-color: #fff;
+		border-radius: 5px;
+		padding: 5px;
+		box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.1);
+		font-size: 12px;
+		p {
+			margin: 5px 0;
+			letter-spacing: .7px;
+		}
+	}
+	.backlog-task {
+		border-left: 8px solid #fa6e6e;
+	}
+	.develop-task {
+		border-left: 8px solid #fcac79
+	}
+	.test-task {
+		border-left: 8px solid #cc96ef
+	}
+	.done-task {
+		border-left: 8px solid #38e2bd
+	}
+}
+
+.backlog {
+	&.drop-hover {
+		background: linear-gradient(to bottom, #ffdada 1%, #f0f0f0 100%)
+	}
+}
+.develop {
+	&.drop-hover {
+		background: linear-gradient(to bottom, #ffdbc4 1%, #f0f0f0 100%)
+	}
+}
+.test {
+	&.drop-hover {
+		background: linear-gradient(to bottom, #eac9ff 1%, #f0f0f0 100%)
+	}
+}
+.done {
+	&.drop-hover {
+		background: linear-gradient(to bottom, #bdfff1 1%, #f0f0f0 100%)
+	}
+}
+
