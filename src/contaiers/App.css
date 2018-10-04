@@ -1,42 +1,87 @@
-h3 {
+.app .header {
+  height: 100px; }
+  .app .header .col-md-6 {
+    align-items: center;
+    display: flex; }
+    .app .header .col-md-6:last-child {
+      justify-content: flex-end; }
+      .app .header .col-md-6:last-child .btn {
+        margin-right: 10px;
+        font-size: 15px;
+        color: #8a8a8a;
+        height: 50px;
+        width: 200px;
+        text-transform: uppercase;
+        cursor: pointer;
+        background-color: #fff;
+        border-radius: 5px;
+        border: 1px solid #d8d8d8;
+        border-left: 8px solid #fa6e6e;
+        box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.1);
+        transition: all .3s; }
+        .app .header .col-md-6:last-child .btn:hover {
+          border-left: 8px solid #38e2bd;
+          box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.1); }
+
+.app .board .col-md-3 h3 {
   font-size: 12px; }
+  .app .board .col-md-3 h3 span {
+    font-size: 14px; }
 
-.col-md-3:not(:last-child) {
-  border-right: 1px solid #d8d8d8; }
-
-.backlog, .develop, .test, .done {
+.app .board .col-md-3 .backlog, .app .board .col-md-3 .develop, .app .board .col-md-3 .test, .app .board .col-md-3 .done {
   margin: 20px 0;
   padding: 10px;
   height: calc(100vh - 114px);
   border-radius: 5px; }
-  .backlog .backlog-task, .backlog .develop-task, .backlog .test-task, .backlog .done-task, .develop .backlog-task, .develop .develop-task, .develop .test-task, .develop .done-task, .test .backlog-task, .test .develop-task, .test .test-task, .test .done-task, .done .backlog-task, .done .develop-task, .done .test-task, .done .done-task {
+  .app .board .col-md-3 .backlog .backlog-task, .app .board .col-md-3 .backlog .develop-task, .app .board .col-md-3 .backlog .test-task, .app .board .col-md-3 .backlog .done-task, .app .board .col-md-3 .develop .backlog-task, .app .board .col-md-3 .develop .develop-task, .app .board .col-md-3 .develop .test-task, .app .board .col-md-3 .develop .done-task, .app .board .col-md-3 .test .backlog-task, .app .board .col-md-3 .test .develop-task, .app .board .col-md-3 .test .test-task, .app .board .col-md-3 .test .done-task, .app .board .col-md-3 .done .backlog-task, .app .board .col-md-3 .done .develop-task, .app .board .col-md-3 .done .test-task, .app .board .col-md-3 .done .done-task {
     border: 1px solid #d8d8d8;
     margin-bottom: 10px;
     background-color: #fff;
     border-radius: 5px;
     padding: 5px;
     box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.1);
-    font-size: 12px; }
-    .backlog .backlog-task p, .backlog .develop-task p, .backlog .test-task p, .backlog .done-task p, .develop .backlog-task p, .develop .develop-task p, .develop .test-task p, .develop .done-task p, .test .backlog-task p, .test .develop-task p, .test .test-task p, .test .done-task p, .done .backlog-task p, .done .develop-task p, .done .test-task p, .done .done-task p {
+    font-size: 12px;
+    transition: all .3s;
+    cursor: pointer; }
+    .app .board .col-md-3 .backlog .backlog-task:hover, .app .board .col-md-3 .backlog .develop-task:hover, .app .board .col-md-3 .backlog .test-task:hover, .app .board .col-md-3 .backlog .done-task:hover, .app .board .col-md-3 .develop .backlog-task:hover, .app .board .col-md-3 .develop .develop-task:hover, .app .board .col-md-3 .develop .test-task:hover, .app .board .col-md-3 .develop .done-task:hover, .app .board .col-md-3 .test .backlog-task:hover, .app .board .col-md-3 .test .develop-task:hover, .app .board .col-md-3 .test .test-task:hover, .app .board .col-md-3 .test .done-task:hover, .app .board .col-md-3 .done .backlog-task:hover, .app .board .col-md-3 .done .develop-task:hover, .app .board .col-md-3 .done .test-task:hover, .app .board .col-md-3 .done .done-task:hover {
+      box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.1); }
+    .app .board .col-md-3 .backlog .backlog-task p, .app .board .col-md-3 .backlog .develop-task p, .app .board .col-md-3 .backlog .test-task p, .app .board .col-md-3 .backlog .done-task p, .app .board .col-md-3 .develop .backlog-task p, .app .board .col-md-3 .develop .develop-task p, .app .board .col-md-3 .develop .test-task p, .app .board .col-md-3 .develop .done-task p, .app .board .col-md-3 .test .backlog-task p, .app .board .col-md-3 .test .develop-task p, .app .board .col-md-3 .test .test-task p, .app .board .col-md-3 .test .done-task p, .app .board .col-md-3 .done .backlog-task p, .app .board .col-md-3 .done .develop-task p, .app .board .col-md-3 .done .test-task p, .app .board .col-md-3 .done .done-task p {
       margin: 5px 0;
       letter-spacing: .7px; }
-  .backlog .backlog-task, .develop .backlog-task, .test .backlog-task, .done .backlog-task {
+      .app .board .col-md-3 .backlog .backlog-task p span, .app .board .col-md-3 .backlog .develop-task p span, .app .board .col-md-3 .backlog .test-task p span, .app .board .col-md-3 .backlog .done-task p span, .app .board .col-md-3 .develop .backlog-task p span, .app .board .col-md-3 .develop .develop-task p span, .app .board .col-md-3 .develop .test-task p span, .app .board .col-md-3 .develop .done-task p span, .app .board .col-md-3 .test .backlog-task p span, .app .board .col-md-3 .test .develop-task p span, .app .board .col-md-3 .test .test-task p span, .app .board .col-md-3 .test .done-task p span, .app .board .col-md-3 .done .backlog-task p span, .app .board .col-md-3 .done .develop-task p span, .app .board .col-md-3 .done .test-task p span, .app .board .col-md-3 .done .done-task p span {
+        font-weight: 700; }
+  .app .board .col-md-3 .backlog .backlog-task, .app .board .col-md-3 .develop .backlog-task, .app .board .col-md-3 .test .backlog-task, .app .board .col-md-3 .done .backlog-task {
     border-left: 8px solid #fa6e6e; }
-  .backlog .develop-task, .develop .develop-task, .test .develop-task, .done .develop-task {
+  .app .board .col-md-3 .backlog .develop-task, .app .board .col-md-3 .develop .develop-task, .app .board .col-md-3 .test .develop-task, .app .board .col-md-3 .done .develop-task {
     border-left: 8px solid #fcac79; }
-  .backlog .test-task, .develop .test-task, .test .test-task, .done .test-task {
+  .app .board .col-md-3 .backlog .test-task, .app .board .col-md-3 .develop .test-task, .app .board .col-md-3 .test .test-task, .app .board .col-md-3 .done .test-task {
     border-left: 8px solid #cc96ef; }
-  .backlog .done-task, .develop .done-task, .test .done-task, .done .done-task {
+  .app .board .col-md-3 .backlog .done-task, .app .board .col-md-3 .develop .done-task, .app .board .col-md-3 .test .done-task, .app .board .col-md-3 .done .done-task {
     border-left: 8px solid #38e2bd; }
 
-.backlog.drop-hover {
+.app .board .col-md-3 .backlog.drop-hover {
   background: linear-gradient(to bottom, #ffdada 1%, #f0f0f0 100%); }
 
-.develop.drop-hover {
+.app .board .col-md-3 .develop.drop-hover {
   background: linear-gradient(to bottom, #ffdbc4 1%, #f0f0f0 100%); }
 
-.test.drop-hover {
+.app .board .col-md-3 .test.drop-hover {
   background: linear-gradient(to bottom, #eac9ff 1%, #f0f0f0 100%); }
 
-.done.drop-hover {
+.app .board .col-md-3 .done.drop-hover {
   background: linear-gradient(to bottom, #bdfff1 1%, #f0f0f0 100%); }
+
+.app .board .col-md-3:first-child h3 span {
+  color: #fa6e6e; }
+
+.app .board .col-md-3:nth-child(2) h3 span {
+  color: #fcac79; }
+
+.app .board .col-md-3:nth-child(3) h3 span {
+  color: #cc96ef; }
+
+.app .board .col-md-3:nth-child(4) h3 span {
+  color: #38e2bd; }
+
+.app .board .col-md-3:not(:last-child) {
+  border-right: 1px solid #d8d8d8; }

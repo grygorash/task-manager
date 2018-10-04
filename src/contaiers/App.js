@@ -1,107 +1,140 @@
 import React, { Component, Fragment } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Col, Container, Row } from 'reactstrap';
+import { Container } from 'reactstrap';
 import HTML5Backend from 'react-dnd-html5-backend';
 import { DragDropContext } from 'react-dnd';
+import { Route, Switch, withRouter } from 'react-router';
 
-import { addTask, changeProgress, fetchTasks } from '../actions';
 import {
+	addBoard, addSelectedBoard,
+	addTask,
+	changeProgress,
+	fetchInitialState
+} from '../actions';
+import {
+	getActiveTasks,
 	getBacklogTasks,
 	getDevelopTasks,
 	getTestTasks,
 	getDoneTasks,
 	getLoadingStatus,
-	getTasks
+	getTasks, getBoards,
+	getSelectedBoard
 } from '../selectors';
 import Loader from '../components/Loader/Loader';
 import AddTask from '../components/AddTask/AddTask';
-import BacklogTasks from '../components/BacklogTasks/BacklogTasks';
-import DevelopTasks from '../components/DevelopTasks/DevelopTasks';
-import TestTasks from '../components/TestTasks/TestTasks';
-import DoneTasks from '../components/DoneTasks/DoneTasks';
+import Board from '../components/Board/Board';
 
 import './App.css';
+import MainPage from '../components/MainPage/MainPage';
 
 class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			taskValue: ''
+			boardValue: '',
+			taskValue: '',
+			descriptionValue: ''
 		};
 	};
 
 	componentDidMount() {
-		this.props.fetchTasks();
+		this.props.fetchInitialState();
 	}
 
 	componentDidUpdate() {
+		localStorage.setItem('boards', JSON.stringify(this.props.boards));
 		localStorage.setItem('tasks', JSON.stringify(this.props.tasks));
+		localStorage.setItem('selectedBoard', JSON.stringify(this.props.selectedBoard));
 	}
 
-	handleInputChangeAdd = value => {
+	handleBoardTitleChange = value => {
+		this.setState({boardValue: value});
+	};
+
+	onTitleChange = value => {
 		this.setState({taskValue: value});
+	};
+
+	onDescriptionChange = value => {
+		this.setState({descriptionValue: value});
+	};
+
+	handleAddBoard = (e, board) => {
+		e.preventDefault();
+		this.setState({boardValue: ''});
+		this.props.addBoard(board);
 	};
 
 	handleAddTask = (e, task) => {
 		e.preventDefault();
-		this.setState({taskValue: ''});
+		this.setState({taskValue: '', descriptionValue: ''});
 		this.props.addTask(task);
+		this.props.history.push(`/board/${task.boardId}`);
 	};
 
 	handleDrop = (id, progress) => {
 		this.props.changeProgress(id, progress);
 	};
 
-	render() {
-		const {handleInputChangeAdd, handleAddTask, handleDrop} = this;
-		const {taskValue} = this.state;
-		const {tasks, getBacklogTasks, getDevelopTasks, getTestTasks, getDoneTasks, loaded} = this.props;
+	handleSelectBoard = board => {
+		this.props.addSelectedBoard(board);
+	};
 
+	render() {
+		const {onTitleChange, onDescriptionChange, handleAddTask, handleDrop, handleAddBoard, handleBoardTitleChange, handleSelectBoard} = this;
+		const {boardValue, taskValue, descriptionValue} = this.state;
+		const {tasks, boards, getBacklogTasks, getDevelopTasks, getTestTasks, getDoneTasks, loaded, selectedBoard, getActiveTasks} = this.props;
 		return (
 			<Fragment>
 				{loaded ? (
-					<div className="App">
-						<Container fluid={true}>
-							<Row>
-								<Col md="12">
-									<AddTask
+					<Container className="app" fluid={true}>
+						<Switch>
+							<Route
+								exact path="/"
+								render={() =>
+									<MainPage
+										boards={boards}
 										tasks={tasks}
-										taskValue={taskValue}
-										onAddTask={handleAddTask}
-										onInputChangeAdd={handleInputChangeAdd}
-									/>
-								</Col>
-								<Col md="3">
-									<h3>> Backlog ({getBacklogTasks.length})</h3>
-									<BacklogTasks
 										backlogTasks={getBacklogTasks}
-										onDrop={handleDrop} />
-								</Col>
-								<Col md="3">
-									<h3>> Develop ({getDevelopTasks.length})</h3>
-									<DevelopTasks
 										developTasks={getDevelopTasks}
-										onDrop={handleDrop} />
-								</Col>
-								<Col md="3">
-									<h3>> Test ({getTestTasks.length})</h3>
-									<TestTasks
 										testTasks={getTestTasks}
-										onDrop={handleDrop} />
-								</Col>
-								<Col md="3">
-									<h3>> Done Tasks ({getDoneTasks.length})</h3>
-									<DoneTasks
 										doneTasks={getDoneTasks}
-										onDrop={handleDrop} />
-								</Col>
-								<Col md="12">
-									total tasks: {tasks.length}
-								</Col>
-							</Row>
-						</Container>
-					</div>
+										boardValue={boardValue}
+										onSelectBoard={handleSelectBoard}
+										onDrop={handleDrop}
+										onBoardTitleChange={handleBoardTitleChange}
+										onAddBoard={handleAddBoard} />}
+							/>
+							<Route
+								exact path="/board/:boardId"
+								render={() =>
+									<Board
+										tasks={getActiveTasks}
+										selectedBoard={selectedBoard}
+										backlogTasks={getBacklogTasks}
+										developTasks={getDevelopTasks}
+										testTasks={getTestTasks}
+										doneTasks={getDoneTasks}
+										onDrop={handleDrop}
+									/>}
+							/>
+							<Route
+								path="/board/:boardId/create-task"
+								render={() =>
+									<AddTask
+										tasks={getActiveTasks}
+										taskValue={taskValue}
+										descriptionValue={descriptionValue}
+										selectedBoard={selectedBoard}
+										onAddTask={handleAddTask}
+										onTitleChange={onTitleChange}
+										onDescriptionChange={onDescriptionChange}
+									/>}
+							/>
+						</Switch>
+					</Container>
 				) : <Loader />}
 			</Fragment>
 		);
@@ -109,18 +142,23 @@ class App extends Component {
 }
 
 const mapStateToProps = state => ({
+	boards: getBoards(state),
+	selectedBoard: getSelectedBoard(state),
 	tasks: getTasks(state),
 	getBacklogTasks: getBacklogTasks(state),
 	getDevelopTasks: getDevelopTasks(state),
 	getTestTasks: getTestTasks(state),
 	getDoneTasks: getDoneTasks(state),
+	getActiveTasks: getActiveTasks(state),
 	loaded: getLoadingStatus(state)
 });
 
 const mapDispatchToProps = dispatch => ({
-	fetchTasks: bindActionCreators(fetchTasks, dispatch),
+	fetchInitialState: bindActionCreators(fetchInitialState, dispatch),
+	addSelectedBoard: bindActionCreators(addSelectedBoard, dispatch),
+	addBoard: bindActionCreators(addBoard, dispatch),
 	addTask: bindActionCreators(addTask, dispatch),
 	changeProgress: bindActionCreators(changeProgress, dispatch),
 });
 
-export default DragDropContext(HTML5Backend)(connect(mapStateToProps, mapDispatchToProps)(App));
+export default withRouter(DragDropContext(HTML5Backend)(connect(mapStateToProps, mapDispatchToProps)(App)));

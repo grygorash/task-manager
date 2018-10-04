@@ -1,37 +1,55 @@
 import {
-	FETCH_TASKS_START,
-	FETCH_TASKS_SUCCESS,
-	FETCH_LOCAL_TASKS_SUCCESS,
-	FETCH_TASKS_FAILURE,
-	ADD_TASK, CHANGE_PROGRESS
+	ADD_TASK,
+	CHANGE_PROGRESS,
+
+	ADD_BOARD, SELECT_BOARD, FETCH_START, FETCH_LOCAL_SUCCESS,
+	FETCH_FAILURE, FETCH_SUCCESS
 } from '../actionTypes';
 
-export const fetchTasks = () => async dispatch => {
-	dispatch({type: FETCH_TASKS_START});
+export const fetchInitialState = () => async dispatch => {
+	dispatch({type: FETCH_START});
 
 	try {
+		const boards = await [];
 		const tasks = await [];
-		if (!localStorage.getItem('tasks')) {
+		const selectedBoard = await {};
+		if (!localStorage.getItem('boards')) {
 			dispatch({
-				         type: FETCH_TASKS_SUCCESS,
-				         tasks
+				         type: FETCH_SUCCESS,
+				         boards,
+				         tasks,
+				         selectedBoard
 			         });
 		} else {
 			dispatch({
-				         type: FETCH_LOCAL_TASKS_SUCCESS,
-				         tasks: JSON.parse(localStorage.getItem('tasks'))
+				         type: FETCH_LOCAL_SUCCESS,
+				         boards: JSON.parse(localStorage.getItem('boards')),
+				         tasks: JSON.parse(localStorage.getItem('tasks')),
+				         selectedBoard: JSON.parse(localStorage.getItem('selectedBoard'))
 			         });
 		}
 	}
-
 	catch (err) {
 		dispatch({
-			         type: FETCH_TASKS_FAILURE,
+			         type: FETCH_FAILURE,
 			         payload: err,
 			         error: true
 		         });
 	}
+};
 
+export const addSelectedBoard = board => {
+	return {
+		type: SELECT_BOARD,
+		board
+	};
+};
+
+export const addBoard = board => {
+	return {
+		type: ADD_BOARD,
+		board
+	};
 };
 
 export const addTask = task => {

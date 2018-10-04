@@ -1,18 +1,28 @@
 import * as dotProp from 'dot-prop-immutable';
 
-import { ADD_TASK, CHANGE_PROGRESS, FETCH_LOCAL_TASKS_SUCCESS, FETCH_TASKS_SUCCESS } from '../actionTypes';
+import {
+	ADD_BOARD,
+	ADD_TASK,
+	CHANGE_PROGRESS,
+	FETCH_LOCAL_SUCCESS, FETCH_SUCCESS,
+	SELECT_BOARD
+} from '../actionTypes';
 
-const initialState = {
-	loaded: false
-};
+const initialState = {};
 
 export default function rootReducer(state = initialState, action) {
 	switch (action.type) {
-		case FETCH_TASKS_SUCCESS:
-			return {...state, tasks: action.tasks, loaded: true};
+		case FETCH_SUCCESS:
+			return {...state, boards: action.boards, tasks: action.tasks, selectedBoard: action.selectedBoard, loaded: true};
 
-		case FETCH_LOCAL_TASKS_SUCCESS:
-			return {...state, tasks: action.tasks, loaded: true};
+		case FETCH_LOCAL_SUCCESS:
+			return {...state, boards: action.boards, tasks: action.tasks, selectedBoard: action.selectedBoard, loaded: true};
+
+		case SELECT_BOARD:
+			return {...state, selectedBoard: action.board};
+
+		case ADD_BOARD:
+			return {...state, boards: [...state.boards, action.board]};
 
 		case ADD_TASK:
 			return {...state, tasks: [...state.tasks, action.task]};

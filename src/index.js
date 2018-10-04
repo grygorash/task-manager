@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from "react-redux";
+import { Provider } from 'react-redux';
+import { BrowserRouter } from "react-router-dom";
 import { applyMiddleware, createStore } from 'redux';
-import { composeWithDevTools } from "redux-devtools-extension";
-import thunk from "redux-thunk";
-import "bootstrap/dist/css/bootstrap.min.css";
+import { composeWithDevTools } from 'redux-devtools-extension';
+import thunk from 'redux-thunk';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import App from './contaiers/App';
 import registerServiceWorker from './registerServiceWorker';
@@ -18,7 +19,9 @@ const store = createStore(rootReducer, composeWithDevTools(
 
 ReactDOM.render(
 	<Provider store={store}>
-		<App />
+		<BrowserRouter>
+			<App />
+		</BrowserRouter>
 	</Provider>,
 	document.getElementById('root'));
 registerServiceWorker();

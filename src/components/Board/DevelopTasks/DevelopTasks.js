@@ -1,6 +1,6 @@
 import React from 'react';
-import DevelopTask from './DevelopTask/DevelopTask';
 import { DropTarget } from 'react-dnd';
+import Task from '../Task/Task';
 
 function collect(connect, monitor) {
 	return {
@@ -15,10 +15,14 @@ const DevelopTasks = props => {
 	return connectDropTarget(
 		<div className={hovered ? 'develop drop-hover' : 'develop'}>
 			{developTasks ? developTasks.map((task, i) => (
-				                                 <DevelopTask
+				                                 <Task
 					                                 key={i}
 					                                 id={task.id}
 					                                 task={task}
+					                                 ownPriority="develop"
+					                                 secondPriority="backlog"
+					                                 thirdPriority="test"
+					                                 fourthPriority="done"
 					                                 onDrop={onDrop} />
 			                                 )
 			) : null}
