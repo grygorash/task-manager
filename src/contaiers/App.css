@@ -23,6 +23,8 @@
   .app .boards .board-list p {
     width: 100%;
     margin-bottom: 15px; }
+    .app .boards .board-list p span {
+      text-transform: none; }
   .app .boards .board-list a {
     width: 300px;
     height: auto;
@@ -61,8 +63,6 @@
       padding: 10px;
       min-height: calc(100vh - 244px);
       border-radius: 5px; }
-      .app .board .backlog .backlog-list.drop-hover, .app .board .backlog .develop-list.drop-hover, .app .board .backlog .test-list.drop-hover, .app .board .backlog .done-list.drop-hover, .app .board .develop .backlog-list.drop-hover, .app .board .develop .develop-list.drop-hover, .app .board .develop .test-list.drop-hover, .app .board .develop .done-list.drop-hover, .app .board .test .backlog-list.drop-hover, .app .board .test .develop-list.drop-hover, .app .board .test .test-list.drop-hover, .app .board .test .done-list.drop-hover, .app .board .done .backlog-list.drop-hover, .app .board .done .develop-list.drop-hover, .app .board .done .test-list.drop-hover, .app .board .done .done-list.drop-hover {
-        background: linear-gradient(to bottom, #9b8181 1%, #22242a 100%); }
       .app .board .backlog .backlog-list .backlog-task, .app .board .backlog .backlog-list .develop-task, .app .board .backlog .backlog-list .test-task, .app .board .backlog .backlog-list .done-task, .app .board .backlog .develop-list .backlog-task, .app .board .backlog .develop-list .develop-task, .app .board .backlog .develop-list .test-task, .app .board .backlog .develop-list .done-task, .app .board .backlog .test-list .backlog-task, .app .board .backlog .test-list .develop-task, .app .board .backlog .test-list .test-task, .app .board .backlog .test-list .done-task, .app .board .backlog .done-list .backlog-task, .app .board .backlog .done-list .develop-task, .app .board .backlog .done-list .test-task, .app .board .backlog .done-list .done-task, .app .board .develop .backlog-list .backlog-task, .app .board .develop .backlog-list .develop-task, .app .board .develop .backlog-list .test-task, .app .board .develop .backlog-list .done-task, .app .board .develop .develop-list .backlog-task, .app .board .develop .develop-list .develop-task, .app .board .develop .develop-list .test-task, .app .board .develop .develop-list .done-task, .app .board .develop .test-list .backlog-task, .app .board .develop .test-list .develop-task, .app .board .develop .test-list .test-task, .app .board .develop .test-list .done-task, .app .board .develop .done-list .backlog-task, .app .board .develop .done-list .develop-task, .app .board .develop .done-list .test-task, .app .board .develop .done-list .done-task, .app .board .test .backlog-list .backlog-task, .app .board .test .backlog-list .develop-task, .app .board .test .backlog-list .test-task, .app .board .test .backlog-list .done-task, .app .board .test .develop-list .backlog-task, .app .board .test .develop-list .develop-task, .app .board .test .develop-list .test-task, .app .board .test .develop-list .done-task, .app .board .test .test-list .backlog-task, .app .board .test .test-list .develop-task, .app .board .test .test-list .test-task, .app .board .test .test-list .done-task, .app .board .test .done-list .backlog-task, .app .board .test .done-list .develop-task, .app .board .test .done-list .test-task, .app .board .test .done-list .done-task, .app .board .done .backlog-list .backlog-task, .app .board .done .backlog-list .develop-task, .app .board .done .backlog-list .test-task, .app .board .done .backlog-list .done-task, .app .board .done .develop-list .backlog-task, .app .board .done .develop-list .develop-task, .app .board .done .develop-list .test-task, .app .board .done .develop-list .done-task, .app .board .done .test-list .backlog-task, .app .board .done .test-list .develop-task, .app .board .done .test-list .test-task, .app .board .done .test-list .done-task, .app .board .done .done-list .backlog-task, .app .board .done .done-list .develop-task, .app .board .done .done-list .test-task, .app .board .done .done-list .done-task {
         border: 1px solid #000;
         margin-bottom: 10px;
@@ -100,12 +100,14 @@
         color: #38e2bd; }
         .app .board .backlog .backlog-list .done-task span, .app .board .backlog .develop-list .done-task span, .app .board .backlog .test-list .done-task span, .app .board .backlog .done-list .done-task span, .app .board .develop .backlog-list .done-task span, .app .board .develop .develop-list .done-task span, .app .board .develop .test-list .done-task span, .app .board .develop .done-list .done-task span, .app .board .test .backlog-list .done-task span, .app .board .test .develop-list .done-task span, .app .board .test .test-list .done-task span, .app .board .test .done-list .done-task span, .app .board .done .backlog-list .done-task span, .app .board .done .develop-list .done-task span, .app .board .done .test-list .done-task span, .app .board .done .done-list .done-task span {
           color: #aaadb3; }
+    .app .board .backlog .backlog-list.drop-hover, .app .board .develop .backlog-list.drop-hover, .app .board .test .backlog-list.drop-hover, .app .board .done .backlog-list.drop-hover {
+      background: linear-gradient(to bottom, rgba(250, 110, 110, 0.3) 1%, #22242a 100%); }
     .app .board .backlog .develop-list.drop-hover, .app .board .develop .develop-list.drop-hover, .app .board .test .develop-list.drop-hover, .app .board .done .develop-list.drop-hover {
-      background: linear-gradient(to bottom, #9a8174 1%, #22242a 100%); }
+      background: linear-gradient(to bottom, rgba(252, 172, 121, 0.3) 1%, #22242a 100%); }
     .app .board .backlog .test-list.drop-hover, .app .board .develop .test-list.drop-hover, .app .board .test .test-list.drop-hover, .app .board .done .test-list.drop-hover {
-      background: linear-gradient(to bottom, #897499 1%, #22242a 100%); }
+      background: linear-gradient(to bottom, rgba(204, 150, 239, 0.3) 1%, #22242a 100%); }
     .app .board .backlog .done-list.drop-hover, .app .board .develop .done-list.drop-hover, .app .board .test .done-list.drop-hover, .app .board .done .done-list.drop-hover {
-      background: linear-gradient(to bottom, #70968b 1%, #22242a 100%); }
+      background: linear-gradient(to bottom, rgba(56, 226, 189, 0.3) 1%, #22242a 100%); }
   .app .board .backlog h3 span {
     color: #fa6e6e; }
   .app .board .develop h3 span {

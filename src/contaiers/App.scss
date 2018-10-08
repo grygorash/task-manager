@@ -27,6 +27,9 @@
 			p {
 				width: 100%;
 				margin-bottom: 15px;
+				span {
+					text-transform: none;
+				}
 			}
 			a {
 				width: 300px;
@@ -80,9 +83,6 @@
 				padding: 10px;
 				min-height: calc(100vh - 244px);
 				border-radius: 5px;
-				&.drop-hover {
-					background: linear-gradient(to bottom, #9b8181 1%, #22242a 100%)
-				}
 				.backlog-task, .develop-task, .test-task, .done-task {
 					border: 1px solid #000;
 					margin-bottom: 10px;
@@ -134,19 +134,24 @@
 				}
 
 			}
+			.backlog-list {
+				&.drop-hover {
+					background: linear-gradient(to bottom, rgba(250, 110, 110, .3) 1%, #22242a 100%)
+				}
+			}
 			.develop-list {
 				&.drop-hover {
-					background: linear-gradient(to bottom, #9a8174 1%, #22242a 100%)
+					background: linear-gradient(to bottom, rgba(252, 172, 121, .3) 1%, #22242a 100%)
 				}
 			}
 			.test-list {
 				&.drop-hover {
-					background: linear-gradient(to bottom, #897499 1%, #22242a 100%)
+					background: linear-gradient(to bottom, rgba(204, 150, 239, .3) 1%, #22242a 100%)
 				}
 			}
 			.done-list {
 				&.drop-hover {
-					background: linear-gradient(to bottom, #70968b 1%, #22242a 100%)
+					background: linear-gradient(to bottom, rgba(56, 226, 189, .3) 1%, #22242a 100%)
 				}
 			}
 		}
@@ -199,7 +204,7 @@
 		input, textarea {
 			margin-bottom: 20px;
 		}
-		textarea{
+		textarea {
 			height: 50px;
 			max-height: 100px;
 			min-height: 50px;

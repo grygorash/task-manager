@@ -25,7 +25,7 @@ import {
 import Loader from '../components/Loader/Loader';
 import Boards from '../components/Boards/Boards';
 import Board from '../components/Board/Board';
-import AddTask from '../components/AddTask/AddTask';
+import TaskCreate from '../components/TaskCreate/TaskCreate';
 
 import './App.css';
 
@@ -130,7 +130,7 @@ class App extends Component {
 							<Route
 								path="/board/:boardId/create-task"
 								render={() =>
-									<AddTask
+									<TaskCreate
 										tasks={getActiveTasks}
 										taskValue={taskValue}
 										descriptionValue={descriptionValue}

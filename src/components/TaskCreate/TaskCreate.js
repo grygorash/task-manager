@@ -1,6 +1,6 @@
 import React from 'react';
 
-const AddTask = props => {
+const TaskCreate = props => {
 	const {tasks, onTitleChange, onDescriptionChange, onAddTask, taskValue, descriptionValue, selectedBoard} = props;
 	return (
 		<form className="task-form" onSubmit={e => onAddTask(e, {
@@ -25,4 +25,4 @@ const AddTask = props => {
 	);
 };
 
-export default AddTask;
+export default TaskCreate;
