@@ -63,11 +63,9 @@
 	}
 	.board {
 		padding: 20px 0;
-		.task-create {
-			a {
-				display: flex;
-				justify-content: flex-end;
-			}
+		.create {
+			display: flex;
+			justify-content: flex-end;
 		}
 		.backlog, .develop, .test, .done {
 			border-right: 1px solid #d8d8d8;
@@ -185,7 +183,7 @@
 			}
 		}
 	}
-	.task-form {
+	.task-form, .developer-form {
 		padding: 20px;
 		max-width: 800px;
 		width: 100%;
@@ -201,7 +199,7 @@
 				text-transform: uppercase;
 			}
 		}
-		input, textarea {
+		input, textarea, select {
 			margin-bottom: 20px;
 		}
 		textarea {

@@ -3,7 +3,7 @@ import {
 	CHANGE_PROGRESS,
 
 	ADD_BOARD, SELECT_BOARD, FETCH_START, FETCH_LOCAL_SUCCESS,
-	FETCH_FAILURE, FETCH_SUCCESS
+	FETCH_FAILURE, FETCH_SUCCESS, ADD_DEV
 } from '../actionTypes';
 
 export const fetchInitialState = () => async dispatch => {
@@ -12,12 +12,14 @@ export const fetchInitialState = () => async dispatch => {
 	try {
 		const boards = await [];
 		const tasks = await [];
+		const developers = await [];
 		const selectedBoard = await {};
 		if (!localStorage.getItem('boards')) {
 			dispatch({
 				         type: FETCH_SUCCESS,
 				         boards,
 				         tasks,
+				         developers,
 				         selectedBoard
 			         });
 		} else {
@@ -25,6 +27,7 @@ export const fetchInitialState = () => async dispatch => {
 				         type: FETCH_LOCAL_SUCCESS,
 				         boards: JSON.parse(localStorage.getItem('boards')),
 				         tasks: JSON.parse(localStorage.getItem('tasks')),
+				         developers: JSON.parse(localStorage.getItem('developers')),
 				         selectedBoard: JSON.parse(localStorage.getItem('selectedBoard'))
 			         });
 		}
@@ -56,6 +59,13 @@ export const addTask = task => {
 	return {
 		type: ADD_TASK,
 		task
+	};
+};
+
+export const addDev = developer => {
+	return {
+		type: ADD_DEV,
+		developer
 	};
 };
 

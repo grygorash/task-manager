@@ -7,7 +7,9 @@ import { DragDropContext } from 'react-dnd';
 import { Route, Switch, withRouter } from 'react-router';
 
 import {
-	addBoard, addSelectedBoard,
+	addBoard,
+	addDev,
+	addSelectedBoard,
 	addTask,
 	changeProgress,
 	fetchInitialState
@@ -20,12 +22,13 @@ import {
 	getDoneTasks,
 	getLoadingStatus,
 	getTasks, getBoards,
-	getSelectedBoard
+	getSelectedBoard, getDevelopers, getActiveDevelopers
 } from '../selectors';
 import Loader from '../components/Loader/Loader';
 import Boards from '../components/Boards/Boards';
 import Board from '../components/Board/Board';
 import TaskCreate from '../components/TaskCreate/TaskCreate';
+import DeveloperCreate from '../components/DeveloperCreate/DeveloperCreate';
 
 import './App.css';
 
@@ -35,7 +38,10 @@ class App extends Component {
 		this.state = {
 			boardValue: '',
 			taskValue: '',
-			descriptionValue: ''
+			descriptionValue: '',
+			developerValue: 'Choose Developer',
+			devNameValue: '',
+			devEmailValue: ''
 		};
 	};
 
@@ -46,6 +52,7 @@ class App extends Component {
 	componentDidUpdate() {
 		localStorage.setItem('boards', JSON.stringify(this.props.boards));
 		localStorage.setItem('tasks', JSON.stringify(this.props.tasks));
+		localStorage.setItem('developers', JSON.stringify(this.props.developers));
 		localStorage.setItem('selectedBoard', JSON.stringify(this.props.selectedBoard));
 	}
 
@@ -61,6 +68,18 @@ class App extends Component {
 		this.setState({descriptionValue: value});
 	};
 
+	handleDeveloperChange = value => {
+		this.setState({developerValue: value});
+	};
+
+	handleDevNameChange = value => {
+		this.setState({devNameValue: value});
+	};
+
+	handleDevEmailChange = value => {
+		this.setState({devEmailValue: value});
+	};
+
 	handleAddBoard = (e, board) => {
 		e.preventDefault();
 		this.setState({boardValue: ''});
@@ -69,9 +88,20 @@ class App extends Component {
 
 	handleAddTask = (e, task) => {
 		e.preventDefault();
-		this.setState({taskValue: '', descriptionValue: ''});
+		this.setState({
+			              taskValue: '',
+			              descriptionValue: '',
+			              developerValue: ''
+		              });
 		this.props.addTask(task);
 		this.props.history.push(`/board/${task.boardId}`);
+	};
+
+	handleAddDev = (e, dev) => {
+		e.preventDefault();
+		this.setState({devNameValue: '', devEmailValue: ''});
+		this.props.addDev(dev);
+		this.props.history.push(`/board/${dev.boardId}`);
 	};
 
 	handleDrop = (id, progress) => {
@@ -83,9 +113,39 @@ class App extends Component {
 	};
 
 	render() {
-		const {onTitleChange, onDescriptionChange, handleAddTask, handleDrop, handleAddBoard, handleBoardTitleChange, handleSelectBoard} = this;
-		const {boardValue, taskValue, descriptionValue} = this.state;
-		const {tasks, boards, getBacklogTasks, getDevelopTasks, getTestTasks, getDoneTasks, loaded, selectedBoard, getActiveTasks} = this.props;
+		const {
+			onTitleChange,
+			onDescriptionChange,
+			handleDeveloperChange,
+			handleAddTask,
+			handleDrop,
+			handleAddBoard,
+			handleBoardTitleChange,
+			handleSelectBoard,
+			handleAddDev,
+			handleDevNameChange,
+			handleDevEmailChange
+		} = this;
+		const {
+			boardValue,
+			taskValue,
+			descriptionValue,
+			developerValue,
+			devNameValue,
+			devEmailValue
+		} = this.state;
+		const {
+			tasks,
+			boards,
+			getBacklogTasks,
+			getDevelopTasks,
+			getTestTasks,
+			getDoneTasks,
+			loaded,
+			selectedBoard,
+			getActiveTasks,
+			getActiveDevelopers
+		} = this.props;
 		return (
 			<Fragment>
 				{loaded ? (
@@ -119,6 +179,7 @@ class App extends Component {
 								render={() =>
 									<Board
 										tasks={getActiveTasks}
+										developers={getActiveDevelopers}
 										selectedBoard={selectedBoard}
 										backlogTasks={getBacklogTasks}
 										developTasks={getDevelopTasks}
@@ -134,10 +195,25 @@ class App extends Component {
 										tasks={getActiveTasks}
 										taskValue={taskValue}
 										descriptionValue={descriptionValue}
+										developerValue={developerValue}
 										selectedBoard={selectedBoard}
+										developers={getActiveDevelopers}
 										onAddTask={handleAddTask}
 										onTitleChange={onTitleChange}
 										onDescriptionChange={onDescriptionChange}
+										onDeveloperChange={handleDeveloperChange}
+									/>}
+							/>
+							<Route
+								path="/board/:boardId/create-developer"
+								render={() =>
+									<DeveloperCreate
+										devNameValue={devNameValue}
+										devEmailValue={devEmailValue}
+										selectedBoard={selectedBoard}
+										onAddDev={handleAddDev}
+										onDevNameChange={handleDevNameChange}
+										onDevEmailChange={handleDevEmailChange}
 									/>}
 							/>
 						</Switch>
@@ -153,18 +229,21 @@ const mapStateToProps = state => ({
 	boards: getBoards(state),
 	selectedBoard: getSelectedBoard(state),
 	tasks: getTasks(state),
+	developers: getDevelopers(state),
+	getActiveTasks: getActiveTasks(state),
+	getActiveDevelopers: getActiveDevelopers(state),
 	getBacklogTasks: getBacklogTasks(state),
 	getDevelopTasks: getDevelopTasks(state),
 	getTestTasks: getTestTasks(state),
-	getDoneTasks: getDoneTasks(state),
-	getActiveTasks: getActiveTasks(state)
+	getDoneTasks: getDoneTasks(state)
 });
 
 const mapDispatchToProps = dispatch => ({
 	fetchInitialState: bindActionCreators(fetchInitialState, dispatch),
-	addSelectedBoard: bindActionCreators(addSelectedBoard, dispatch),
 	addBoard: bindActionCreators(addBoard, dispatch),
 	addTask: bindActionCreators(addTask, dispatch),
+	addDev: bindActionCreators(addDev, dispatch),
+	addSelectedBoard: bindActionCreators(addSelectedBoard, dispatch),
 	changeProgress: bindActionCreators(changeProgress, dispatch),
 });
 

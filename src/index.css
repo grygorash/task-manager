@@ -39,7 +39,7 @@ body {
       box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.1); }
       body .btn:hover span {
         color: #38e2bd; }
-  body input, body textarea {
+  body input, body textarea, body select {
     background: transparent;
     padding: 12px 0;
     color: #aaadb3;
@@ -47,6 +47,6 @@ body {
     border-bottom: 2px solid #fa6e6e;
     outline: none;
     box-shadow: 0 4px 3px 0 rgba(0, 0, 0, 0.1); }
-    body input::placeholder, body textarea::placeholder {
+    body input::placeholder, body textarea::placeholder, body select::placeholder {
       color: #aaadb3;
       opacity: 1; }

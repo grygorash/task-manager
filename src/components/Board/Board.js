@@ -8,10 +8,12 @@ import TestTasks from './TestTasks/TestTasks';
 import DoneTasks from './DoneTasks/DoneTasks';
 
 const Board = props => {
-	const {tasks, backlogTasks, developTasks, testTasks, doneTasks, onDrop, selectedBoard} = props;
+	const {tasks, developers, backlogTasks, developTasks, testTasks, doneTasks, onDrop, selectedBoard} = props;
 	return (
 		<Row className="board">
-			<Header selectedBoard={selectedBoard} />
+			<Header
+				selectedBoard={selectedBoard}
+				developers={developers} />
 			<Col md="3" className="backlog">
 				<h3>> Backlog (<span>{backlogTasks.length}</span>)</h3>
 				<BacklogTasks
