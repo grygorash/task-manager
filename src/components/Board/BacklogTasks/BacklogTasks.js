@@ -14,7 +14,7 @@ function collect(connect, monitor) {
 const BacklogTasks = props => {
 	const {backlogTasks, connectDropTarget, hovered, onDrop} = props;
 	return connectDropTarget(
-		<div className={hovered ? 'backlog drop-hover' : 'backlog'}>
+		<div className={hovered ? 'backlog-list drop-hover' : 'backlog-list'}>
 			{backlogTasks ? backlogTasks.map((task, i) => (
 				                                 <Task
 					                                 key={i}

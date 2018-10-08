@@ -3,7 +3,7 @@ import React from 'react';
 const AddTask = props => {
 	const {tasks, onTitleChange, onDescriptionChange, onAddTask, taskValue, descriptionValue, selectedBoard} = props;
 	return (
-		<form onSubmit={e => onAddTask(e, {
+		<form className="task-form" onSubmit={e => onAddTask(e, {
 			id: +new Date(),
 			boardId: selectedBoard.id,
 			taskNumber: tasks.length + 1,
@@ -12,14 +12,15 @@ const AddTask = props => {
 			createDate: new Date().toLocaleString('en-US'),
 			progress: 'backlog'
 		})}>
+			<h3>Create<span>Task</span></h3>
 			<input type="text"
 			       value={taskValue}
-			       placeholder="enter task"
+			       placeholder="Enter Task Name"
 			       onChange={({target}) => onTitleChange(target.value)} />
 			<textarea value={descriptionValue}
-			          placeholder="enter task description"
+			          placeholder="Enter Task Description"
 			          onChange={({target}) => onDescriptionChange(target.value)} />
-			<button>add task</button>
+			<button className="btn">Add<span>Task</span></button>
 		</form>
 	);
 };

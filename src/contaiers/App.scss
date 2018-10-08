@@ -1,58 +1,100 @@
 .app {
 	.header {
-		height: 100px;
-		.col-md-6 {
-			align-items: center;
-			display: flex;
-			&:last-child {
-				justify-content: flex-end;
-				.btn {
-					margin-right: 10px;
-					font-size: 15px;
-					color: #8a8a8a;
-					height: 50px;
-					width: 200px;
+		background-color: #363d46;
+		box-shadow: 0 9px 21px -6px rgba(0, 0, 0, 0.55);
+		justify-content: center;
+		.logo {
+			font-size: 22px;
+			text-align: center;
+			cursor: pointer;
+			padding: 20px 0;
+			margin: 0;
+			text-shadow: 2px 2px 1px rgba(0, 0, 0, 1);
+			span {
+				&:first-child {
+					color: #38e2bd;
 					text-transform: uppercase;
-					cursor: pointer;
-					background-color: #fff;
-					border-radius: 5px;
-					border: 1px solid #d8d8d8;
-					border-left: 8px solid #fa6e6e;
-					box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.1);
-					transition: all .3s;
-					&:hover {
-						border-left: 8px solid #38e2bd;
-						box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.1);
-					}
+				}
+				&:last-child {
+					color: #fa6e6e;
+					text-transform: uppercase;
+				}
+			}
+		}
+	}
+	.boards {
+		.board-list {
+			p {
+				width: 100%;
+				margin-bottom: 15px;
+			}
+			a {
+				width: 300px;
+				height: auto;
+				text-align: left;
+				margin-bottom: 10px;
+				flex-direction: column;
+				p {
+					margin: 0;
+				}
+			}
+			display: flex;
+			flex-flow: row wrap;
+			padding: 20px 20px 10px;
+		}
+		.create-board {
+			padding: 20px;
+			p {
+				width: 100%;
+				margin-bottom: 15px;
+			}
+			form {
+				display: flex;
+				flex-flow: row wrap;
+				input {
+					width: 300px;
+					margin-right: 20px;
 				}
 			}
 		}
 	}
 	.board {
-		.col-md-3 {
+		padding: 20px 0;
+		.task-create {
+			a {
+				display: flex;
+				justify-content: flex-end;
+			}
+		}
+		.backlog, .develop, .test, .done {
+			border-right: 1px solid #d8d8d8;
+			margin: 20px 0;
 			h3 {
+				padding: 0 10px;
 				font-size: 12px;
 				span {
 					font-size: 14px;
 				}
 			}
-			.backlog, .develop, .test, .done {
-				margin: 20px 0;
+			.backlog-list, .develop-list, .test-list, .done-list {
 				padding: 10px;
-				height: calc(100vh - 114px);
+				min-height: calc(100vh - 244px);
 				border-radius: 5px;
+				&.drop-hover {
+					background: linear-gradient(to bottom, #9b8181 1%, #22242a 100%)
+				}
 				.backlog-task, .develop-task, .test-task, .done-task {
-					border: 1px solid #d8d8d8;
+					border: 1px solid #000;
 					margin-bottom: 10px;
-					background-color: #fff;
+					background-color: #363d46;
 					border-radius: 5px;
 					padding: 5px;
-					box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.1);
+					box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1);
 					font-size: 12px;
 					transition: all .3s;
 					cursor: pointer;
 					&:hover {
-						box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.1);
+						box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.1);
 					}
 					p {
 						margin: 5px 0;
@@ -64,72 +106,105 @@
 				}
 				.backlog-task {
 					border-left: 8px solid #fa6e6e;
+					color: #fa6e6e;
+					span {
+						color: #aaadb3;
+					}
 				}
 				.develop-task {
-					border-left: 8px solid #fcac79
+					border-left: 8px solid #fcac79;
+					color: #fcac79;
+					span {
+						color: #aaadb3;
+					}
 				}
 				.test-task {
-					border-left: 8px solid #cc96ef
+					border-left: 8px solid #cc96ef;
+					color: #cc96ef;
+					span {
+						color: #aaadb3;
+					}
 				}
 				.done-task {
-					border-left: 8px solid #38e2bd
+					border-left: 8px solid #38e2bd;
+					color: #38e2bd;
+					span {
+						color: #aaadb3;
+					}
 				}
-			}
-			.backlog {
-				&.drop-hover {
-					background: linear-gradient(to bottom, #ffdada 1%, #f0f0f0 100%)
-				}
-			}
 
-			.develop {
+			}
+			.develop-list {
 				&.drop-hover {
-					background: linear-gradient(to bottom, #ffdbc4 1%, #f0f0f0 100%)
+					background: linear-gradient(to bottom, #9a8174 1%, #22242a 100%)
 				}
 			}
-
-			.test {
+			.test-list {
 				&.drop-hover {
-					background: linear-gradient(to bottom, #eac9ff 1%, #f0f0f0 100%)
+					background: linear-gradient(to bottom, #897499 1%, #22242a 100%)
 				}
 			}
-
-			.done {
+			.done-list {
 				&.drop-hover {
-					background: linear-gradient(to bottom, #bdfff1 1%, #f0f0f0 100%)
+					background: linear-gradient(to bottom, #70968b 1%, #22242a 100%)
 				}
 			}
-			&:first-child {
-				h3 {
-					span {
-						color: #fa6e6e;
-					}
+		}
+		.backlog {
+			h3 {
+				span {
+					color: #fa6e6e;
 				}
 			}
-			&:nth-child(2) {
-				h3 {
-					span {
-						color: #fcac79;
-					}
+		}
+		.develop {
+			h3 {
+				span {
+					color: #fcac79;
 				}
 			}
-			&:nth-child(3) {
-				h3 {
-					span {
-						color: #cc96ef;
-					}
+		}
+		.test {
+			h3 {
+				span {
+					color: #cc96ef;
 				}
 			}
-			&:nth-child(4) {
-				h3 {
-					span {
-						color: #38e2bd;
-					}
+		}
+		.done {
+			border-right: none;
+			h3 {
+				span {
+					color: #38e2bd;
 				}
-			}
-			&:not(:last-child) {
-				border-right: 1px solid #d8d8d8
 			}
 		}
 	}
+	.task-form {
+		padding: 20px;
+		max-width: 800px;
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		margin: 0 auto;
+		h3 {
+			text-align: center;
+			margin-bottom: 20px;
+			font-size: 22px;
+			span {
+				color: #fa6e6e;
+				text-transform: uppercase;
+			}
+		}
+		input, textarea {
+			margin-bottom: 20px;
+		}
+		textarea{
+			height: 50px;
+			max-height: 100px;
+			min-height: 50px;
+		}
+	}
 }
+
 

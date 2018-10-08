@@ -1,20 +1,24 @@
 import React from 'react';
+import { Col } from 'reactstrap';
 
 const BoardCreate = props => {
-	const {boardValue, onBoardTitleChange, onAddBoard} = props;
+	const {boards, boardValue, onBoardTitleChange, onAddBoard} = props;
 	return (
-		<form onSubmit={(e) => onAddBoard(e, {
-			id: +new Date(),
-			boardTitle: boardValue,
-			createDate: new Date().toLocaleString('en-US'),
-		})}>
-			<input
-				type="text"
-				value={boardValue}
-				placeholder="enter name of board"
-				onChange={({target}) => onBoardTitleChange(target.value)} />
-			<button>add board</button>
-		</form>
+		<Col md="12" className="create-board" style={boards.length ? {paddingTop: '0'}: {paddingTop: '20px'}}>
+			<p>{boards.length ? "Or Create New" : "Create New Board"}</p>
+			<form onSubmit={(e) => onAddBoard(e, {
+				id: +new Date(),
+				boardTitle: boardValue,
+				createDate: new Date().toLocaleString('en-US'),
+			})}>
+				<input
+					type="text"
+					value={boardValue}
+					placeholder="Enter Name Of Board"
+					onChange={({target}) => onBoardTitleChange(target.value)} />
+				<button className="btn">Add <span>Board</span></button>
+			</form>
+		</Col>
 	);
 };
 

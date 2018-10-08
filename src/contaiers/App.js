@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Container } from 'reactstrap';
+import { Container, Row } from 'reactstrap';
 import HTML5Backend from 'react-dnd-html5-backend';
 import { DragDropContext } from 'react-dnd';
 import { Route, Switch, withRouter } from 'react-router';
@@ -28,6 +28,7 @@ import Board from '../components/Board/Board';
 
 import './App.css';
 import MainPage from '../components/MainPage/MainPage';
+import { Link } from 'react-router-dom';
 
 class App extends Component {
 	constructor(props) {
@@ -90,6 +91,12 @@ class App extends Component {
 			<Fragment>
 				{loaded ? (
 					<Container className="app" fluid={true}>
+						<Row className="header">
+							<h1 className="logo"
+							    onClick={() => {this.props.history.push('/');}}>
+								drag<span>n</span>drop<span>Boards</span>
+							</h1>
+						</Row>
 						<Switch>
 							<Route
 								exact path="/"

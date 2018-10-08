@@ -1,25 +1,22 @@
-import React, { Fragment } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
 import BoardList from './BoardList/BoardList';
 import BoardCreate from './BoardCreate/BoardCreate';
-import { Route, Switch } from 'react-router';
-import AddTask from '../AddTask/AddTask';
-import Board from '../Board/Board';
+import { Row } from 'reactstrap';
 
 const MainPage = props => {
-	const {boards, tasks, boardValue, backlogTasks, developTasks, testTasks, onAddBoard, doneTasks, onDrop, onBoardTitleChange, onSelectBoard} = props;
-	// console.log('--->', props);
+	const {boards, boardValue, onAddBoard, onBoardTitleChange, onSelectBoard} = props;
+
 	return (
-		<Fragment>
+		<Row className='boards'>
 			<BoardList
 				boards={boards}
-				onSelectBoard={onSelectBoard}/>
+				onSelectBoard={onSelectBoard} />
 			<BoardCreate
+				boards={boards}
 				boardValue={boardValue}
 				onBoardTitleChange={onBoardTitleChange}
 				onAddBoard={onAddBoard} />
-
-		</Fragment>
+		</Row>
 
 	);
 };

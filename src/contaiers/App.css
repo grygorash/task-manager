@@ -1,87 +1,139 @@
 .app .header {
-  height: 100px; }
-  .app .header .col-md-6 {
-    align-items: center;
-    display: flex; }
-    .app .header .col-md-6:last-child {
-      justify-content: flex-end; }
-      .app .header .col-md-6:last-child .btn {
-        margin-right: 10px;
-        font-size: 15px;
-        color: #8a8a8a;
-        height: 50px;
-        width: 200px;
-        text-transform: uppercase;
-        cursor: pointer;
-        background-color: #fff;
-        border-radius: 5px;
-        border: 1px solid #d8d8d8;
-        border-left: 8px solid #fa6e6e;
-        box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.1);
-        transition: all .3s; }
-        .app .header .col-md-6:last-child .btn:hover {
-          border-left: 8px solid #38e2bd;
-          box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.1); }
+  background-color: #363d46;
+  box-shadow: 0 9px 21px -6px rgba(0, 0, 0, 0.55);
+  justify-content: center; }
+  .app .header .logo {
+    font-size: 22px;
+    text-align: center;
+    cursor: pointer;
+    padding: 20px 0;
+    margin: 0;
+    text-shadow: 2px 2px 1px black; }
+    .app .header .logo span:first-child {
+      color: #38e2bd;
+      text-transform: uppercase; }
+    .app .header .logo span:last-child {
+      color: #fa6e6e;
+      text-transform: uppercase; }
 
-.app .board .col-md-3 h3 {
-  font-size: 12px; }
-  .app .board .col-md-3 h3 span {
-    font-size: 14px; }
-
-.app .board .col-md-3 .backlog, .app .board .col-md-3 .develop, .app .board .col-md-3 .test, .app .board .col-md-3 .done {
-  margin: 20px 0;
-  padding: 10px;
-  height: calc(100vh - 114px);
-  border-radius: 5px; }
-  .app .board .col-md-3 .backlog .backlog-task, .app .board .col-md-3 .backlog .develop-task, .app .board .col-md-3 .backlog .test-task, .app .board .col-md-3 .backlog .done-task, .app .board .col-md-3 .develop .backlog-task, .app .board .col-md-3 .develop .develop-task, .app .board .col-md-3 .develop .test-task, .app .board .col-md-3 .develop .done-task, .app .board .col-md-3 .test .backlog-task, .app .board .col-md-3 .test .develop-task, .app .board .col-md-3 .test .test-task, .app .board .col-md-3 .test .done-task, .app .board .col-md-3 .done .backlog-task, .app .board .col-md-3 .done .develop-task, .app .board .col-md-3 .done .test-task, .app .board .col-md-3 .done .done-task {
-    border: 1px solid #d8d8d8;
+.app .boards .board-list {
+  display: flex;
+  flex-flow: row wrap;
+  padding: 20px 20px 10px; }
+  .app .boards .board-list p {
+    width: 100%;
+    margin-bottom: 15px; }
+  .app .boards .board-list a {
+    width: 300px;
+    height: auto;
+    text-align: left;
     margin-bottom: 10px;
-    background-color: #fff;
-    border-radius: 5px;
-    padding: 5px;
-    box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.1);
-    font-size: 12px;
-    transition: all .3s;
-    cursor: pointer; }
-    .app .board .col-md-3 .backlog .backlog-task:hover, .app .board .col-md-3 .backlog .develop-task:hover, .app .board .col-md-3 .backlog .test-task:hover, .app .board .col-md-3 .backlog .done-task:hover, .app .board .col-md-3 .develop .backlog-task:hover, .app .board .col-md-3 .develop .develop-task:hover, .app .board .col-md-3 .develop .test-task:hover, .app .board .col-md-3 .develop .done-task:hover, .app .board .col-md-3 .test .backlog-task:hover, .app .board .col-md-3 .test .develop-task:hover, .app .board .col-md-3 .test .test-task:hover, .app .board .col-md-3 .test .done-task:hover, .app .board .col-md-3 .done .backlog-task:hover, .app .board .col-md-3 .done .develop-task:hover, .app .board .col-md-3 .done .test-task:hover, .app .board .col-md-3 .done .done-task:hover {
-      box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.1); }
-    .app .board .col-md-3 .backlog .backlog-task p, .app .board .col-md-3 .backlog .develop-task p, .app .board .col-md-3 .backlog .test-task p, .app .board .col-md-3 .backlog .done-task p, .app .board .col-md-3 .develop .backlog-task p, .app .board .col-md-3 .develop .develop-task p, .app .board .col-md-3 .develop .test-task p, .app .board .col-md-3 .develop .done-task p, .app .board .col-md-3 .test .backlog-task p, .app .board .col-md-3 .test .develop-task p, .app .board .col-md-3 .test .test-task p, .app .board .col-md-3 .test .done-task p, .app .board .col-md-3 .done .backlog-task p, .app .board .col-md-3 .done .develop-task p, .app .board .col-md-3 .done .test-task p, .app .board .col-md-3 .done .done-task p {
-      margin: 5px 0;
-      letter-spacing: .7px; }
-      .app .board .col-md-3 .backlog .backlog-task p span, .app .board .col-md-3 .backlog .develop-task p span, .app .board .col-md-3 .backlog .test-task p span, .app .board .col-md-3 .backlog .done-task p span, .app .board .col-md-3 .develop .backlog-task p span, .app .board .col-md-3 .develop .develop-task p span, .app .board .col-md-3 .develop .test-task p span, .app .board .col-md-3 .develop .done-task p span, .app .board .col-md-3 .test .backlog-task p span, .app .board .col-md-3 .test .develop-task p span, .app .board .col-md-3 .test .test-task p span, .app .board .col-md-3 .test .done-task p span, .app .board .col-md-3 .done .backlog-task p span, .app .board .col-md-3 .done .develop-task p span, .app .board .col-md-3 .done .test-task p span, .app .board .col-md-3 .done .done-task p span {
-        font-weight: 700; }
-  .app .board .col-md-3 .backlog .backlog-task, .app .board .col-md-3 .develop .backlog-task, .app .board .col-md-3 .test .backlog-task, .app .board .col-md-3 .done .backlog-task {
-    border-left: 8px solid #fa6e6e; }
-  .app .board .col-md-3 .backlog .develop-task, .app .board .col-md-3 .develop .develop-task, .app .board .col-md-3 .test .develop-task, .app .board .col-md-3 .done .develop-task {
-    border-left: 8px solid #fcac79; }
-  .app .board .col-md-3 .backlog .test-task, .app .board .col-md-3 .develop .test-task, .app .board .col-md-3 .test .test-task, .app .board .col-md-3 .done .test-task {
-    border-left: 8px solid #cc96ef; }
-  .app .board .col-md-3 .backlog .done-task, .app .board .col-md-3 .develop .done-task, .app .board .col-md-3 .test .done-task, .app .board .col-md-3 .done .done-task {
-    border-left: 8px solid #38e2bd; }
+    flex-direction: column; }
+    .app .boards .board-list a p {
+      margin: 0; }
 
-.app .board .col-md-3 .backlog.drop-hover {
-  background: linear-gradient(to bottom, #ffdada 1%, #f0f0f0 100%); }
+.app .boards .create-board {
+  padding: 20px; }
+  .app .boards .create-board p {
+    width: 100%;
+    margin-bottom: 15px; }
+  .app .boards .create-board form {
+    display: flex;
+    flex-flow: row wrap; }
+    .app .boards .create-board form input {
+      width: 300px;
+      margin-right: 20px; }
 
-.app .board .col-md-3 .develop.drop-hover {
-  background: linear-gradient(to bottom, #ffdbc4 1%, #f0f0f0 100%); }
+.app .board {
+  padding: 20px 0; }
+  .app .board .task-create a {
+    display: flex;
+    justify-content: flex-end; }
+  .app .board .backlog, .app .board .develop, .app .board .test, .app .board .done {
+    border-right: 1px solid #d8d8d8;
+    margin: 20px 0; }
+    .app .board .backlog h3, .app .board .develop h3, .app .board .test h3, .app .board .done h3 {
+      padding: 0 10px;
+      font-size: 12px; }
+      .app .board .backlog h3 span, .app .board .develop h3 span, .app .board .test h3 span, .app .board .done h3 span {
+        font-size: 14px; }
+    .app .board .backlog .backlog-list, .app .board .backlog .develop-list, .app .board .backlog .test-list, .app .board .backlog .done-list, .app .board .develop .backlog-list, .app .board .develop .develop-list, .app .board .develop .test-list, .app .board .develop .done-list, .app .board .test .backlog-list, .app .board .test .develop-list, .app .board .test .test-list, .app .board .test .done-list, .app .board .done .backlog-list, .app .board .done .develop-list, .app .board .done .test-list, .app .board .done .done-list {
+      padding: 10px;
+      min-height: calc(100vh - 244px);
+      border-radius: 5px; }
+      .app .board .backlog .backlog-list.drop-hover, .app .board .backlog .develop-list.drop-hover, .app .board .backlog .test-list.drop-hover, .app .board .backlog .done-list.drop-hover, .app .board .develop .backlog-list.drop-hover, .app .board .develop .develop-list.drop-hover, .app .board .develop .test-list.drop-hover, .app .board .develop .done-list.drop-hover, .app .board .test .backlog-list.drop-hover, .app .board .test .develop-list.drop-hover, .app .board .test .test-list.drop-hover, .app .board .test .done-list.drop-hover, .app .board .done .backlog-list.drop-hover, .app .board .done .develop-list.drop-hover, .app .board .done .test-list.drop-hover, .app .board .done .done-list.drop-hover {
+        background: linear-gradient(to bottom, #9b8181 1%, #22242a 100%); }
+      .app .board .backlog .backlog-list .backlog-task, .app .board .backlog .backlog-list .develop-task, .app .board .backlog .backlog-list .test-task, .app .board .backlog .backlog-list .done-task, .app .board .backlog .develop-list .backlog-task, .app .board .backlog .develop-list .develop-task, .app .board .backlog .develop-list .test-task, .app .board .backlog .develop-list .done-task, .app .board .backlog .test-list .backlog-task, .app .board .backlog .test-list .develop-task, .app .board .backlog .test-list .test-task, .app .board .backlog .test-list .done-task, .app .board .backlog .done-list .backlog-task, .app .board .backlog .done-list .develop-task, .app .board .backlog .done-list .test-task, .app .board .backlog .done-list .done-task, .app .board .develop .backlog-list .backlog-task, .app .board .develop .backlog-list .develop-task, .app .board .develop .backlog-list .test-task, .app .board .develop .backlog-list .done-task, .app .board .develop .develop-list .backlog-task, .app .board .develop .develop-list .develop-task, .app .board .develop .develop-list .test-task, .app .board .develop .develop-list .done-task, .app .board .develop .test-list .backlog-task, .app .board .develop .test-list .develop-task, .app .board .develop .test-list .test-task, .app .board .develop .test-list .done-task, .app .board .develop .done-list .backlog-task, .app .board .develop .done-list .develop-task, .app .board .develop .done-list .test-task, .app .board .develop .done-list .done-task, .app .board .test .backlog-list .backlog-task, .app .board .test .backlog-list .develop-task, .app .board .test .backlog-list .test-task, .app .board .test .backlog-list .done-task, .app .board .test .develop-list .backlog-task, .app .board .test .develop-list .develop-task, .app .board .test .develop-list .test-task, .app .board .test .develop-list .done-task, .app .board .test .test-list .backlog-task, .app .board .test .test-list .develop-task, .app .board .test .test-list .test-task, .app .board .test .test-list .done-task, .app .board .test .done-list .backlog-task, .app .board .test .done-list .develop-task, .app .board .test .done-list .test-task, .app .board .test .done-list .done-task, .app .board .done .backlog-list .backlog-task, .app .board .done .backlog-list .develop-task, .app .board .done .backlog-list .test-task, .app .board .done .backlog-list .done-task, .app .board .done .develop-list .backlog-task, .app .board .done .develop-list .develop-task, .app .board .done .develop-list .test-task, .app .board .done .develop-list .done-task, .app .board .done .test-list .backlog-task, .app .board .done .test-list .develop-task, .app .board .done .test-list .test-task, .app .board .done .test-list .done-task, .app .board .done .done-list .backlog-task, .app .board .done .done-list .develop-task, .app .board .done .done-list .test-task, .app .board .done .done-list .done-task {
+        border: 1px solid #000;
+        margin-bottom: 10px;
+        background-color: #363d46;
+        border-radius: 5px;
+        padding: 5px;
+        box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1);
+        font-size: 12px;
+        transition: all .3s;
+        cursor: pointer; }
+        .app .board .backlog .backlog-list .backlog-task:hover, .app .board .backlog .backlog-list .develop-task:hover, .app .board .backlog .backlog-list .test-task:hover, .app .board .backlog .backlog-list .done-task:hover, .app .board .backlog .develop-list .backlog-task:hover, .app .board .backlog .develop-list .develop-task:hover, .app .board .backlog .develop-list .test-task:hover, .app .board .backlog .develop-list .done-task:hover, .app .board .backlog .test-list .backlog-task:hover, .app .board .backlog .test-list .develop-task:hover, .app .board .backlog .test-list .test-task:hover, .app .board .backlog .test-list .done-task:hover, .app .board .backlog .done-list .backlog-task:hover, .app .board .backlog .done-list .develop-task:hover, .app .board .backlog .done-list .test-task:hover, .app .board .backlog .done-list .done-task:hover, .app .board .develop .backlog-list .backlog-task:hover, .app .board .develop .backlog-list .develop-task:hover, .app .board .develop .backlog-list .test-task:hover, .app .board .develop .backlog-list .done-task:hover, .app .board .develop .develop-list .backlog-task:hover, .app .board .develop .develop-list .develop-task:hover, .app .board .develop .develop-list .test-task:hover, .app .board .develop .develop-list .done-task:hover, .app .board .develop .test-list .backlog-task:hover, .app .board .develop .test-list .develop-task:hover, .app .board .develop .test-list .test-task:hover, .app .board .develop .test-list .done-task:hover, .app .board .develop .done-list .backlog-task:hover, .app .board .develop .done-list .develop-task:hover, .app .board .develop .done-list .test-task:hover, .app .board .develop .done-list .done-task:hover, .app .board .test .backlog-list .backlog-task:hover, .app .board .test .backlog-list .develop-task:hover, .app .board .test .backlog-list .test-task:hover, .app .board .test .backlog-list .done-task:hover, .app .board .test .develop-list .backlog-task:hover, .app .board .test .develop-list .develop-task:hover, .app .board .test .develop-list .test-task:hover, .app .board .test .develop-list .done-task:hover, .app .board .test .test-list .backlog-task:hover, .app .board .test .test-list .develop-task:hover, .app .board .test .test-list .test-task:hover, .app .board .test .test-list .done-task:hover, .app .board .test .done-list .backlog-task:hover, .app .board .test .done-list .develop-task:hover, .app .board .test .done-list .test-task:hover, .app .board .test .done-list .done-task:hover, .app .board .done .backlog-list .backlog-task:hover, .app .board .done .backlog-list .develop-task:hover, .app .board .done .backlog-list .test-task:hover, .app .board .done .backlog-list .done-task:hover, .app .board .done .develop-list .backlog-task:hover, .app .board .done .develop-list .develop-task:hover, .app .board .done .develop-list .test-task:hover, .app .board .done .develop-list .done-task:hover, .app .board .done .test-list .backlog-task:hover, .app .board .done .test-list .develop-task:hover, .app .board .done .test-list .test-task:hover, .app .board .done .test-list .done-task:hover, .app .board .done .done-list .backlog-task:hover, .app .board .done .done-list .develop-task:hover, .app .board .done .done-list .test-task:hover, .app .board .done .done-list .done-task:hover {
+          box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.1); }
+        .app .board .backlog .backlog-list .backlog-task p, .app .board .backlog .backlog-list .develop-task p, .app .board .backlog .backlog-list .test-task p, .app .board .backlog .backlog-list .done-task p, .app .board .backlog .develop-list .backlog-task p, .app .board .backlog .develop-list .develop-task p, .app .board .backlog .develop-list .test-task p, .app .board .backlog .develop-list .done-task p, .app .board .backlog .test-list .backlog-task p, .app .board .backlog .test-list .develop-task p, .app .board .backlog .test-list .test-task p, .app .board .backlog .test-list .done-task p, .app .board .backlog .done-list .backlog-task p, .app .board .backlog .done-list .develop-task p, .app .board .backlog .done-list .test-task p, .app .board .backlog .done-list .done-task p, .app .board .develop .backlog-list .backlog-task p, .app .board .develop .backlog-list .develop-task p, .app .board .develop .backlog-list .test-task p, .app .board .develop .backlog-list .done-task p, .app .board .develop .develop-list .backlog-task p, .app .board .develop .develop-list .develop-task p, .app .board .develop .develop-list .test-task p, .app .board .develop .develop-list .done-task p, .app .board .develop .test-list .backlog-task p, .app .board .develop .test-list .develop-task p, .app .board .develop .test-list .test-task p, .app .board .develop .test-list .done-task p, .app .board .develop .done-list .backlog-task p, .app .board .develop .done-list .develop-task p, .app .board .develop .done-list .test-task p, .app .board .develop .done-list .done-task p, .app .board .test .backlog-list .backlog-task p, .app .board .test .backlog-list .develop-task p, .app .board .test .backlog-list .test-task p, .app .board .test .backlog-list .done-task p, .app .board .test .develop-list .backlog-task p, .app .board .test .develop-list .develop-task p, .app .board .test .develop-list .test-task p, .app .board .test .develop-list .done-task p, .app .board .test .test-list .backlog-task p, .app .board .test .test-list .develop-task p, .app .board .test .test-list .test-task p, .app .board .test .test-list .done-task p, .app .board .test .done-list .backlog-task p, .app .board .test .done-list .develop-task p, .app .board .test .done-list .test-task p, .app .board .test .done-list .done-task p, .app .board .done .backlog-list .backlog-task p, .app .board .done .backlog-list .develop-task p, .app .board .done .backlog-list .test-task p, .app .board .done .backlog-list .done-task p, .app .board .done .develop-list .backlog-task p, .app .board .done .develop-list .develop-task p, .app .board .done .develop-list .test-task p, .app .board .done .develop-list .done-task p, .app .board .done .test-list .backlog-task p, .app .board .done .test-list .develop-task p, .app .board .done .test-list .test-task p, .app .board .done .test-list .done-task p, .app .board .done .done-list .backlog-task p, .app .board .done .done-list .develop-task p, .app .board .done .done-list .test-task p, .app .board .done .done-list .done-task p {
+          margin: 5px 0;
+          letter-spacing: .7px; }
+          .app .board .backlog .backlog-list .backlog-task p span, .app .board .backlog .backlog-list .develop-task p span, .app .board .backlog .backlog-list .test-task p span, .app .board .backlog .backlog-list .done-task p span, .app .board .backlog .develop-list .backlog-task p span, .app .board .backlog .develop-list .develop-task p span, .app .board .backlog .develop-list .test-task p span, .app .board .backlog .develop-list .done-task p span, .app .board .backlog .test-list .backlog-task p span, .app .board .backlog .test-list .develop-task p span, .app .board .backlog .test-list .test-task p span, .app .board .backlog .test-list .done-task p span, .app .board .backlog .done-list .backlog-task p span, .app .board .backlog .done-list .develop-task p span, .app .board .backlog .done-list .test-task p span, .app .board .backlog .done-list .done-task p span, .app .board .develop .backlog-list .backlog-task p span, .app .board .develop .backlog-list .develop-task p span, .app .board .develop .backlog-list .test-task p span, .app .board .develop .backlog-list .done-task p span, .app .board .develop .develop-list .backlog-task p span, .app .board .develop .develop-list .develop-task p span, .app .board .develop .develop-list .test-task p span, .app .board .develop .develop-list .done-task p span, .app .board .develop .test-list .backlog-task p span, .app .board .develop .test-list .develop-task p span, .app .board .develop .test-list .test-task p span, .app .board .develop .test-list .done-task p span, .app .board .develop .done-list .backlog-task p span, .app .board .develop .done-list .develop-task p span, .app .board .develop .done-list .test-task p span, .app .board .develop .done-list .done-task p span, .app .board .test .backlog-list .backlog-task p span, .app .board .test .backlog-list .develop-task p span, .app .board .test .backlog-list .test-task p span, .app .board .test .backlog-list .done-task p span, .app .board .test .develop-list .backlog-task p span, .app .board .test .develop-list .develop-task p span, .app .board .test .develop-list .test-task p span, .app .board .test .develop-list .done-task p span, .app .board .test .test-list .backlog-task p span, .app .board .test .test-list .develop-task p span, .app .board .test .test-list .test-task p span, .app .board .test .test-list .done-task p span, .app .board .test .done-list .backlog-task p span, .app .board .test .done-list .develop-task p span, .app .board .test .done-list .test-task p span, .app .board .test .done-list .done-task p span, .app .board .done .backlog-list .backlog-task p span, .app .board .done .backlog-list .develop-task p span, .app .board .done .backlog-list .test-task p span, .app .board .done .backlog-list .done-task p span, .app .board .done .develop-list .backlog-task p span, .app .board .done .develop-list .develop-task p span, .app .board .done .develop-list .test-task p span, .app .board .done .develop-list .done-task p span, .app .board .done .test-list .backlog-task p span, .app .board .done .test-list .develop-task p span, .app .board .done .test-list .test-task p span, .app .board .done .test-list .done-task p span, .app .board .done .done-list .backlog-task p span, .app .board .done .done-list .develop-task p span, .app .board .done .done-list .test-task p span, .app .board .done .done-list .done-task p span {
+            font-weight: 700; }
+      .app .board .backlog .backlog-list .backlog-task, .app .board .backlog .develop-list .backlog-task, .app .board .backlog .test-list .backlog-task, .app .board .backlog .done-list .backlog-task, .app .board .develop .backlog-list .backlog-task, .app .board .develop .develop-list .backlog-task, .app .board .develop .test-list .backlog-task, .app .board .develop .done-list .backlog-task, .app .board .test .backlog-list .backlog-task, .app .board .test .develop-list .backlog-task, .app .board .test .test-list .backlog-task, .app .board .test .done-list .backlog-task, .app .board .done .backlog-list .backlog-task, .app .board .done .develop-list .backlog-task, .app .board .done .test-list .backlog-task, .app .board .done .done-list .backlog-task {
+        border-left: 8px solid #fa6e6e;
+        color: #fa6e6e; }
+        .app .board .backlog .backlog-list .backlog-task span, .app .board .backlog .develop-list .backlog-task span, .app .board .backlog .test-list .backlog-task span, .app .board .backlog .done-list .backlog-task span, .app .board .develop .backlog-list .backlog-task span, .app .board .develop .develop-list .backlog-task span, .app .board .develop .test-list .backlog-task span, .app .board .develop .done-list .backlog-task span, .app .board .test .backlog-list .backlog-task span, .app .board .test .develop-list .backlog-task span, .app .board .test .test-list .backlog-task span, .app .board .test .done-list .backlog-task span, .app .board .done .backlog-list .backlog-task span, .app .board .done .develop-list .backlog-task span, .app .board .done .test-list .backlog-task span, .app .board .done .done-list .backlog-task span {
+          color: #aaadb3; }
+      .app .board .backlog .backlog-list .develop-task, .app .board .backlog .develop-list .develop-task, .app .board .backlog .test-list .develop-task, .app .board .backlog .done-list .develop-task, .app .board .develop .backlog-list .develop-task, .app .board .develop .develop-list .develop-task, .app .board .develop .test-list .develop-task, .app .board .develop .done-list .develop-task, .app .board .test .backlog-list .develop-task, .app .board .test .develop-list .develop-task, .app .board .test .test-list .develop-task, .app .board .test .done-list .develop-task, .app .board .done .backlog-list .develop-task, .app .board .done .develop-list .develop-task, .app .board .done .test-list .develop-task, .app .board .done .done-list .develop-task {
+        border-left: 8px solid #fcac79;
+        color: #fcac79; }
+        .app .board .backlog .backlog-list .develop-task span, .app .board .backlog .develop-list .develop-task span, .app .board .backlog .test-list .develop-task span, .app .board .backlog .done-list .develop-task span, .app .board .develop .backlog-list .develop-task span, .app .board .develop .develop-list .develop-task span, .app .board .develop .test-list .develop-task span, .app .board .develop .done-list .develop-task span, .app .board .test .backlog-list .develop-task span, .app .board .test .develop-list .develop-task span, .app .board .test .test-list .develop-task span, .app .board .test .done-list .develop-task span, .app .board .done .backlog-list .develop-task span, .app .board .done .develop-list .develop-task span, .app .board .done .test-list .develop-task span, .app .board .done .done-list .develop-task span {
+          color: #aaadb3; }
+      .app .board .backlog .backlog-list .test-task, .app .board .backlog .develop-list .test-task, .app .board .backlog .test-list .test-task, .app .board .backlog .done-list .test-task, .app .board .develop .backlog-list .test-task, .app .board .develop .develop-list .test-task, .app .board .develop .test-list .test-task, .app .board .develop .done-list .test-task, .app .board .test .backlog-list .test-task, .app .board .test .develop-list .test-task, .app .board .test .test-list .test-task, .app .board .test .done-list .test-task, .app .board .done .backlog-list .test-task, .app .board .done .develop-list .test-task, .app .board .done .test-list .test-task, .app .board .done .done-list .test-task {
+        border-left: 8px solid #cc96ef;
+        color: #cc96ef; }
+        .app .board .backlog .backlog-list .test-task span, .app .board .backlog .develop-list .test-task span, .app .board .backlog .test-list .test-task span, .app .board .backlog .done-list .test-task span, .app .board .develop .backlog-list .test-task span, .app .board .develop .develop-list .test-task span, .app .board .develop .test-list .test-task span, .app .board .develop .done-list .test-task span, .app .board .test .backlog-list .test-task span, .app .board .test .develop-list .test-task span, .app .board .test .test-list .test-task span, .app .board .test .done-list .test-task span, .app .board .done .backlog-list .test-task span, .app .board .done .develop-list .test-task span, .app .board .done .test-list .test-task span, .app .board .done .done-list .test-task span {
+          color: #aaadb3; }
+      .app .board .backlog .backlog-list .done-task, .app .board .backlog .develop-list .done-task, .app .board .backlog .test-list .done-task, .app .board .backlog .done-list .done-task, .app .board .develop .backlog-list .done-task, .app .board .develop .develop-list .done-task, .app .board .develop .test-list .done-task, .app .board .develop .done-list .done-task, .app .board .test .backlog-list .done-task, .app .board .test .develop-list .done-task, .app .board .test .test-list .done-task, .app .board .test .done-list .done-task, .app .board .done .backlog-list .done-task, .app .board .done .develop-list .done-task, .app .board .done .test-list .done-task, .app .board .done .done-list .done-task {
+        border-left: 8px solid #38e2bd;
+        color: #38e2bd; }
+        .app .board .backlog .backlog-list .done-task span, .app .board .backlog .develop-list .done-task span, .app .board .backlog .test-list .done-task span, .app .board .backlog .done-list .done-task span, .app .board .develop .backlog-list .done-task span, .app .board .develop .develop-list .done-task span, .app .board .develop .test-list .done-task span, .app .board .develop .done-list .done-task span, .app .board .test .backlog-list .done-task span, .app .board .test .develop-list .done-task span, .app .board .test .test-list .done-task span, .app .board .test .done-list .done-task span, .app .board .done .backlog-list .done-task span, .app .board .done .develop-list .done-task span, .app .board .done .test-list .done-task span, .app .board .done .done-list .done-task span {
+          color: #aaadb3; }
+    .app .board .backlog .develop-list.drop-hover, .app .board .develop .develop-list.drop-hover, .app .board .test .develop-list.drop-hover, .app .board .done .develop-list.drop-hover {
+      background: linear-gradient(to bottom, #9a8174 1%, #22242a 100%); }
+    .app .board .backlog .test-list.drop-hover, .app .board .develop .test-list.drop-hover, .app .board .test .test-list.drop-hover, .app .board .done .test-list.drop-hover {
+      background: linear-gradient(to bottom, #897499 1%, #22242a 100%); }
+    .app .board .backlog .done-list.drop-hover, .app .board .develop .done-list.drop-hover, .app .board .test .done-list.drop-hover, .app .board .done .done-list.drop-hover {
+      background: linear-gradient(to bottom, #70968b 1%, #22242a 100%); }
+  .app .board .backlog h3 span {
+    color: #fa6e6e; }
+  .app .board .develop h3 span {
+    color: #fcac79; }
+  .app .board .test h3 span {
+    color: #cc96ef; }
+  .app .board .done {
+    border-right: none; }
+    .app .board .done h3 span {
+      color: #38e2bd; }
 
-.app .board .col-md-3 .test.drop-hover {
-  background: linear-gradient(to bottom, #eac9ff 1%, #f0f0f0 100%); }
-
-.app .board .col-md-3 .done.drop-hover {
-  background: linear-gradient(to bottom, #bdfff1 1%, #f0f0f0 100%); }
-
-.app .board .col-md-3:first-child h3 span {
-  color: #fa6e6e; }
-
-.app .board .col-md-3:nth-child(2) h3 span {
-  color: #fcac79; }
-
-.app .board .col-md-3:nth-child(3) h3 span {
-  color: #cc96ef; }
-
-.app .board .col-md-3:nth-child(4) h3 span {
-  color: #38e2bd; }
-
-.app .board .col-md-3:not(:last-child) {
-  border-right: 1px solid #d8d8d8; }
+.app .task-form {
+  padding: 20px;
+  max-width: 800px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto; }
+  .app .task-form h3 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 22px; }
+    .app .task-form h3 span {
+      color: #fa6e6e;
+      text-transform: uppercase; }
+  .app .task-form input, .app .task-form textarea {
+    margin-bottom: 20px; }
+  .app .task-form textarea {
+    height: 50px;
+    max-height: 100px;
+    min-height: 50px; }

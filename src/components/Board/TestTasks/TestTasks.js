@@ -14,7 +14,7 @@ function collect(connect, monitor) {
 const TestTasks = props => {
 	const {testTasks, connectDropTarget, hovered, onDrop} = props;
 	return connectDropTarget(
-		<div className={hovered ? 'test drop-hover' : 'test'}>
+		<div className={hovered ? 'test-list drop-hover' : 'test-list'}>
 			{testTasks ? testTasks.map((task, i) => (
 				                           <Task
 					                           key={i}

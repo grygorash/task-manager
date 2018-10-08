@@ -33,10 +33,22 @@ const Task = props => {
 	const opacity = isDragging ? 0 : 1;
 	return connectDragSource(
 		<div className={`${ownPriority}-task`} style={{opacity}}>
-			<p><span>Task №:</span> {task.taskNumber}</p>
-			<p><span>Title:</span> {task.title}</p>
-			<p><span>Description:</span> {task.description}</p>
-			<p><span>Create Date:</span> {task.createDate}</p>
+			<p className={`${ownPriority}-info`}>
+				<span className={`${ownPriority}-value`}>Task №: </span>
+				{task.taskNumber}
+			</p>
+			<p className={`${ownPriority}-info`}>
+				<span className={`${ownPriority}-value`}>Title: </span>
+				{task.title}
+			</p>
+			<p className={`${ownPriority}-info`}>
+				<span className={`${ownPriority}-value`}>Description: </span>
+				{task.description}
+			</p>
+			<p className={`${ownPriority}-info`}>
+				<span className={`${ownPriority}-value`}>Create Date: </span>
+				{task.createDate}
+			</p>
 		</div>
 	);
 };

@@ -11,34 +11,33 @@ const Board = props => {
 	const {tasks, backlogTasks, developTasks, testTasks, doneTasks, onDrop, selectedBoard} = props;
 	return (
 		<Row className="board">
-			<Header selectedBoard={selectedBoard}/>
-			<div>{selectedBoard.id}</div>
-			<Col md="3">
+			<Header selectedBoard={selectedBoard} />
+			<Col md="3" className="backlog">
 				<h3>> Backlog (<span>{backlogTasks.length}</span>)</h3>
 				<BacklogTasks
 					backlogTasks={backlogTasks}
 					onDrop={onDrop} />
 			</Col>
-			<Col md="3">
+			<Col md="3" className="develop">
 				<h3>> Develop (<span>{developTasks.length}</span>)</h3>
 				<DevelopTasks
 					developTasks={developTasks}
 					onDrop={onDrop} />
 			</Col>
-			<Col md="3">
+			<Col md="3" className="test">
 				<h3>> Test (<span>{testTasks.length}</span>)</h3>
 				<TestTasks
 					testTasks={testTasks}
 					onDrop={onDrop} />
 			</Col>
-			<Col md="3">
+			<Col md="3" className="done">
 				<h3>> Done Tasks (<span>{doneTasks.length}</span>)</h3>
 				<DoneTasks
 					doneTasks={doneTasks}
 					onDrop={onDrop} />
 			</Col>
 			<Col md="12">
-				total tasks: {tasks.length}
+				Total Tasks: {tasks.length}
 			</Col>
 		</Row>
 
