@@ -108,6 +108,14 @@ class App extends Component {
 				}
 			));
 			this.props.addBoard(board);
+		} else {
+			this.setState((prevState) => ({
+					validation: {
+						...prevState.validation,
+						boardValue: false
+					}
+				}
+			));
 		}
 	};
 

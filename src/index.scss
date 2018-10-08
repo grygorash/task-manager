@@ -8,12 +8,16 @@ body {
 	font-family: 'Roboto', sans-serif;
 	background-color: #22242a;
 	color: #aaadb3;
+	text-shadow: 2px 2px 1px black;
 	p {
 		margin: 0;
 		word-wrap: break-word;
 		span {
 			color: #fa6e6e;
 		}
+	}
+	input{
+		text-shadow: 2px 2px 1px black;
 	}
 	.btn {
 		display: flex;
@@ -29,6 +33,7 @@ body {
 		border: 1px solid #000;
 		border-left: 8px solid #fa6e6e;
 		box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1);
+		text-shadow: 2px 2px 1px black;
 		transition: all .3s;
 		span {
 			text-transform: uppercase;
