@@ -23,12 +23,11 @@ import {
 	getSelectedBoard
 } from '../selectors';
 import Loader from '../components/Loader/Loader';
-import AddTask from '../components/AddTask/AddTask';
+import Boards from '../components/Boards/Boards';
 import Board from '../components/Board/Board';
+import AddTask from '../components/AddTask/AddTask';
 
 import './App.css';
-import MainPage from '../components/MainPage/MainPage';
-import { Link } from 'react-router-dom';
 
 class App extends Component {
 	constructor(props) {
@@ -101,7 +100,7 @@ class App extends Component {
 							<Route
 								exact path="/"
 								render={() =>
-									<MainPage
+									<Boards
 										boards={boards}
 										tasks={tasks}
 										backlogTasks={getBacklogTasks}
@@ -112,7 +111,8 @@ class App extends Component {
 										onSelectBoard={handleSelectBoard}
 										onDrop={handleDrop}
 										onBoardTitleChange={handleBoardTitleChange}
-										onAddBoard={handleAddBoard} />}
+										onAddBoard={handleAddBoard}
+									/>}
 							/>
 							<Route
 								exact path="/board/:boardId"
@@ -149,6 +149,7 @@ class App extends Component {
 }
 
 const mapStateToProps = state => ({
+	loaded: getLoadingStatus(state),
 	boards: getBoards(state),
 	selectedBoard: getSelectedBoard(state),
 	tasks: getTasks(state),
@@ -156,8 +157,7 @@ const mapStateToProps = state => ({
 	getDevelopTasks: getDevelopTasks(state),
 	getTestTasks: getTestTasks(state),
 	getDoneTasks: getDoneTasks(state),
-	getActiveTasks: getActiveTasks(state),
-	loaded: getLoadingStatus(state)
+	getActiveTasks: getActiveTasks(state)
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -1,11 +1,11 @@
 import React from 'react';
 import { Col, Row } from 'reactstrap';
 
+import Header from './Header/Header';
 import BacklogTasks from './BacklogTasks/BacklogTasks';
 import DevelopTasks from './DevelopTasks/DevelopTasks';
 import TestTasks from './TestTasks/TestTasks';
 import DoneTasks from './DoneTasks/DoneTasks';
-import Header from '../Header/Header';
 
 const Board = props => {
 	const {tasks, backlogTasks, developTasks, testTasks, doneTasks, onDrop, selectedBoard} = props;

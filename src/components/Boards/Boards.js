@@ -3,7 +3,7 @@ import BoardList from './BoardList/BoardList';
 import BoardCreate from './BoardCreate/BoardCreate';
 import { Row } from 'reactstrap';
 
-const MainPage = props => {
+const Boards = props => {
 	const {boards, boardValue, onAddBoard, onBoardTitleChange, onSelectBoard} = props;
 
 	return (
@@ -21,4 +21,4 @@ const MainPage = props => {
 	);
 };
 
-export default MainPage;
+export default Boards;
