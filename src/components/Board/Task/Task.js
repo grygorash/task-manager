@@ -46,7 +46,7 @@ const Task = props => {
 				{task.description}
 			</p>
 			<p className={`${ownPriority}-info`}>
-				<span className={`${ownPriority}-value`}>Description: </span>
+				<span className={`${ownPriority}-value`}>Developer: </span>
 				{task.developer}
 			</p>
 			<p className={`${ownPriority}-info`}>

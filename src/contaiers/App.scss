@@ -11,6 +11,7 @@
 			margin: 0;
 			text-shadow: 2px 2px 1px rgba(0, 0, 0, 1);
 			span {
+				transition: all .3s;
 				&:first-child {
 					color: #38e2bd;
 					text-transform: uppercase;
@@ -18,6 +19,14 @@
 				&:last-child {
 					color: #fa6e6e;
 					text-transform: uppercase;
+				}
+			}
+			&:hover {
+				span {
+					&:last-child {
+						color: #38e2bd;
+						text-transform: uppercase;
+					}
 				}
 			}
 		}
@@ -31,14 +40,21 @@
 					text-transform: none;
 				}
 			}
-			a {
-				width: 300px;
-				height: auto;
-				text-align: left;
-				margin: 0 20px 20px 0;
-				flex-direction: column;
-				p {
-					margin: 0;
+			.list {
+				display: flex;
+				flex-flow: row wrap;
+				a {
+					width: 305px;
+					height: auto;
+					text-align: left;
+					margin: 0 10px 10px 0;
+					flex-direction: column;
+					p {
+						margin: 0;
+					}
+					&:nth-child(6n) {
+						margin-right: 0;
+					}
 				}
 			}
 			display: flex;
@@ -49,14 +65,17 @@
 			padding: 20px;
 			p {
 				width: 100%;
-				margin-bottom: 15px;
+				margin-bottom: 10px;
 			}
 			form {
 				display: flex;
 				flex-flow: row wrap;
 				input {
-					width: 300px;
-					margin-right: 20px;
+					width: 305px;
+					margin-right: 10px;
+					&.validation-success {
+						border-color: #38e2bd;
+					}
 				}
 			}
 		}
@@ -68,7 +87,7 @@
 			justify-content: flex-end;
 		}
 		.backlog, .develop, .test, .done {
-			border-right: 1px solid #d8d8d8;
+			border-right: 1px solid #aaadb3;
 			margin: 20px 0;
 			h3 {
 				padding: 0 10px;

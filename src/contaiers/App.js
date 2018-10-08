@@ -36,12 +36,17 @@ class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			boardValue: '',
-			taskValue: '',
-			descriptionValue: '',
-			developerValue: 'Choose Developer',
-			devNameValue: '',
-			devEmailValue: ''
+			values: {
+				boardValue: '',
+				taskValue: '',
+				descriptionValue: '',
+				developerValue: 'Choose Developer',
+				devNameValue: '',
+				devEmailValue: ''
+			},
+			validation: {
+				boardValue: null
+			}
 		};
 	};
 
@@ -57,49 +62,79 @@ class App extends Component {
 	}
 
 	handleBoardTitleChange = value => {
-		this.setState({boardValue: value});
+		if (value.length >= 3) {
+			this.setState((prevState) => ({validation: {...prevState.validation, boardValue: true}}), () => {
+			});
+		} else {
+			this.setState((prevState) => ({validation: {...prevState.validation, boardValue: false}}), () => {
+			});
+		}
+		this.setState((prevState) => ({values: {...prevState.values, boardValue: value}}));
 	};
 
-	onTitleChange = value => {
-		this.setState({taskValue: value});
+	handleTitleChange = value => {
+		this.setState((prevState) => ({values: {...prevState.values, taskValue: value}}));
+
 	};
 
-	onDescriptionChange = value => {
-		this.setState({descriptionValue: value});
+	handleDescriptionChange = value => {
+		this.setState((prevState) => ({values: {...prevState.values, descriptionValue: value}}));
 	};
 
 	handleDeveloperChange = value => {
-		this.setState({developerValue: value});
+		this.setState((prevState) => ({values: {...prevState.values, developerValue: value}}));
 	};
 
 	handleDevNameChange = value => {
-		this.setState({devNameValue: value});
+		this.setState((prevState) => ({values: {...prevState.values, devNameValue: value}}));
 	};
 
 	handleDevEmailChange = value => {
-		this.setState({devEmailValue: value});
+		this.setState((prevState) => ({values: {...prevState.values, devEmailValue: value}}));
 	};
 
 	handleAddBoard = (e, board) => {
 		e.preventDefault();
-		this.setState({boardValue: ''});
-		this.props.addBoard(board);
+		if (this.state.validation.boardValue === true) {
+			this.setState((prevState) => ({
+					values: {
+						...prevState.values,
+						boardValue: ''
+					},
+					validation: {
+						...prevState.validation,
+						boardValue: null
+					}
+				}
+			));
+			this.props.addBoard(board);
+		}
 	};
 
 	handleAddTask = (e, task) => {
 		e.preventDefault();
-		this.setState({
-			              taskValue: '',
-			              descriptionValue: '',
-			              developerValue: ''
-		              });
+		this.setState((prevState) => ({
+			values: {
+				...prevState.values,
+				taskValue: '',
+				descriptionValue: '',
+				developerValue: 'Choose Developer'
+			}
+		}));
+
 		this.props.addTask(task);
 		this.props.history.push(`/board/${task.boardId}`);
 	};
 
 	handleAddDev = (e, dev) => {
 		e.preventDefault();
-		this.setState({devNameValue: '', devEmailValue: ''});
+		this.setState((prevState) => ({
+			values: {
+				...prevState.values,
+				devNameValue: '',
+				devEmailValue: ''
+			}
+		}));
 		this.props.addDev(dev);
 		this.props.history.push(`/board/${dev.boardId}`);
 	};
@@ -114,8 +149,8 @@ class App extends Component {
 
 	render() {
 		const {
-			onTitleChange,
-			onDescriptionChange,
+			handleTitleChange,
+			handleDescriptionChange,
 			handleDeveloperChange,
 			handleAddTask,
 			handleDrop,
@@ -127,12 +162,8 @@ class App extends Component {
 			handleDevEmailChange
 		} = this;
 		const {
-			boardValue,
-			taskValue,
-			descriptionValue,
-			developerValue,
-			devNameValue,
-			devEmailValue
+			values,
+			validation
 		} = this.state;
 		const {
 			tasks,
@@ -167,7 +198,8 @@ class App extends Component {
 										developTasks={getDevelopTasks}
 										testTasks={getTestTasks}
 										doneTasks={getDoneTasks}
-										boardValue={boardValue}
+										boardValue={values.boardValue}
+										validationBoardValue={validation.boardValue}
 										onSelectBoard={handleSelectBoard}
 										onDrop={handleDrop}
 										onBoardTitleChange={handleBoardTitleChange}
@@ -193,14 +225,14 @@ class App extends Component {
 								render={() =>
 									<TaskCreate
 										tasks={getActiveTasks}
-										taskValue={taskValue}
-										descriptionValue={descriptionValue}
-										developerValue={developerValue}
+										taskValue={values.taskValue}
+										descriptionValue={values.descriptionValue}
+										developerValue={values.developerValue}
 										selectedBoard={selectedBoard}
 										developers={getActiveDevelopers}
 										onAddTask={handleAddTask}
-										onTitleChange={onTitleChange}
-										onDescriptionChange={onDescriptionChange}
+										onTitleChange={handleTitleChange}
+										onDescriptionChange={handleDescriptionChange}
 										onDeveloperChange={handleDeveloperChange}
 									/>}
 							/>
@@ -208,8 +240,8 @@ class App extends Component {
 								path="/board/:boardId/create-developer"
 								render={() =>
 									<DeveloperCreate
-										devNameValue={devNameValue}
-										devEmailValue={devEmailValue}
+										devNameValue={values.devNameValue}
+										devEmailValue={values.devEmailValue}
 										selectedBoard={selectedBoard}
 										onAddDev={handleAddDev}
 										onDevNameChange={handleDevNameChange}

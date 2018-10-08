@@ -39,7 +39,9 @@ const Board = props => {
 					onDrop={onDrop} />
 			</Col>
 			<Col md="12">
-				Total Tasks: {tasks.length}
+				<p>
+					Total Tasks: <span>{tasks.length}</span>
+				</p>
 			</Col>
 		</Row>
 

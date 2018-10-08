@@ -9,12 +9,14 @@ const BoardList = props => {
 			{boards.length ? (
 				<Col md="12" className="board-list">
 					<p>Choose your board</p>
-					{boards.map((board, i) => (
-						<Link className="btn" key={i} to={`/board/${board.id}`} onClick={() => onSelectBoard(board)}>
-							<p>Title: <span>{board.boardTitle}</span></p>
-							<p>Created date: <span>{board.createDate}</span></p>
-						</Link>
-					))}
+					<div className="list">
+						{boards.map((board, i) => (
+							<Link className="btn" key={i} to={`/board/${board.id}`} onClick={() => onSelectBoard(board)}>
+								<p>Title: <span>{board.boardTitle}</span></p>
+								<p>Created date: <span>{board.createDate}</span></p>
+							</Link>
+						))}
+					</div>
 				</Col>
 			) : null}
 		</Fragment>

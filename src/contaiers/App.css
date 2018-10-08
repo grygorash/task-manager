@@ -9,11 +9,16 @@
     padding: 20px 0;
     margin: 0;
     text-shadow: 2px 2px 1px black; }
-    .app .header .logo span:first-child {
+    .app .header .logo span {
+      transition: all .3s; }
+      .app .header .logo span:first-child {
+        color: #38e2bd;
+        text-transform: uppercase; }
+      .app .header .logo span:last-child {
+        color: #fa6e6e;
+        text-transform: uppercase; }
+    .app .header .logo:hover span:last-child {
       color: #38e2bd;
-      text-transform: uppercase; }
-    .app .header .logo span:last-child {
-      color: #fa6e6e;
       text-transform: uppercase; }
 
 .app .boards .board-list {
@@ -25,26 +30,33 @@
     margin-bottom: 15px; }
     .app .boards .board-list p span {
       text-transform: none; }
-  .app .boards .board-list a {
-    width: 300px;
-    height: auto;
-    text-align: left;
-    margin: 0 20px 20px 0;
-    flex-direction: column; }
-    .app .boards .board-list a p {
-      margin: 0; }
+  .app .boards .board-list .list {
+    display: flex;
+    flex-flow: row wrap; }
+    .app .boards .board-list .list a {
+      width: 305px;
+      height: auto;
+      text-align: left;
+      margin: 0 10px 10px 0;
+      flex-direction: column; }
+      .app .boards .board-list .list a p {
+        margin: 0; }
+      .app .boards .board-list .list a:nth-child(6n) {
+        margin-right: 0; }
 
 .app .boards .create-board {
   padding: 20px; }
   .app .boards .create-board p {
     width: 100%;
-    margin-bottom: 15px; }
+    margin-bottom: 10px; }
   .app .boards .create-board form {
     display: flex;
     flex-flow: row wrap; }
     .app .boards .create-board form input {
-      width: 300px;
-      margin-right: 20px; }
+      width: 305px;
+      margin-right: 10px; }
+      .app .boards .create-board form input.validation-success {
+        border-color: #38e2bd; }
 
 .app .board {
   padding: 20px 0; }
@@ -52,7 +64,7 @@
     display: flex;
     justify-content: flex-end; }
   .app .board .backlog, .app .board .develop, .app .board .test, .app .board .done {
-    border-right: 1px solid #d8d8d8;
+    border-right: 1px solid #aaadb3;
     margin: 20px 0; }
     .app .board .backlog h3, .app .board .develop h3, .app .board .test h3, .app .board .done h3 {
       padding: 0 10px;
