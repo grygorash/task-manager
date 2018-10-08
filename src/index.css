@@ -18,11 +18,10 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-right: 10px;
     font-size: 15px;
     color: #aaadb3;
     height: 50px;
-    width: 200px;
+    width: 300px;
     cursor: pointer;
     background-color: #363d46;
     border-radius: 5px;

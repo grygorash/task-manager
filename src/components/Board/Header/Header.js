@@ -12,6 +12,7 @@ const Header = props => {
 				</Col>
 				<Col md="6" className="create">
 					<button className="btn"
+					        style={developers.length ? {marginRight: '20px'} : null}
 					        onClick={() => props.history.push(`/board/${selectedBoard.id}/create-developer`)}>
 						Invite <span>Developer</span>
 					</button>
