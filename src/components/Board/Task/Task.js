@@ -1,5 +1,6 @@
 import React from 'react';
 import { DragSource } from 'react-dnd';
+import moment from 'moment';
 
 const taskSource = {
 	beginDrag(props) {
@@ -50,8 +51,12 @@ const Task = props => {
 				{task.developer}
 			</p>
 			<p className={`${ownPriority}-info`}>
-				<span className={`${ownPriority}-value`}>Create Date: </span>
-				{task.createDate}
+				<span className={`${ownPriority}-value`}>Start Date: </span>
+				{moment(task.startDate).format("MMM Do YYYY")}
+			</p>
+			<p className={`${ownPriority}-info`}>
+				<span className={`${ownPriority}-value`}>End Date: </span>
+				{moment(task.endDate).format("MMM Do YYYY")}
 			</p>
 		</div>
 	);

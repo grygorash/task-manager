@@ -3,6 +3,8 @@ import BoardList from './BoardList/BoardList';
 import BoardCreate from './BoardCreate/BoardCreate';
 import { Row } from 'reactstrap';
 
+import './Boards.css';
+
 const Boards = props => {
 	const {boards, values, onAddBoard, onBoardTitleChange, onSelectBoard, validation} = props;
 
@@ -13,8 +15,8 @@ const Boards = props => {
 				onSelectBoard={onSelectBoard} />
 			<BoardCreate
 				boards={boards}
-				boardValue={values.boardValue}
-				validationBoardValue={validation.boardValue}
+				boardTitle={values.boardTitle}
+				validationBoardTitle={validation.boardTitle}
 				onBoardTitleChange={onBoardTitleChange}
 				onAddBoard={onAddBoard} />
 		</Row>

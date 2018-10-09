@@ -1,0 +1,129 @@
+.board {
+	padding: 20px 0 0;
+	.create {
+		display: flex;
+		justify-content: flex-end;
+		align-items: center;
+	}
+	.backlog, .develop, .test, .done {
+		border-right: 1px solid #aaadb3;
+		margin: 20px 0;
+		h3 {
+			padding: 0 10px;
+			font-size: 12px;
+			span {
+				font-size: 14px;
+			}
+		}
+		.backlog-list, .develop-list, .test-list, .done-list {
+			padding: 10px;
+			min-height: calc(100vh - 292px);
+			border-radius: 5px;
+			.backlog-task, .develop-task, .test-task, .done-task {
+				border: 1px solid #000;
+				margin-bottom: 10px;
+				background-color: #363d46;
+				border-radius: 5px;
+				padding: 5px;
+				box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1);
+				font-size: 12px;
+				transition: all .3s;
+				cursor: pointer;
+				&:hover {
+					box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.1);
+				}
+				p {
+					margin: 5px 0;
+					letter-spacing: .7px;
+					span {
+						font-weight: 700;
+					}
+				}
+			}
+			.backlog-task {
+				border-left: 8px solid #fa6e6e;
+				color: #fa6e6e;
+				span {
+					color: #aaadb3;
+				}
+			}
+			.develop-task {
+				border-left: 8px solid #fcac79;
+				color: #fcac79;
+				span {
+					color: #aaadb3;
+				}
+			}
+			.test-task {
+				border-left: 8px solid #cc96ef;
+				color: #cc96ef;
+				span {
+					color: #aaadb3;
+				}
+			}
+			.done-task {
+				border-left: 8px solid #38e2bd;
+				color: #38e2bd;
+				span {
+					color: #aaadb3;
+				}
+			}
+
+		}
+		.backlog-list {
+			&.drop-hover {
+				background: linear-gradient(to bottom, rgba(250, 110, 110, .3) 1%, #22242a 100%)
+			}
+		}
+		.develop-list {
+			&.drop-hover {
+				background: linear-gradient(to bottom, rgba(252, 172, 121, .3) 1%, #22242a 100%)
+			}
+		}
+		.test-list {
+			&.drop-hover {
+				background: linear-gradient(to bottom, rgba(204, 150, 239, .3) 1%, #22242a 100%)
+			}
+		}
+		.done-list {
+			&.drop-hover {
+				background: linear-gradient(to bottom, rgba(56, 226, 189, .3) 1%, #22242a 100%)
+			}
+		}
+	}
+	.backlog {
+		h3 {
+			span {
+				color: #fa6e6e;
+			}
+		}
+	}
+	.develop {
+		h3 {
+			span {
+				color: #fcac79;
+			}
+		}
+	}
+	.test {
+		h3 {
+			span {
+				color: #cc96ef;
+			}
+		}
+	}
+	.done {
+		border-right: none;
+		h3 {
+			span {
+				color: #38e2bd;
+			}
+		}
+	}
+	.total{
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		min-height: 70px;
+	}
+}

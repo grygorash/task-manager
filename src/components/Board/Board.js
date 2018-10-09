@@ -7,6 +7,8 @@ import DevelopTasks from './DevelopTasks/DevelopTasks';
 import TestTasks from './TestTasks/TestTasks';
 import DoneTasks from './DoneTasks/DoneTasks';
 
+import './Board.css';
+
 const Board = props => {
 	const {tasks, developers, backlogTasks, developTasks, testTasks, doneTasks, onDrop, selectedBoard} = props;
 	return (
@@ -38,10 +40,13 @@ const Board = props => {
 					doneTasks={doneTasks}
 					onDrop={onDrop} />
 			</Col>
-			<Col md="12">
+			<Col md="12" className='total'>
 				<p>
 					Total Tasks: <span>{tasks.length}</span>
 				</p>
+				<button
+					style={!backlogTasks.length && !developTasks.length && !testTasks.length ? {display: 'block'} : {display: 'none'}}
+					className="btn">close<span>Board</span></button>
 			</Col>
 		</Row>
 

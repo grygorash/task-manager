@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import { Col } from 'reactstrap';
 import { withRouter } from 'react-router';
+import moment from 'moment';
 
 const Header = props => {
 		const {selectedBoard, developers} = props;
@@ -8,7 +9,8 @@ const Header = props => {
 			<Fragment>
 				<Col md="6" className="border-info">
 					<p>Title: <span>{selectedBoard.boardTitle}</span></p>
-					<p>Created Date: <span>{selectedBoard.createDate}</span></p>
+					<p>Start Date: <span>{moment(selectedBoard.startDate).format("MMM Do YYYY")}</span></p>
+					<p>End Date: <span>{selectedBoard.endDate ? moment(selectedBoard.endDate).format("MMM Do YYYY") : '-'}</span></p>
 				</Col>
 				<Col md="6" className="create">
 					<button className="btn"

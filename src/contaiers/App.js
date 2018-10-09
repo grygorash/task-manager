@@ -2,9 +2,9 @@ import React, { Component, Fragment } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Container, Row } from 'reactstrap';
-import HTML5Backend from 'react-dnd-html5-backend';
-import { DragDropContext } from 'react-dnd';
 import { Route, Switch, withRouter } from 'react-router';
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
 
 import {
 	addBoard,
@@ -20,9 +20,11 @@ import {
 	getDevelopTasks,
 	getTestTasks,
 	getDoneTasks,
+	getActiveDevelopers,
 	getLoadingStatus,
 	getTasks, getBoards,
-	getSelectedBoard, getDevelopers, getActiveDevelopers
+	getSelectedBoard,
+	getDevelopers
 } from '../selectors';
 import Loader from '../components/Loader/Loader';
 import Boards from '../components/Boards/Boards';
@@ -30,6 +32,7 @@ import Board from '../components/Board/Board';
 import TaskCreate from '../components/TaskCreate/TaskCreate';
 import DeveloperCreate from '../components/DeveloperCreate/DeveloperCreate';
 
+import 'react-datepicker/dist/react-datepicker.css';
 import './App.css';
 
 class App extends Component {
@@ -37,20 +40,24 @@ class App extends Component {
 		super(props);
 		this.state = {
 			values: {
-				boardValue: '',
-				taskValue: '',
-				descriptionValue: '',
-				developerValue: 'Choose Developer',
-				devNameValue: '',
-				devEmailValue: ''
+				boardTitle: '',
+				taskTitle: '',
+				taskDescription: '',
+				taskDeveloper: 'Select Developer',
+				taskStartDate: null,
+				taskEndDate: null,
+				devName: '',
+				devEmail: ''
 			},
 			validation: {
-				boardValue: null,
-				taskValue: null,
-				descriptionValue: null,
-				developerValue: null,
-				devNameValue: null,
-				devEmailValue: null
+				boardTitle: null,
+				taskTitle: null,
+				taskDescription: null,
+				taskDeveloper: null,
+				taskStartDate: null,
+				taskEndDate: null,
+				devName: null,
+				devEmail: null
 			}
 		};
 	};
@@ -68,71 +75,89 @@ class App extends Component {
 
 	handleBoardTitleChange = value => {
 		if (value.length >= 3) {
-			this.setState((prevState) => ({validation: {...prevState.validation, boardValue: true}}));
+			this.setState((prevState) => ({validation: {...prevState.validation, boardTitle: true}}));
 		} else {
-			this.setState((prevState) => ({validation: {...prevState.validation, boardValue: false}}));
+			this.setState((prevState) => ({validation: {...prevState.validation, boardTitle: false}}));
 		}
-		this.setState((prevState) => ({values: {...prevState.values, boardValue: value}}));
+		this.setState((prevState) => ({values: {...prevState.values, boardTitle: value}}));
 	};
 
 	handleTitleChange = value => {
 		if (value.length >= 3) {
-			this.setState((prevState) => ({validation: {...prevState.validation, taskValue: true}}));
+			this.setState((prevState) => ({validation: {...prevState.validation, taskTitle: true}}));
 		} else {
-			this.setState((prevState) => ({validation: {...prevState.validation, taskValue: false}}));
+			this.setState((prevState) => ({validation: {...prevState.validation, taskTitle: false}}));
 		}
-		this.setState((prevState) => ({values: {...prevState.values, taskValue: value}}));
+		this.setState((prevState) => ({values: {...prevState.values, taskTitle: value}}));
 
 	};
 
 	handleDescriptionChange = value => {
 		if (value.length >= 3) {
-			this.setState((prevState) => ({validation: {...prevState.validation, descriptionValue: true}}));
+			this.setState((prevState) => ({validation: {...prevState.validation, taskDescription: true}}));
 		} else {
-			this.setState((prevState) => ({validation: {...prevState.validation, descriptionValue: false}}));
+			this.setState((prevState) => ({validation: {...prevState.validation, taskDescription: false}}));
 		}
-		this.setState((prevState) => ({values: {...prevState.values, descriptionValue: value}}));
+		this.setState((prevState) => ({values: {...prevState.values, taskDescription: value}}));
+	};
+
+	handleChangeStart = (date) => {
+		if (date) {
+			this.setState((prevState) => ({validation: {...prevState.validation, taskStartDate: true}}));
+		} else {
+			this.setState((prevState) => ({validation: {...prevState.validation, taskStartDate: false}}));
+		}
+		this.setState((prevState) => ({values: {...prevState.values, taskStartDate: date}}));
+	};
+
+	handleChangeEnd = (date) => {
+		if (date) {
+			this.setState((prevState) => ({validation: {...prevState.validation, taskEndDate: true}}));
+		} else {
+			this.setState((prevState) => ({validation: {...prevState.validation, taskEndDate: false}}));
+		}
+		this.setState((prevState) => ({values: {...prevState.values, taskEndDate: date}}));
 	};
 
 	handleDeveloperChange = value => {
-		if (value !== 'Choose Developer') {
-			this.setState((prevState) => ({validation: {...prevState.validation, developerValue: true}}));
+		if (value !== 'Select Developer') {
+			this.setState((prevState) => ({validation: {...prevState.validation, taskDeveloper: true}}));
 		} else {
-			this.setState((prevState) => ({validation: {...prevState.validation, developerValue: false}}));
+			this.setState((prevState) => ({validation: {...prevState.validation, taskDeveloper: false}}));
 		}
-		this.setState((prevState) => ({values: {...prevState.values, developerValue: value}}));
+		this.setState((prevState) => ({values: {...prevState.values, taskDeveloper: value}}));
 	};
 
 	handleDevNameChange = value => {
 		if (value.length >= 3) {
-			this.setState((prevState) => ({validation: {...prevState.validation, devNameValue: true}}));
+			this.setState((prevState) => ({validation: {...prevState.validation, devName: true}}));
 		} else {
-			this.setState((prevState) => ({validation: {...prevState.validation, devNameValue: false}}));
+			this.setState((prevState) => ({validation: {...prevState.validation, devName: false}}));
 		}
-		this.setState((prevState) => ({values: {...prevState.values, devNameValue: value}}));
+		this.setState((prevState) => ({values: {...prevState.values, devName: value}}));
 	};
 
 	handleDevEmailChange = value => {
 		const emailValidation = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
 		if (value.match(emailValidation)) {
-			this.setState((prevState) => ({validation: {...prevState.validation, devEmailValue: true}}));
+			this.setState((prevState) => ({validation: {...prevState.validation, devEmail: true}}));
 		} else {
-			this.setState((prevState) => ({validation: {...prevState.validation, devEmailValue: false}}));
+			this.setState((prevState) => ({validation: {...prevState.validation, devEmail: false}}));
 		}
-		this.setState((prevState) => ({values: {...prevState.values, devEmailValue: value}}));
+		this.setState((prevState) => ({values: {...prevState.values, devEmail: value}}));
 	};
 
 	handleAddBoard = (e, board) => {
 		e.preventDefault();
-		if (this.state.validation.boardValue === true) {
+		if (this.state.validation.boardTitle === true) {
 			this.setState((prevState) => ({
 					values: {
 						...prevState.values,
-						boardValue: ''
+						boardTitle: ''
 					},
 					validation: {
 						...prevState.validation,
-						boardValue: null
+						boardTitle: null
 					}
 				}
 			));
@@ -141,41 +166,47 @@ class App extends Component {
 			this.setState((prevState) => ({
 					validation: {
 						...prevState.validation,
-						boardValue: false
+						boardTitle: false
 					}
 				}
 			));
 		}
 	};
 
-	handleAddTask = (e, task) => {
+	handleAddTask = (e, task, tasks) => {
 		e.preventDefault();
-		if (this.state.validation.taskValue === true &&
-			this.state.validation.descriptionValue === true &&
-			this.state.validation.developerValue === true) {
+		if (this.state.validation.taskTitle === true &&
+			this.state.validation.taskDescription === true &&
+			this.state.validation.taskStartDate === true &&
+			this.state.validation.taskEndDate === true &&
+			this.state.validation.taskDeveloper === true) {
 			this.setState((prevState) => ({
 					values: {
 						...prevState.values,
-						taskValue: '',
-						descriptionValue: '',
-						developerValue: 'Choose Developer'
+						taskTitle: '',
+						taskDescription: '',
+						taskDeveloper: 'Select Developer',
+						taskStartDate: null,
+						taskEndDate: null
 					},
 					validation: {
 						...prevState.validation,
-						taskValue: null,
-						descriptionValue: null,
-						developerValue: null
+						taskTitle: null,
+						taskDescription: null,
+						taskDeveloper: null,
+						taskStartDate: null,
+						taskEndDate: null
 					}
 				}
 			));
 			this.props.addTask(task);
 			this.props.history.push(`/board/${task.boardId}`);
 		} else {
-			if (this.state.values.taskValue.length >= 3) {
+			if (this.state.values.taskTitle.length >= 3) {
 				this.setState((prevState) => ({
 						validation: {
 							...prevState.validation,
-							taskValue: true
+							taskTitle: true
 						}
 					}
 				));
@@ -183,17 +214,17 @@ class App extends Component {
 				this.setState((prevState) => ({
 						validation: {
 							...prevState.validation,
-							taskValue: false
+							taskTitle: false
 						}
 					}
 				));
 			}
 
-			if (this.state.values.descriptionValue.length >= 3) {
+			if (this.state.values.taskDescription.length >= 3) {
 				this.setState((prevState) => ({
 						validation: {
 							...prevState.validation,
-							descriptionValue: true
+							taskDescription: true
 						}
 					}
 				));
@@ -201,17 +232,17 @@ class App extends Component {
 				this.setState((prevState) => ({
 						validation: {
 							...prevState.validation,
-							descriptionValue: false
+							taskDescription: false
 						}
 					}
 				));
 			}
 
-			if (this.state.values.developerValue !== 'Choose Developer') {
+			if (this.state.values.taskDeveloper !== 'Select Developer') {
 				this.setState((prevState) => ({
 						validation: {
 							...prevState.validation,
-							developerValue: true
+							taskDeveloper: true
 						}
 					}
 				));
@@ -219,7 +250,43 @@ class App extends Component {
 				this.setState((prevState) => ({
 						validation: {
 							...prevState.validation,
-							developerValue: false
+							taskDeveloper: false
+						}
+					}
+				));
+			}
+
+			if (this.state.values.taskStartDate) {
+				this.setState((prevState) => ({
+						validation: {
+							...prevState.validation,
+							taskStartDate: true
+						}
+					}
+				));
+			} else {
+				this.setState((prevState) => ({
+						validation: {
+							...prevState.validation,
+							taskStartDate: false
+						}
+					}
+				));
+			}
+
+			if (this.state.values.taskEndDate) {
+				this.setState((prevState) => ({
+						validation: {
+							...prevState.validation,
+							taskEndDate: true
+						}
+					}
+				));
+			} else {
+				this.setState((prevState) => ({
+						validation: {
+							...prevState.validation,
+							taskEndDate: false
 						}
 					}
 				));
@@ -230,18 +297,18 @@ class App extends Component {
 	handleAddDev = (e, dev) => {
 		e.preventDefault();
 		const emailValidation = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
-		if (this.state.validation.devNameValue === true &&
-			this.state.validation.devEmailValue === true) {
+		if (this.state.validation.devName === true &&
+			this.state.validation.devEmail === true) {
 			this.setState((prevState) => ({
 					values: {
 						...prevState.values,
-						devNameValue: '',
-						devEmailValue: ''
+						devName: '',
+						devEmail: ''
 					},
 					validation: {
 						...prevState.validation,
-						devNameValue: null,
-						devEmailValue: null,
+						devName: null,
+						devEmail: null,
 					}
 				}
 			));
@@ -249,11 +316,11 @@ class App extends Component {
 			this.props.history.push(`/board/${dev.boardId}`);
 		} else {
 
-			if (this.state.values.devNameValue.length >= 3) {
+			if (this.state.values.devName.length >= 3) {
 				this.setState((prevState) => ({
 						validation: {
 							...prevState.validation,
-							devNameValue: true
+							devName: true
 						}
 					}
 				));
@@ -261,17 +328,17 @@ class App extends Component {
 				this.setState((prevState) => ({
 						validation: {
 							...prevState.validation,
-							devNameValue: false
+							devName: false
 						}
 					}
 				));
 			}
 
-			if (this.state.values.devEmailValue.match(emailValidation)) {
+			if (this.state.values.devEmail.match(emailValidation)) {
 				this.setState((prevState) => ({
 						validation: {
 							...prevState.validation,
-							devEmailValue: true
+							devEmail: true
 						}
 					}
 				));
@@ -279,7 +346,7 @@ class App extends Component {
 				this.setState((prevState) => ({
 						validation: {
 							...prevState.validation,
-							devEmailValue: false
+							devEmail: false
 						}
 					}
 				));
@@ -299,6 +366,8 @@ class App extends Component {
 		const {
 			handleTitleChange,
 			handleDescriptionChange,
+			handleChangeStart,
+			handleChangeEnd,
 			handleDeveloperChange,
 			handleAddTask,
 			handleDrop,
@@ -380,6 +449,8 @@ class App extends Component {
 										onAddTask={handleAddTask}
 										onTitleChange={handleTitleChange}
 										onDescriptionChange={handleDescriptionChange}
+										onChangeStart={handleChangeStart}
+										onChangeEnd={handleChangeEnd}
 										onDeveloperChange={handleDeveloperChange}
 									/>}
 							/>

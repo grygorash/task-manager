@@ -55,7 +55,7 @@ export const addBoard = board => {
 	};
 };
 
-export const addTask = task => {
+export const addTask = (task) => {
 	return {
 		type: ADD_TASK,
 		task

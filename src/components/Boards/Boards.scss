@@ -1,0 +1,46 @@
+.boards {
+	.board-list {
+		p {
+			width: 100%;
+			margin-bottom: 15px;
+			span {
+				text-transform: none;
+			}
+		}
+		.list {
+			display: flex;
+			flex-flow: row wrap;
+			a {
+				width: 305px;
+				height: auto;
+				text-align: left;
+				margin: 0 10px 10px 0;
+				flex-direction: column;
+				p {
+					margin: 0;
+				}
+				&:nth-child(6n) {
+					margin-right: 0;
+				}
+			}
+		}
+		display: flex;
+		flex-flow: row wrap;
+		padding: 20px 20px 10px;
+	}
+	.create-board {
+		padding: 20px;
+		p {
+			width: 100%;
+			margin-bottom: 10px;
+		}
+		form {
+			display: flex;
+			flex-flow: row wrap;
+			input {
+				width: 305px;
+				margin-right: 10px;
+			}
+		}
+	}
+}
