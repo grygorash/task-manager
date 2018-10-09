@@ -12,9 +12,9 @@ const ClosedBoardsList = props => {
 					<p>Closed Boards</p>
 					<div className="list">
 						{closedBoards.map((board, i) => (
-							<div className="closed">
+							<div className="closed" key={i}>
 								<div className="status">closed</div>
-								<Link className="btn" key={i} to={`/board/${board.id}`} onClick={() => onSelectBoard(board)}>
+								<Link className="btn" to={`/board/${board.id}`} onClick={() => onSelectBoard(board)}>
 									<p>Title: <span>{board.boardTitle}</span></p>
 									<p>Start Date: <span>{moment(board.startDate).format('MMM Do YYYY')}</span></p>
 									<p>End Date: <span>{board.endDate ? moment(board.endDate).format('MMM Do YYYY') : '-'}</span></p>
