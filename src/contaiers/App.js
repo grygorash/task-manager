@@ -68,22 +68,18 @@ class App extends Component {
 
 	handleBoardTitleChange = value => {
 		if (value.length >= 3) {
-			this.setState((prevState) => ({validation: {...prevState.validation, boardValue: true}}), () => {
-			});
+			this.setState((prevState) => ({validation: {...prevState.validation, boardValue: true}}));
 		} else {
-			this.setState((prevState) => ({validation: {...prevState.validation, boardValue: false}}), () => {
-			});
+			this.setState((prevState) => ({validation: {...prevState.validation, boardValue: false}}));
 		}
 		this.setState((prevState) => ({values: {...prevState.values, boardValue: value}}));
 	};
 
 	handleTitleChange = value => {
 		if (value.length >= 3) {
-			this.setState((prevState) => ({validation: {...prevState.validation, taskValue: true}}), () => {
-			});
+			this.setState((prevState) => ({validation: {...prevState.validation, taskValue: true}}));
 		} else {
-			this.setState((prevState) => ({validation: {...prevState.validation, taskValue: false}}), () => {
-			});
+			this.setState((prevState) => ({validation: {...prevState.validation, taskValue: false}}));
 		}
 		this.setState((prevState) => ({values: {...prevState.values, taskValue: value}}));
 
@@ -91,33 +87,27 @@ class App extends Component {
 
 	handleDescriptionChange = value => {
 		if (value.length >= 3) {
-			this.setState((prevState) => ({validation: {...prevState.validation, descriptionValue: true}}), () => {
-			});
+			this.setState((prevState) => ({validation: {...prevState.validation, descriptionValue: true}}));
 		} else {
-			this.setState((prevState) => ({validation: {...prevState.validation, descriptionValue: false}}), () => {
-			});
+			this.setState((prevState) => ({validation: {...prevState.validation, descriptionValue: false}}));
 		}
 		this.setState((prevState) => ({values: {...prevState.values, descriptionValue: value}}));
 	};
 
 	handleDeveloperChange = value => {
 		if (value !== 'Choose Developer') {
-			this.setState((prevState) => ({validation: {...prevState.validation, developerValue: true}}), () => {
-			});
+			this.setState((prevState) => ({validation: {...prevState.validation, developerValue: true}}));
 		} else {
-			this.setState((prevState) => ({validation: {...prevState.validation, developerValue: false}}), () => {
-			});
+			this.setState((prevState) => ({validation: {...prevState.validation, developerValue: false}}));
 		}
 		this.setState((prevState) => ({values: {...prevState.values, developerValue: value}}));
 	};
 
 	handleDevNameChange = value => {
 		if (value.length >= 3) {
-			this.setState((prevState) => ({validation: {...prevState.validation, devNameValue: true}}), () => {
-			});
+			this.setState((prevState) => ({validation: {...prevState.validation, devNameValue: true}}));
 		} else {
-			this.setState((prevState) => ({validation: {...prevState.validation, devNameValue: false}}), () => {
-			});
+			this.setState((prevState) => ({validation: {...prevState.validation, devNameValue: false}}));
 		}
 		this.setState((prevState) => ({values: {...prevState.values, devNameValue: value}}));
 	};
@@ -125,11 +115,9 @@ class App extends Component {
 	handleDevEmailChange = value => {
 		const emailValidation = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
 		if (value.match(emailValidation)) {
-			this.setState((prevState) => ({validation: {...prevState.validation, devEmailValue: true}}), () => {
-			});
+			this.setState((prevState) => ({validation: {...prevState.validation, devEmailValue: true}}));
 		} else {
-			this.setState((prevState) => ({validation: {...prevState.validation, devEmailValue: false}}), () => {
-			});
+			this.setState((prevState) => ({validation: {...prevState.validation, devEmailValue: false}}));
 		}
 		this.setState((prevState) => ({values: {...prevState.values, devEmailValue: value}}));
 	};
@@ -337,7 +325,6 @@ class App extends Component {
 			getActiveTasks,
 			getActiveDevelopers
 		} = this.props;
-		console.log('--->', validation);
 		return (
 			<Fragment>
 				{loaded ? (
