@@ -7,7 +7,9 @@ import {
 	FETCH_LOCAL_SUCCESS,
 	FETCH_FAILURE,
 	FETCH_SUCCESS,
-	ADD_DEV, CLOSE_BOARD
+	ADD_DEV,
+	CLOSE_BOARD,
+	REMOVE_BOARD
 } from '../actionTypes';
 
 export const fetchInitialState = () => async dispatch => {
@@ -55,6 +57,13 @@ export const addSelectedBoard = board => {
 export const addBoard = board => {
 	return {
 		type: ADD_BOARD,
+		board
+	};
+};
+
+export const removeBoard = board => {
+	return {
+		type: REMOVE_BOARD,
 		board
 	};
 };

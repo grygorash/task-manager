@@ -12,7 +12,7 @@ import {
 	addSelectedBoard,
 	addTask,
 	changeProgress, closeBoard,
-	fetchInitialState
+	fetchInitialState, removeBoard
 } from '../actions';
 import {
 	getActiveTasks,
@@ -173,6 +173,11 @@ class App extends Component {
 				}
 			));
 		}
+	};
+
+	handleRemoveBoard = board => {
+		this.props.removeBoard(board);
+		this.props.history.push('/');
 	};
 
 	handleAddTask = (e, task) => {
@@ -379,6 +384,7 @@ class App extends Component {
 			handleAddTask,
 			handleDrop,
 			handleAddBoard,
+			handleRemoveBoard,
 			handleBoardTitleChange,
 			handleSelectBoard,
 			handleAddDev,
@@ -448,6 +454,7 @@ class App extends Component {
 										doneTasks={getDoneTasks}
 										onDrop={handleDrop}
 										onCloseBoard={handleCloseBoard}
+										onRemoveBoard={handleRemoveBoard}
 									/>}
 							/>
 							<Route
@@ -506,6 +513,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
 	fetchInitialState: bindActionCreators(fetchInitialState, dispatch),
 	addBoard: bindActionCreators(addBoard, dispatch),
+	removeBoard: bindActionCreators(removeBoard, dispatch),
 	addTask: bindActionCreators(addTask, dispatch),
 	addDev: bindActionCreators(addDev, dispatch),
 	addSelectedBoard: bindActionCreators(addSelectedBoard, dispatch),

@@ -6,7 +6,7 @@ import {
 	ADD_TASK,
 	CHANGE_PROGRESS, CLOSE_BOARD,
 	FETCH_LOCAL_SUCCESS,
-	FETCH_SUCCESS,
+	FETCH_SUCCESS, REMOVE_BOARD,
 	SELECT_BOARD
 } from '../actionTypes';
 import moment from 'moment';
@@ -46,6 +46,11 @@ export default function rootReducer(state = initialState, action) {
 				...state,
 				boards: [...state.boards, action.board]
 			};
+
+		case REMOVE_BOARD:
+			const removeBoardIndex = state.boards.findIndex(board => board.id === action.board.id);
+			const removeSelectedBoard = dotProp.set(state, 'selectedBoard', {});
+			return dotProp.delete(removeSelectedBoard, `boards.${removeBoardIndex}`);
 
 		case ADD_TASK:
 			const endDate = [];

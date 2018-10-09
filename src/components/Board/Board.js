@@ -10,7 +10,18 @@ import DoneTasks from './DoneTasks/DoneTasks';
 import './Board.css';
 
 const Board = props => {
-	const {tasks, developers, backlogTasks, developTasks, testTasks, doneTasks, onDrop, selectedBoard, onCloseBoard} = props;
+	const {
+		tasks,
+		developers,
+		backlogTasks,
+		developTasks,
+		testTasks,
+		doneTasks,
+		onDrop,
+		selectedBoard,
+		onCloseBoard,
+		onRemoveBoard
+	} = props;
 	return (
 		<Row
 			className="board"
@@ -42,21 +53,28 @@ const Board = props => {
 					doneTasks={doneTasks}
 					onDrop={onDrop} />
 			</Col>
-			<Col md="12" className="total">
+			<Col md="6" className="total">
 				<p>
 					Total Tasks: <span>{tasks.length}</span>
 				</p>
+			</Col>
+			<Col md="6" className="remove-close">
 				<button
 					onClick={() => onCloseBoard(selectedBoard)}
 					style={
 						!backlogTasks.length &&
 						!developTasks.length &&
 						!testTasks.length ?
-							{display: 'block'} :
-							{display: 'none'}
+							{display: 'block', marginRight: '30px'} :
+							{display: 'none', marginRight: '0'}
 					}
+					className={selectedBoard.status === 'closed' || !tasks.length ? 'd-none' : 'btn'}>
+					Close<span>Board</span>
+				</button>
+				<button
+					onClick={() => onRemoveBoard(selectedBoard)}
 					className={selectedBoard.status === 'closed' ? 'd-none' : 'btn'}>
-					close<span>Board</span>
+					Remove<span>Board</span>
 				</button>
 			</Col>
 		</Row>

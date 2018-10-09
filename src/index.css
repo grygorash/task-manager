@@ -7,7 +7,8 @@ body {
   font-family: 'Roboto', sans-serif;
   background-color: #22242a;
   color: #aaadb3;
-  text-shadow: 2px 2px 1px black; }
+  text-shadow: 2px 2px 1px black;
+  cursor: default; }
   body p {
     margin: 0;
     word-wrap: break-word; }

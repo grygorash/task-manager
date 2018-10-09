@@ -6,6 +6,11 @@
 		justify-content: flex-end;
 		align-items: center;
 	}
+	.remove-close{
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+	}
 	.backlog, .develop, .test, .done {
 		border-right: 1px solid #aaadb3;
 		margin: 20px 0;
