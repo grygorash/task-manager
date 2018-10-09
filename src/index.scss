@@ -16,7 +16,7 @@ body {
 			color: #fa6e6e;
 		}
 	}
-	input{
+	input {
 		text-shadow: 2px 2px 1px black;
 	}
 	.btn {
@@ -63,18 +63,25 @@ body {
 			color: #aaadb3;
 			opacity: 1;
 		}
-	}
-	.error-field {
-		display: none;
-		&.error-field.not-valid {
-			position: absolute;
-			bottom: -10px;
-			color: #fa6e6e;
-			font-size: 12px;
-			width: auto;
-			display: block;
+		&.validation-success {
+			border-color: #38e2bd;
 		}
 	}
+	.validation {
+		position: relative;
+		.error-field {
+			display: none;
+			&.error-field.not-valid {
+				position: absolute;
+				bottom: -30px;
+				color: #fa6e6e;
+				font-size: 12px;
+				width: auto;
+				display: block;
+			}
+		}
+	}
+
 	&::-webkit-scrollbar {
 		width: 8px;
 	}

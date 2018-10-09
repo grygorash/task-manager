@@ -73,9 +73,6 @@
 				input {
 					width: 305px;
 					margin-right: 10px;
-					&.validation-success {
-						border-color: #38e2bd;
-					}
 				}
 			}
 		}
@@ -220,11 +217,27 @@
 		}
 		input, textarea, select {
 			margin-bottom: 20px;
+			width: 100%;
 		}
 		textarea {
 			height: 50px;
 			max-height: 100px;
 			min-height: 50px;
+		}
+		.validation {
+			.error-field.error-field.not-valid {
+				bottom: 0;
+			}
+		}
+		.btn {
+			margin: 10px auto 0;
+		}
+	}
+	.task-form {
+		.validation:nth-child(3) {
+			.error-field.not-valid {
+				bottom: 7px;
+			}
 		}
 	}
 }

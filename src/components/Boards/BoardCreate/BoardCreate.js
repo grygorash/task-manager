@@ -11,16 +11,18 @@ const BoardCreate = props => {
 				boardTitle: boardValue,
 				createDate: new Date().toLocaleString('en-US'),
 			})}>
-				<input
-					className={boardValue.length >= 3 ? 'validation-success' : ''}
-					type="text"
-					value={boardValue}
-					placeholder="Enter Name Of Board"
-					onChange={({target}) => onBoardTitleChange(target.value)} />
-				<p
-					className={validationBoardValue || validationBoardValue === null ? 'error-field' : 'error-field not-valid'}>
-					more than 3 symbols
-				</p>
+				<div className="validation">
+					<input
+						className={boardValue.length >= 3 ? 'validation-success' : ''}
+						type="text"
+						value={boardValue}
+						placeholder="Enter Name Of Board"
+						onChange={({target}) => onBoardTitleChange(target.value)} />
+					<p
+						className={validationBoardValue || validationBoardValue === null ? 'error-field' : 'error-field not-valid'}>
+						more than 3 symbols
+					</p>
+				</div>
 				<button className={boardValue.length >= 3 ? 'validation-success btn' : 'btn'}>Add <span>Board</span></button>
 			</form>
 		</Col>

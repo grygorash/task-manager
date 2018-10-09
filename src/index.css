@@ -53,15 +53,19 @@ body {
     body input::placeholder, body textarea::placeholder, body select::placeholder {
       color: #aaadb3;
       opacity: 1; }
-  body .error-field {
-    display: none; }
-    body .error-field.error-field.not-valid {
-      position: absolute;
-      bottom: -10px;
-      color: #fa6e6e;
-      font-size: 12px;
-      width: auto;
-      display: block; }
+    body input.validation-success, body textarea.validation-success, body select.validation-success {
+      border-color: #38e2bd; }
+  body .validation {
+    position: relative; }
+    body .validation .error-field {
+      display: none; }
+      body .validation .error-field.error-field.not-valid {
+        position: absolute;
+        bottom: -30px;
+        color: #fa6e6e;
+        font-size: 12px;
+        width: auto;
+        display: block; }
   body::-webkit-scrollbar {
     width: 8px; }
   body::-webkit-scrollbar-track {

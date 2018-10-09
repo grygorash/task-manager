@@ -55,8 +55,6 @@
     .app .boards .create-board form input {
       width: 305px;
       margin-right: 10px; }
-      .app .boards .create-board form input.validation-success {
-        border-color: #38e2bd; }
 
 .app .board {
   padding: 20px 0; }
@@ -146,8 +144,16 @@
       color: #fa6e6e;
       text-transform: uppercase; }
   .app .task-form input, .app .task-form textarea, .app .task-form select, .app .developer-form input, .app .developer-form textarea, .app .developer-form select {
-    margin-bottom: 20px; }
+    margin-bottom: 20px;
+    width: 100%; }
   .app .task-form textarea, .app .developer-form textarea {
     height: 50px;
     max-height: 100px;
     min-height: 50px; }
+  .app .task-form .validation .error-field.error-field.not-valid, .app .developer-form .validation .error-field.error-field.not-valid {
+    bottom: 0; }
+  .app .task-form .btn, .app .developer-form .btn {
+    margin: 10px auto 0; }
+
+.app .task-form .validation:nth-child(3) .error-field.not-valid {
+  bottom: 7px; }

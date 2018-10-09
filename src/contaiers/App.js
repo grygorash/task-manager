@@ -45,7 +45,12 @@ class App extends Component {
 				devEmailValue: ''
 			},
 			validation: {
-				boardValue: null
+				boardValue: null,
+				taskValue: null,
+				descriptionValue: null,
+				developerValue: null,
+				devNameValue: null,
+				devEmailValue: null
 			}
 		};
 	};
@@ -73,23 +78,59 @@ class App extends Component {
 	};
 
 	handleTitleChange = value => {
+		if (value.length >= 3) {
+			this.setState((prevState) => ({validation: {...prevState.validation, taskValue: true}}), () => {
+			});
+		} else {
+			this.setState((prevState) => ({validation: {...prevState.validation, taskValue: false}}), () => {
+			});
+		}
 		this.setState((prevState) => ({values: {...prevState.values, taskValue: value}}));
 
 	};
 
 	handleDescriptionChange = value => {
+		if (value.length >= 3) {
+			this.setState((prevState) => ({validation: {...prevState.validation, descriptionValue: true}}), () => {
+			});
+		} else {
+			this.setState((prevState) => ({validation: {...prevState.validation, descriptionValue: false}}), () => {
+			});
+		}
 		this.setState((prevState) => ({values: {...prevState.values, descriptionValue: value}}));
 	};
 
 	handleDeveloperChange = value => {
+		if (value !== 'Choose Developer') {
+			this.setState((prevState) => ({validation: {...prevState.validation, developerValue: true}}), () => {
+			});
+		} else {
+			this.setState((prevState) => ({validation: {...prevState.validation, developerValue: false}}), () => {
+			});
+		}
 		this.setState((prevState) => ({values: {...prevState.values, developerValue: value}}));
 	};
 
 	handleDevNameChange = value => {
+		if (value.length >= 3) {
+			this.setState((prevState) => ({validation: {...prevState.validation, devNameValue: true}}), () => {
+			});
+		} else {
+			this.setState((prevState) => ({validation: {...prevState.validation, devNameValue: false}}), () => {
+			});
+		}
 		this.setState((prevState) => ({values: {...prevState.values, devNameValue: value}}));
 	};
 
 	handleDevEmailChange = value => {
+		const emailValidation = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+		if (value.match(emailValidation)) {
+			this.setState((prevState) => ({validation: {...prevState.validation, devEmailValue: true}}), () => {
+			});
+		} else {
+			this.setState((prevState) => ({validation: {...prevState.validation, devEmailValue: false}}), () => {
+			});
+		}
 		this.setState((prevState) => ({values: {...prevState.values, devEmailValue: value}}));
 	};
 
@@ -121,30 +162,141 @@ class App extends Component {
 
 	handleAddTask = (e, task) => {
 		e.preventDefault();
-		this.setState((prevState) => ({
-			values: {
-				...prevState.values,
-				taskValue: '',
-				descriptionValue: '',
-				developerValue: 'Choose Developer'
+		if (this.state.validation.taskValue === true &&
+			this.state.validation.descriptionValue === true &&
+			this.state.validation.developerValue === true) {
+			this.setState((prevState) => ({
+					values: {
+						...prevState.values,
+						taskValue: '',
+						descriptionValue: '',
+						developerValue: 'Choose Developer'
+					},
+					validation: {
+						...prevState.validation,
+						taskValue: null,
+						descriptionValue: null,
+						developerValue: null
+					}
+				}
+			));
+			this.props.addTask(task);
+			this.props.history.push(`/board/${task.boardId}`);
+		} else {
+			if (this.state.values.taskValue.length >= 3) {
+				this.setState((prevState) => ({
+						validation: {
+							...prevState.validation,
+							taskValue: true
+						}
+					}
+				));
+			} else {
+				this.setState((prevState) => ({
+						validation: {
+							...prevState.validation,
+							taskValue: false
+						}
+					}
+				));
 			}
-		}));
 
-		this.props.addTask(task);
-		this.props.history.push(`/board/${task.boardId}`);
+			if (this.state.values.descriptionValue.length >= 3) {
+				this.setState((prevState) => ({
+						validation: {
+							...prevState.validation,
+							descriptionValue: true
+						}
+					}
+				));
+			} else {
+				this.setState((prevState) => ({
+						validation: {
+							...prevState.validation,
+							descriptionValue: false
+						}
+					}
+				));
+			}
+
+			if (this.state.values.developerValue !== 'Choose Developer') {
+				this.setState((prevState) => ({
+						validation: {
+							...prevState.validation,
+							developerValue: true
+						}
+					}
+				));
+			} else {
+				this.setState((prevState) => ({
+						validation: {
+							...prevState.validation,
+							developerValue: false
+						}
+					}
+				));
+			}
+		}
 	};
 
 	handleAddDev = (e, dev) => {
 		e.preventDefault();
-		this.setState((prevState) => ({
-			values: {
-				...prevState.values,
-				devNameValue: '',
-				devEmailValue: ''
+		const emailValidation = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+		if (this.state.validation.devNameValue === true &&
+			this.state.validation.devEmailValue === true) {
+			this.setState((prevState) => ({
+					values: {
+						...prevState.values,
+						devNameValue: '',
+						devEmailValue: ''
+					},
+					validation: {
+						...prevState.validation,
+						devNameValue: null,
+						devEmailValue: null,
+					}
+				}
+			));
+			this.props.addDev(dev);
+			this.props.history.push(`/board/${dev.boardId}`);
+		} else {
+
+			if (this.state.values.devNameValue.length >= 3) {
+				this.setState((prevState) => ({
+						validation: {
+							...prevState.validation,
+							devNameValue: true
+						}
+					}
+				));
+			} else {
+				this.setState((prevState) => ({
+						validation: {
+							...prevState.validation,
+							devNameValue: false
+						}
+					}
+				));
 			}
-		}));
-		this.props.addDev(dev);
-		this.props.history.push(`/board/${dev.boardId}`);
+
+			if (this.state.values.devEmailValue.match(emailValidation)) {
+				this.setState((prevState) => ({
+						validation: {
+							...prevState.validation,
+							devEmailValue: true
+						}
+					}
+				));
+			} else {
+				this.setState((prevState) => ({
+						validation: {
+							...prevState.validation,
+							devEmailValue: false
+						}
+					}
+				));
+			}
+		}
 	};
 
 	handleDrop = (id, progress) => {
@@ -185,6 +337,7 @@ class App extends Component {
 			getActiveTasks,
 			getActiveDevelopers
 		} = this.props;
+		console.log('--->', validation);
 		return (
 			<Fragment>
 				{loaded ? (
@@ -206,8 +359,8 @@ class App extends Component {
 										developTasks={getDevelopTasks}
 										testTasks={getTestTasks}
 										doneTasks={getDoneTasks}
-										boardValue={values.boardValue}
-										validationBoardValue={validation.boardValue}
+										values={values}
+										validation={validation}
 										onSelectBoard={handleSelectBoard}
 										onDrop={handleDrop}
 										onBoardTitleChange={handleBoardTitleChange}
@@ -233,11 +386,10 @@ class App extends Component {
 								render={() =>
 									<TaskCreate
 										tasks={getActiveTasks}
-										taskValue={values.taskValue}
-										descriptionValue={values.descriptionValue}
-										developerValue={values.developerValue}
-										selectedBoard={selectedBoard}
 										developers={getActiveDevelopers}
+										values={values}
+										validation={validation}
+										selectedBoard={selectedBoard}
 										onAddTask={handleAddTask}
 										onTitleChange={handleTitleChange}
 										onDescriptionChange={handleDescriptionChange}
@@ -248,8 +400,8 @@ class App extends Component {
 								path="/board/:boardId/create-developer"
 								render={() =>
 									<DeveloperCreate
-										devNameValue={values.devNameValue}
-										devEmailValue={values.devEmailValue}
+										values={values}
+										validation={validation}
 										selectedBoard={selectedBoard}
 										onAddDev={handleAddDev}
 										onDevNameChange={handleDevNameChange}
