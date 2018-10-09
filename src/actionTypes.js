@@ -9,3 +9,4 @@ export const ADD_DEV = 'ADD_DEV';
 export const CHANGE_PROGRESS = 'CHANGE_PROGRESS';
 
 export const SELECT_BOARD = 'SELECT_BOARD';
+export const CLOSE_BOARD = 'CLOSE_BOARD';

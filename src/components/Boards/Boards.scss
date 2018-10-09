@@ -1,5 +1,6 @@
 .boards {
-	.board-list {
+	.board-list, .closed-board-list {
+		background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 1%, #22242a 100%);
 		p {
 			width: 100%;
 			margin-bottom: 15px;
@@ -11,7 +12,7 @@
 			display: flex;
 			flex-flow: row wrap;
 			a {
-				width: 305px;
+				width: 303px;
 				height: auto;
 				text-align: left;
 				margin: 0 10px 10px 0;
@@ -29,7 +30,9 @@
 		padding: 20px 20px 10px;
 	}
 	.create-board {
-		padding: 20px;
+		padding: 20px 20px 40px;
+		box-shadow: 0 9px 21px -6px rgba(0, 0, 0, 0.55);
+		border-bottom: 1px solid #363d46;
 		p {
 			width: 100%;
 			margin-bottom: 10px;
@@ -40,6 +43,23 @@
 			input {
 				width: 305px;
 				margin-right: 10px;
+			}
+		}
+	}
+	.closed-board-list {
+		padding-top: 20px;
+		.closed {
+			position: relative;
+			.status {
+				position: absolute;
+				right: 20px;
+				top: 3px;
+				color: #fa6e6e;
+				z-index: 2;
+				font-size: 13px;
+			}
+			.btn {
+				opacity: .5;
 			}
 		}
 	}

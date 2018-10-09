@@ -81,6 +81,9 @@ body {
 			}
 		}
 	}
+	.d-none {
+		display: none;
+	}
 	&::-webkit-scrollbar {
 		width: 8px;
 	}

@@ -66,6 +66,8 @@ body {
         font-size: 12px;
         width: auto;
         display: block; }
+  body .d-none {
+    display: none; }
   body::-webkit-scrollbar {
     width: 8px; }
   body::-webkit-scrollbar-track {

@@ -29,3 +29,11 @@ export const getTestTasks = createSelector(getActiveTasks, tasks => {
 export const getDoneTasks = createSelector(getActiveTasks, tasks => {
 	return tasks ? tasks.filter(task => task.progress === 'done') : null;
 });
+
+export const getOpenBoards = createSelector(getBoards, boards => {
+	return boards ? boards.filter(board => board.status === 'open') : null;
+});
+
+export const getClosedBoards = createSelector(getBoards, boards => {
+	return boards ? boards.filter(board => board.status === 'closed') : null;
+});

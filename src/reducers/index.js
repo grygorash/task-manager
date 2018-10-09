@@ -4,7 +4,7 @@ import {
 	ADD_BOARD,
 	ADD_DEV,
 	ADD_TASK,
-	CHANGE_PROGRESS,
+	CHANGE_PROGRESS, CLOSE_BOARD,
 	FETCH_LOCAL_SUCCESS,
 	FETCH_SUCCESS,
 	SELECT_BOARD
@@ -66,6 +66,10 @@ export default function rootReducer(state = initialState, action) {
 		case CHANGE_PROGRESS:
 			const changeTaskIndex = state.tasks.findIndex(task => task.id === action.id);
 			return dotProp.set(state, `tasks.${changeTaskIndex}.progress`, action.progress);
+
+		case CLOSE_BOARD:
+			const closeBoardIndex = state.boards.findIndex(board => board.id === action.board.id);
+			return dotProp.set(state, `boards.${closeBoardIndex}.status`, 'closed');
 
 		default:
 			return state;

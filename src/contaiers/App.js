@@ -11,7 +11,7 @@ import {
 	addDev,
 	addSelectedBoard,
 	addTask,
-	changeProgress,
+	changeProgress, closeBoard,
 	fetchInitialState
 } from '../actions';
 import {
@@ -21,6 +21,8 @@ import {
 	getTestTasks,
 	getDoneTasks,
 	getActiveDevelopers,
+	getOpenBoards,
+	getClosedBoards,
 	getLoadingStatus,
 	getTasks, getBoards,
 	getSelectedBoard,
@@ -101,7 +103,7 @@ class App extends Component {
 		this.setState((prevState) => ({values: {...prevState.values, taskDescription: value}}));
 	};
 
-	handleChangeStart = (date) => {
+	handleChangeStart = date => {
 		if (date) {
 			this.setState((prevState) => ({validation: {...prevState.validation, taskStartDate: true}}));
 		} else {
@@ -110,7 +112,7 @@ class App extends Component {
 		this.setState((prevState) => ({values: {...prevState.values, taskStartDate: date}}));
 	};
 
-	handleChangeEnd = (date) => {
+	handleChangeEnd = date => {
 		if (date) {
 			this.setState((prevState) => ({validation: {...prevState.validation, taskEndDate: true}}));
 		} else {
@@ -173,7 +175,7 @@ class App extends Component {
 		}
 	};
 
-	handleAddTask = (e, task, tasks) => {
+	handleAddTask = (e, task) => {
 		e.preventDefault();
 		if (this.state.validation.taskTitle === true &&
 			this.state.validation.taskDescription === true &&
@@ -362,6 +364,11 @@ class App extends Component {
 		this.props.addSelectedBoard(board);
 	};
 
+	handleCloseBoard = board => {
+		this.props.closeBoard(board);
+		this.props.history.push('/');
+	};
+
 	render() {
 		const {
 			handleTitleChange,
@@ -376,7 +383,8 @@ class App extends Component {
 			handleSelectBoard,
 			handleAddDev,
 			handleDevNameChange,
-			handleDevEmailChange
+			handleDevEmailChange,
+			handleCloseBoard
 		} = this;
 		const {
 			values,
@@ -385,6 +393,8 @@ class App extends Component {
 		const {
 			tasks,
 			boards,
+			getOpenBoards,
+			getClosedBoards,
 			getBacklogTasks,
 			getDevelopTasks,
 			getTestTasks,
@@ -410,6 +420,8 @@ class App extends Component {
 								render={() =>
 									<Boards
 										boards={boards}
+										openBoards={getOpenBoards}
+										closedBoards={getClosedBoards}
 										tasks={tasks}
 										backlogTasks={getBacklogTasks}
 										developTasks={getDevelopTasks}
@@ -435,6 +447,7 @@ class App extends Component {
 										testTasks={getTestTasks}
 										doneTasks={getDoneTasks}
 										onDrop={handleDrop}
+										onCloseBoard={handleCloseBoard}
 									/>}
 							/>
 							<Route
@@ -485,7 +498,9 @@ const mapStateToProps = state => ({
 	getBacklogTasks: getBacklogTasks(state),
 	getDevelopTasks: getDevelopTasks(state),
 	getTestTasks: getTestTasks(state),
-	getDoneTasks: getDoneTasks(state)
+	getDoneTasks: getDoneTasks(state),
+	getOpenBoards: getOpenBoards(state),
+	getClosedBoards: getClosedBoards(state)
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -495,6 +510,7 @@ const mapDispatchToProps = dispatch => ({
 	addDev: bindActionCreators(addDev, dispatch),
 	addSelectedBoard: bindActionCreators(addSelectedBoard, dispatch),
 	changeProgress: bindActionCreators(changeProgress, dispatch),
+	closeBoard: bindActionCreators(closeBoard, dispatch),
 });
 
 export default withRouter(DragDropContext(HTML5Backend)(connect(mapStateToProps, mapDispatchToProps)(App)));

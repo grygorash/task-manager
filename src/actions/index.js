@@ -1,9 +1,13 @@
 import {
 	ADD_TASK,
 	CHANGE_PROGRESS,
-
-	ADD_BOARD, SELECT_BOARD, FETCH_START, FETCH_LOCAL_SUCCESS,
-	FETCH_FAILURE, FETCH_SUCCESS, ADD_DEV
+	ADD_BOARD,
+	SELECT_BOARD,
+	FETCH_START,
+	FETCH_LOCAL_SUCCESS,
+	FETCH_FAILURE,
+	FETCH_SUCCESS,
+	ADD_DEV, CLOSE_BOARD
 } from '../actionTypes';
 
 export const fetchInitialState = () => async dispatch => {
@@ -74,5 +78,12 @@ export const changeProgress = (id, progress) => {
 		type: CHANGE_PROGRESS,
 		id,
 		progress
+	};
+};
+
+export const closeBoard = board => {
+	return {
+		type: CLOSE_BOARD,
+		board
 	};
 };

@@ -4,14 +4,14 @@ import { Col } from 'reactstrap';
 import moment from 'moment';
 
 const BoardList = props => {
-	const {boards, onSelectBoard} = props;
+	const {openBoards, onSelectBoard} = props;
 	return (
 		<Fragment>
-			{boards.length ? (
+			{openBoards.length ? (
 				<Col md="12" className="board-list">
 					<p>Select your board</p>
 					<div className="list">
-						{boards.map((board, i) => (
+						{openBoards.map((board, i) => (
 							<Link className="btn" key={i} to={`/board/${board.id}`} onClick={() => onSelectBoard(board)}>
 								<p>Title: <span>{board.boardTitle}</span></p>
 								<p>Start Date: <span>{moment(board.startDate).format("MMM Do YYYY")}</span></p>

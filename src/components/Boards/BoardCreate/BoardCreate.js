@@ -3,15 +3,16 @@ import { Col } from 'reactstrap';
 import moment from 'moment';
 
 const BoardCreate = props => {
-	const {boards, boardTitle, onBoardTitleChange, onAddBoard, validationBoardTitle} = props;
+	const {openBoards, boardTitle, onBoardTitleChange, onAddBoard, validationBoardTitle} = props;
 	return (
-		<Col md="12" className="create-board" style={boards.length ? {paddingTop: '0'} : {paddingTop: '20px'}}>
-			<p>{boards.length ? 'Or Create New' : 'Create New Board'}</p>
+		<Col md="12" className="create-board" style={openBoards.length ? {paddingTop: '0'} : {paddingTop: '20px'}}>
+			<p>{openBoards.length ? 'Or Create New' : 'Create New Board'}</p>
 			<form onSubmit={(e) => onAddBoard(e, {
 				id: +new Date(),
 				boardTitle: boardTitle,
 				startDate: moment(),
-				endDate: null
+				endDate: null,
+				status: 'open'
 			})}>
 				<div className="validation">
 					<input
