@@ -11,3 +11,5 @@ export const CHANGE_PROGRESS = 'CHANGE_PROGRESS';
 
 export const SELECT_BOARD = 'SELECT_BOARD';
 export const CLOSE_BOARD = 'CLOSE_BOARD';
+
+export const CHANGE_FILTER = 'CHANGE_FILTER';

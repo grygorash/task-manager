@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Col, Row } from 'reactstrap';
 
 import Header from './Header/Header';
@@ -17,7 +17,10 @@ const Board = props => {
 		onDrop,
 		selectedBoard,
 		onCloseBoard,
-		onRemoveBoard
+		onRemoveBoard,
+		onFilterChange,
+		onDeveloperFilterChange,
+		tasksByFilter
 	} = props;
 	return (
 		<Row
@@ -25,36 +28,38 @@ const Board = props => {
 			style={selectedBoard.status === 'closed' ? {pointerEvents: 'none'} : null}>
 			<Header
 				selectedBoard={selectedBoard}
-				developers={developers} />
+				activeBoardTasks={activeBoardTasks}
+				developers={developers}
+				onFilterChange={onFilterChange}
+				onDeveloperFilterChange={onDeveloperFilterChange} />
 			<Col md="3" className="backlog">
-				<h3>> Backlog (<span>{tasksByProgress.backlog.length}</span>)</h3>
+				<h3>> Backlog (<span>{tasksByFilter.backlog.length}</span>)</h3>
 				<BacklogTasks
-					backlogTasks={tasksByProgress.backlog}
+					backlogTasks={tasksByFilter.backlog}
 					onDrop={onDrop} />
 			</Col>
 			<Col md="3" className="develop">
-				<h3>> Develop (<span>{tasksByProgress.develop.length}</span>)</h3>
+				<h3>> Develop (<span>{tasksByFilter.develop.length}</span>)</h3>
 				<DevelopTasks
-					developTasks={tasksByProgress.develop}
+					developTasks={tasksByFilter.develop}
 					onDrop={onDrop} />
 			</Col>
 			<Col md="3" className="test">
-				<h3>> Test (<span>{tasksByProgress.test.length}</span>)</h3>
+				<h3>> Test (<span>{tasksByFilter.test.length}</span>)</h3>
 				<TestTasks
-					testTasks={tasksByProgress.test}
+					testTasks={tasksByFilter.test}
 					onDrop={onDrop} />
 			</Col>
 			<Col md="3" className="done">
-				<h3>> Done Tasks (<span>{tasksByProgress.done.length}</span>)</h3>
+				<h3>> Done Tasks (<span>{tasksByFilter.done.length}</span>)</h3>
 				<DoneTasks
-					doneTasks={tasksByProgress.done}
+					doneTasks={tasksByFilter.done}
 					onDrop={onDrop} />
-			</Col>
-			<Col md="6" className="total">
-				<p>
-					Total Tasks: <span>{activeBoardTasks.length}</span>
-				</p>
-			</Col>
+			</Col> <Col md="6" className="total">
+			<p>
+				Total Tasks: <span>{activeBoardTasks.length}</span>
+			</p>
+		</Col>
 			<Col md="6" className="remove-close">
 				<button
 					onClick={() => onCloseBoard(selectedBoard)}

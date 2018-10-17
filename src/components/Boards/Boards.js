@@ -12,10 +12,10 @@ const Boards = props => {
 		boards,
 		boardsStatus,
 		values,
+		validation,
 		onAddBoard,
 		onBoardTitleChange,
-		onSelectBoard,
-		validation
+		onSelectBoard
 	} = props;
 	return (
 		<Row className="boards">

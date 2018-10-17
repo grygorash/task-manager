@@ -6,7 +6,7 @@
 		justify-content: flex-end;
 		align-items: center;
 	}
-	.remove-close{
+	.remove-close {
 		display: flex;
 		align-items: center;
 		justify-content: flex-end;
@@ -14,6 +14,7 @@
 	.backlog, .develop, .test, .done {
 		border-right: 1px solid #aaadb3;
 		margin: 20px 0;
+		min-height: calc(100vh - 268px);
 		h3 {
 			padding: 0 10px;
 			font-size: 12px;
@@ -46,7 +47,7 @@
 						font-weight: 700;
 					}
 				}
-				.priority{
+				.priority {
 					position: absolute;
 					text-transform: capitalize;
 					right: 15px;
@@ -132,10 +133,20 @@
 			}
 		}
 	}
-	.total{
+	.total {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
 		min-height: 70px;
+	}
+	.board-info {
+		.priority-filter, .developer-filter {
+			width: 50%;
+			padding: 0 10px;
+			margin-bottom: 0;
+			select {
+				width: 100%;
+			}
+		}
 	}
 }

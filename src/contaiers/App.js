@@ -7,18 +7,22 @@ import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 
 import {
+	fetchInitialState,
 	addBoard,
 	addDev,
-	addSelectedBoard,
 	addTask,
-	changeProgress, closeBoard,
-	fetchInitialState, removeBoard
+	addSelectedBoard,
+	changeFilter,
+	changeProgress,
+	closeBoard,
+	removeBoard
 } from '../actions';
 import {
 	getActiveBoardTasks,
 	getTasksByProgress,
 	getActiveBoardDevelopers,
 	getBoardsStatus,
+	getTasksByFilter,
 	getLoadingStatus,
 	getAllTasks, getBoards,
 	getSelectedBoard,
@@ -135,6 +139,10 @@ class App extends Component {
 			this.setState((prevState) => ({validation: {...prevState.validation, taskPriority: false}}));
 		}
 		this.setState((prevState) => ({values: {...prevState.values, taskPriority: value}}));
+	};
+
+	handleFilterChange = (priority, developer) => {
+		this.props.changeFilter(priority, developer);
 	};
 
 	handleDevNameChange = value => {
@@ -410,6 +418,7 @@ class App extends Component {
 			handleChangeEnd,
 			handleDeveloperChange,
 			handlePriorityChange,
+			handleFilterChange,
 			handleAddTask,
 			handleDrop,
 			handleAddBoard,
@@ -421,10 +430,7 @@ class App extends Component {
 			handleDevEmailChange,
 			handleCloseBoard
 		} = this;
-		const {
-			values,
-			validation
-		} = this.state;
+		const {values, validation} = this.state;
 		const {
 			getAllTasks,
 			tasksByProgress,
@@ -433,7 +439,8 @@ class App extends Component {
 			loaded,
 			selectedBoard,
 			getActiveBoardTasks,
-			getActiveBoardDevelopers
+			getActiveBoardDevelopers,
+			getTasksByFilter
 		} = this.props;
 		return (
 			<Fragment>
@@ -456,7 +463,6 @@ class App extends Component {
 										values={values}
 										validation={validation}
 										onSelectBoard={handleSelectBoard}
-										onDrop={handleDrop}
 										onBoardTitleChange={handleBoardTitleChange}
 										onAddBoard={handleAddBoard}
 									/>}
@@ -469,9 +475,11 @@ class App extends Component {
 										tasksByProgress={tasksByProgress}
 										developers={getActiveBoardDevelopers}
 										selectedBoard={selectedBoard}
+										tasksByFilter={getTasksByFilter}
 										onDrop={handleDrop}
 										onCloseBoard={handleCloseBoard}
 										onRemoveBoard={handleRemoveBoard}
+										onFilterChange={handleFilterChange}
 									/>}
 							/>
 							<Route
@@ -521,7 +529,8 @@ const mapStateToProps = state => ({
 	developers: getDevelopers(state),
 	getActiveBoardTasks: getActiveBoardTasks(state),
 	getActiveBoardDevelopers: getActiveBoardDevelopers(state),
-	getBoardsStatus: getBoardsStatus(state)
+	getBoardsStatus: getBoardsStatus(state),
+	getTasksByFilter: getTasksByFilter(state)
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -533,6 +542,7 @@ const mapDispatchToProps = dispatch => ({
 	addSelectedBoard: bindActionCreators(addSelectedBoard, dispatch),
 	changeProgress: bindActionCreators(changeProgress, dispatch),
 	closeBoard: bindActionCreators(closeBoard, dispatch),
+	changeFilter: bindActionCreators(changeFilter, dispatch)
 });
 
 export default withRouter(DragDropContext(HTML5Backend)(connect(mapStateToProps, mapDispatchToProps)(App)));

@@ -3,7 +3,7 @@ import * as dotProp from 'dot-prop-immutable';
 import {
 	ADD_BOARD,
 	ADD_DEV,
-	ADD_TASK,
+	ADD_TASK, CHANGE_FILTER,
 	CHANGE_PROGRESS, CLOSE_BOARD,
 	FETCH_LOCAL_SUCCESS,
 	FETCH_SUCCESS, REMOVE_BOARD,
@@ -75,6 +75,10 @@ export default function rootReducer(state = initialState, action) {
 		case CLOSE_BOARD:
 			const closeBoardIndex = state.boards.findIndex(board => board.id === action.board.id);
 			return dotProp.set(state, `boards.${closeBoardIndex}.status`, 'closed');
+
+		case CHANGE_FILTER:
+			const priorityState =  dotProp.set(state, 'selectedBoard.filterByPriority', action.priority);
+			return dotProp.set(priorityState, 'selectedBoard.filterByDeveloper', action.developer);
 
 		default:
 			return state;

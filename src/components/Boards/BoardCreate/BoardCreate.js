@@ -15,7 +15,9 @@ const BoardCreate = props => {
 				boardTitle: boardTitle,
 				startDate: moment(),
 				endDate: null,
-				status: 'open'
+				status: 'open',
+				filterByPriority: 'none',
+				filterByDeveloper: 'none'
 			})}>
 				<div className="validation">
 					<input

@@ -9,7 +9,8 @@ import {
 	FETCH_SUCCESS,
 	ADD_DEV,
 	CLOSE_BOARD,
-	REMOVE_BOARD
+	REMOVE_BOARD,
+	CHANGE_FILTER,
 } from '../actionTypes';
 
 export const fetchInitialState = () => async dispatch => {
@@ -94,5 +95,13 @@ export const closeBoard = board => {
 	return {
 		type: CLOSE_BOARD,
 		board
+	};
+};
+
+export const changeFilter = (priority, developer) => {
+	return {
+		type: CHANGE_FILTER,
+		priority,
+		developer
 	};
 };
