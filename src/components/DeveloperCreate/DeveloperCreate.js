@@ -19,11 +19,12 @@ const DeveloperCreate = props => {
 				</Col>
 				<Col md="12">
 					<div className="validation">
-						<input type="text"
-						       value={values.devName}
-						       className={values.devName.length >= 3 ? 'validation-success' : ''}
-						       placeholder="Enter Name Of Developer"
-						       onChange={({target}) => onDevNameChange(target.value)} />
+						<input
+							type="text"
+							value={values.devName}
+							className={values.devName.length >= 3 ? 'validation-success' : ''}
+							placeholder="Enter Name Of Developer"
+							onChange={({target}) => onDevNameChange(target.value)} />
 						<p
 							className={validation.devName || validation.devName === null ? 'error-field' : 'error-field not-valid'}>
 							more than 3 symbols
@@ -32,11 +33,12 @@ const DeveloperCreate = props => {
 				</Col>
 				<Col md="12">
 					<div className="validation">
-						<input type="text"
-						       value={values.devEmail}
-						       className={values.devEmail.match(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/) ? 'validation-success' : ''}
-						       placeholder="Enter Developer Email"
-						       onChange={({target}) => onDevEmailChange(target.value)} />
+						<input
+							type="text"
+							value={values.devEmail}
+							className={values.devEmail.match(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/) ? 'validation-success' : ''}
+							placeholder="Enter Developer Email"
+							onChange={({target}) => onDevEmailChange(target.value)} />
 						<p
 							className={validation.devEmail || validation.devEmail === null ? 'error-field' : 'error-field not-valid'}>
 							enter correct email
@@ -52,7 +54,11 @@ const DeveloperCreate = props => {
 					</button>
 				</Col>
 				<Col md="6">
-					<button className="btn" onClick={() => props.history.push(`/board/${selectedBoard.id}`)}>Cancel</button>
+					<button
+						className="btn"
+						onClick={() => props.history.push(`/board/${selectedBoard.id}`)}>
+						Cancel
+					</button>
 				</Col>
 			</Row>
 		</form>);

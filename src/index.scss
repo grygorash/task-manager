@@ -10,6 +10,7 @@ body {
 	color: #aaadb3;
 	text-shadow: 2px 2px 1px black;
 	cursor: default;
+	letter-spacing: .7px;
 	p {
 		margin: 0;
 		word-wrap: break-word;
@@ -36,6 +37,7 @@ body {
 		box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1);
 		text-shadow: 2px 2px 1px black;
 		transition: all .3s;
+		letter-spacing: .7px;
 		span {
 			text-transform: uppercase;
 			transition: all .3s;

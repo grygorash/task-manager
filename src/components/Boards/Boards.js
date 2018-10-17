@@ -10,8 +10,7 @@ import './Boards.css';
 const Boards = props => {
 	const {
 		boards,
-		openBoards,
-		closedBoards,
+		boardsStatus,
 		values,
 		onAddBoard,
 		onBoardTitleChange,
@@ -21,19 +20,19 @@ const Boards = props => {
 	return (
 		<Row className="boards">
 			<BoardList
-				openBoards={openBoards}
+				openBoards={boardsStatus.open}
 				onSelectBoard={onSelectBoard} />
 			<BoardCreate
-				openBoards={openBoards}
+				openBoards={boardsStatus.open}
 				boardTitle={values.boardTitle}
 				validationBoardTitle={validation.boardTitle}
 				onBoardTitleChange={onBoardTitleChange}
 				onAddBoard={onAddBoard} />
 			<ClosedBoardsList
-				closedBoards={closedBoards}
+				closedBoards={boardsStatus.closed}
 				onSelectBoard={onSelectBoard} />
 			<Col md="12">
-				<p style={!closedBoards.length ? {marginTop: '30px'} : {marginTop: '0'}}>
+				<p style={!boardsStatus.closed.length ? {marginTop: '30px'} : {marginTop: '0'}}>
 					Total Boards: <span>{boards.length}</span>
 				</p>
 			</Col>

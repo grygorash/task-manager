@@ -15,16 +15,12 @@ import {
 	fetchInitialState, removeBoard
 } from '../actions';
 import {
-	getActiveTasks,
-	getBacklogTasks,
-	getDevelopTasks,
-	getTestTasks,
-	getDoneTasks,
-	getActiveDevelopers,
-	getOpenBoards,
-	getClosedBoards,
+	getActiveBoardTasks,
+	getTasksByProgress,
+	getActiveBoardDevelopers,
+	getBoardsStatus,
 	getLoadingStatus,
-	getTasks, getBoards,
+	getAllTasks, getBoards,
 	getSelectedBoard,
 	getDevelopers
 } from '../selectors';
@@ -46,6 +42,7 @@ class App extends Component {
 				taskTitle: '',
 				taskDescription: '',
 				taskDeveloper: 'Select Developer',
+				taskPriority: 'Select Priority',
 				taskStartDate: null,
 				taskEndDate: null,
 				devName: '',
@@ -56,6 +53,7 @@ class App extends Component {
 				taskTitle: null,
 				taskDescription: null,
 				taskDeveloper: null,
+				taskPriority: null,
 				taskStartDate: null,
 				taskEndDate: null,
 				devName: null,
@@ -70,7 +68,7 @@ class App extends Component {
 
 	componentDidUpdate() {
 		localStorage.setItem('boards', JSON.stringify(this.props.boards));
-		localStorage.setItem('tasks', JSON.stringify(this.props.tasks));
+		localStorage.setItem('tasks', JSON.stringify(this.props.getAllTasks));
 		localStorage.setItem('developers', JSON.stringify(this.props.developers));
 		localStorage.setItem('selectedBoard', JSON.stringify(this.props.selectedBoard));
 	}
@@ -130,6 +128,15 @@ class App extends Component {
 		this.setState((prevState) => ({values: {...prevState.values, taskDeveloper: value}}));
 	};
 
+	handlePriorityChange = value => {
+		if (value !== 'Select Priority') {
+			this.setState((prevState) => ({validation: {...prevState.validation, taskPriority: true}}));
+		} else {
+			this.setState((prevState) => ({validation: {...prevState.validation, taskPriority: false}}));
+		}
+		this.setState((prevState) => ({values: {...prevState.values, taskPriority: value}}));
+	};
+
 	handleDevNameChange = value => {
 		if (value.length >= 3) {
 			this.setState((prevState) => ({validation: {...prevState.validation, devName: true}}));
@@ -186,13 +193,15 @@ class App extends Component {
 			this.state.validation.taskDescription === true &&
 			this.state.validation.taskStartDate === true &&
 			this.state.validation.taskEndDate === true &&
-			this.state.validation.taskDeveloper === true) {
+			this.state.validation.taskDeveloper === true &&
+			this.state.validation.taskPriority === true) {
 			this.setState((prevState) => ({
 					values: {
 						...prevState.values,
 						taskTitle: '',
 						taskDescription: '',
 						taskDeveloper: 'Select Developer',
+						taskPriority: 'Select Priority',
 						taskStartDate: null,
 						taskEndDate: null
 					},
@@ -200,6 +209,7 @@ class App extends Component {
 						...prevState.validation,
 						taskTitle: null,
 						taskDescription: null,
+						taskPriority: null,
 						taskDeveloper: null,
 						taskStartDate: null,
 						taskEndDate: null
@@ -258,6 +268,24 @@ class App extends Component {
 						validation: {
 							...prevState.validation,
 							taskDeveloper: false
+						}
+					}
+				));
+			}
+
+			if (this.state.values.taskPriority !== 'Select Priority') {
+				this.setState((prevState) => ({
+						validation: {
+							...prevState.validation,
+							taskPriority: true
+						}
+					}
+				));
+			} else {
+				this.setState((prevState) => ({
+						validation: {
+							...prevState.validation,
+							taskPriority: false
 						}
 					}
 				));
@@ -381,6 +409,7 @@ class App extends Component {
 			handleChangeStart,
 			handleChangeEnd,
 			handleDeveloperChange,
+			handlePriorityChange,
 			handleAddTask,
 			handleDrop,
 			handleAddBoard,
@@ -397,18 +426,14 @@ class App extends Component {
 			validation
 		} = this.state;
 		const {
-			tasks,
+			getAllTasks,
+			tasksByProgress,
 			boards,
-			getOpenBoards,
-			getClosedBoards,
-			getBacklogTasks,
-			getDevelopTasks,
-			getTestTasks,
-			getDoneTasks,
+			getBoardsStatus,
 			loaded,
 			selectedBoard,
-			getActiveTasks,
-			getActiveDevelopers
+			getActiveBoardTasks,
+			getActiveBoardDevelopers
 		} = this.props;
 		return (
 			<Fragment>
@@ -426,13 +451,8 @@ class App extends Component {
 								render={() =>
 									<Boards
 										boards={boards}
-										openBoards={getOpenBoards}
-										closedBoards={getClosedBoards}
-										tasks={tasks}
-										backlogTasks={getBacklogTasks}
-										developTasks={getDevelopTasks}
-										testTasks={getTestTasks}
-										doneTasks={getDoneTasks}
+										boardsStatus={getBoardsStatus}
+										tasks={getAllTasks}
 										values={values}
 										validation={validation}
 										onSelectBoard={handleSelectBoard}
@@ -445,13 +465,10 @@ class App extends Component {
 								exact path="/board/:boardId"
 								render={() =>
 									<Board
-										tasks={getActiveTasks}
-										developers={getActiveDevelopers}
+										activeBoardTasks={getActiveBoardTasks}
+										tasksByProgress={tasksByProgress}
+										developers={getActiveBoardDevelopers}
 										selectedBoard={selectedBoard}
-										backlogTasks={getBacklogTasks}
-										developTasks={getDevelopTasks}
-										testTasks={getTestTasks}
-										doneTasks={getDoneTasks}
 										onDrop={handleDrop}
 										onCloseBoard={handleCloseBoard}
 										onRemoveBoard={handleRemoveBoard}
@@ -461,8 +478,8 @@ class App extends Component {
 								path="/board/:boardId/create-task"
 								render={() =>
 									<TaskCreate
-										tasks={getActiveTasks}
-										developers={getActiveDevelopers}
+										activeBoardTasks={getActiveBoardTasks}
+										developers={getActiveBoardDevelopers}
 										values={values}
 										validation={validation}
 										selectedBoard={selectedBoard}
@@ -472,6 +489,7 @@ class App extends Component {
 										onChangeStart={handleChangeStart}
 										onChangeEnd={handleChangeEnd}
 										onDeveloperChange={handleDeveloperChange}
+										onPriorityChange={handlePriorityChange}
 									/>}
 							/>
 							<Route
@@ -498,16 +516,12 @@ const mapStateToProps = state => ({
 	loaded: getLoadingStatus(state),
 	boards: getBoards(state),
 	selectedBoard: getSelectedBoard(state),
-	tasks: getTasks(state),
+	getAllTasks: getAllTasks(state),
+	tasksByProgress: getTasksByProgress(state),
 	developers: getDevelopers(state),
-	getActiveTasks: getActiveTasks(state),
-	getActiveDevelopers: getActiveDevelopers(state),
-	getBacklogTasks: getBacklogTasks(state),
-	getDevelopTasks: getDevelopTasks(state),
-	getTestTasks: getTestTasks(state),
-	getDoneTasks: getDoneTasks(state),
-	getOpenBoards: getOpenBoards(state),
-	getClosedBoards: getClosedBoards(state)
+	getActiveBoardTasks: getActiveBoardTasks(state),
+	getActiveBoardDevelopers: getActiveBoardDevelopers(state),
+	getBoardsStatus: getBoardsStatus(state)
 });
 
 const mapDispatchToProps = dispatch => ({

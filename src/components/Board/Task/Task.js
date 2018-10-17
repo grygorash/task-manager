@@ -34,6 +34,14 @@ const Task = props => {
 	const opacity = isDragging ? 0 : 1;
 	return connectDragSource(
 		<div className={`${ownPriority}-task`} style={{opacity}}>
+			<p className={`${ownPriority}-info priority`}
+			   style={task.priority === 'low' ? {color: '#fcac79'}
+				   : task.priority === 'medium' ? {color: '#38E2BD'}
+					   : task.priority === 'high' ? {color: '#FA6E6E'}
+						   : null}>
+				<span className={`${ownPriority}-value`}>Priority: </span>
+				{task.priority}
+			</p>
 			<p className={`${ownPriority}-info`}>
 				<span className={`${ownPriority}-value`}>Task №: </span>
 				{task.taskNumber}
@@ -52,11 +60,11 @@ const Task = props => {
 			</p>
 			<p className={`${ownPriority}-info`}>
 				<span className={`${ownPriority}-value`}>Start Date: </span>
-				{moment(task.startDate).format("MMM Do YYYY")}
+				{moment(task.startDate).format('MMM Do YYYY')}
 			</p>
 			<p className={`${ownPriority}-info`}>
 				<span className={`${ownPriority}-value`}>End Date: </span>
-				{moment(task.endDate).format("MMM Do YYYY")}
+				{moment(task.endDate).format('MMM Do YYYY')}
 			</p>
 		</div>
 	);

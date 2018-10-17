@@ -5,7 +5,10 @@ import moment from 'moment';
 const BoardCreate = props => {
 	const {openBoards, boardTitle, onBoardTitleChange, onAddBoard, validationBoardTitle} = props;
 	return (
-		<Col md="12" className="create-board" style={openBoards.length ? {paddingTop: '0'} : {paddingTop: '20px'}}>
+		<Col
+			md="12"
+			className="create-board"
+			style={openBoards.length ? {paddingTop: '0'} : {paddingTop: '20px'}}>
 			<p>{openBoards.length ? 'Or Create New' : 'Create New Board'}</p>
 			<form onSubmit={(e) => onAddBoard(e, {
 				id: +new Date(),

@@ -23,7 +23,7 @@
 		}
 		.backlog-list, .develop-list, .test-list, .done-list {
 			padding: 10px;
-			min-height: calc(100vh - 292px);
+			min-height: 100%;
 			border-radius: 5px;
 			.backlog-task, .develop-task, .test-task, .done-task {
 				border: 1px solid #000;
@@ -35,6 +35,7 @@
 				font-size: 12px;
 				transition: all .3s;
 				cursor: pointer;
+				position: relative;
 				&:hover {
 					box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.1);
 				}
@@ -44,6 +45,11 @@
 					span {
 						font-weight: 700;
 					}
+				}
+				.priority{
+					position: absolute;
+					text-transform: capitalize;
+					right: 15px;
 				}
 			}
 			.backlog-task {

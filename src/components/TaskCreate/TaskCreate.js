@@ -8,7 +8,7 @@ import './TaskCreate.css';
 
 const TaskCreate = props => {
 	const {
-		tasks,
+		activeBoardTasks,
 		developers,
 		values,
 		validation,
@@ -17,6 +17,7 @@ const TaskCreate = props => {
 		onChangeStart,
 		onChangeEnd,
 		onDeveloperChange,
+		onPriorityChange,
 		onAddTask,
 		selectedBoard
 	} = props;
@@ -24,17 +25,20 @@ const TaskCreate = props => {
 		<form className="task-form" onSubmit={e => onAddTask(e, {
 			id: +new Date(),
 			boardId: selectedBoard.id,
-			taskNumber: tasks.length + 1,
+			taskNumber: activeBoardTasks.length + 1,
 			title: values.taskTitle,
 			description: values.taskDescription,
 			developer: values.taskDeveloper,
+			priority: values.taskPriority,
 			startDate: values.taskStartDate,
 			endDate: values.taskEndDate,
 			progress: 'backlog'
 		})}>
 			<Row>
 				<h3 className="col-md-12">Create<span>Task</span></h3>
-				<Col md="12" className="validation">
+				<Col
+					md="12"
+					className="validation">
 					<input
 						type="text"
 						className={values.taskTitle.length >= 3 ? 'validation-success' : ''}
@@ -95,12 +99,32 @@ const TaskCreate = props => {
 					<select
 						className={values.taskDeveloper !== 'Select Developer' || values.taskDeveloper === false ? 'validation-success' : ''}
 						onChange={({target}) => onDeveloperChange(target.value)}>
-						<option style={{display: 'none'}} value={values.taskDeveloper}>{values.taskDeveloper}</option>
+						<option
+							style={{display: 'none'}}
+							value={values.taskDeveloper}>{values.taskDeveloper}
+						</option>
 						{developers.map((dev, i) => <option key={i} value={dev.name}>{dev.name}</option>)}
 					</select>
 					<p
 						className={validation.taskDeveloper || validation.taskDeveloper === null ? 'error-field' : 'error-field not-valid'}>
 						select developer
+					</p>
+				</Col>
+				<Col md="12" className="validation">
+					<select
+						className={values.taskPriority !== 'Select Priority' || values.taskPriority === false ? 'validation-success' : ''}
+						onChange={({target}) => onPriorityChange(target.value)}>
+						<option
+							style={{display: 'none'}}
+							value={values.taskPriority}>{values.taskPriority}
+						</option>
+						<option value="low">Low</option>
+						<option value="medium">Medium</option>
+						<option value="high">High</option>
+					</select>
+					<p
+						className={validation.taskPriority || validation.taskPriority === null ? 'error-field' : 'error-field not-valid'}>
+						select priority
 					</p>
 				</Col>
 				<Col md="6">
@@ -109,13 +133,14 @@ const TaskCreate = props => {
 						validation.taskDescription === true &&
 						validation.taskStartDate === true &&
 						validation.taskEndDate === true &&
-						validation.taskDeveloper === true ?
+						validation.taskDeveloper === true &&
+						validation.taskPriority === true ?
 							'validation-success btn' : 'btn'}>
 						Add<span>Task</span>
 					</button>
 				</Col>
 				<Col md="6">
-					<button className="btn" onClick={()=>props.history.push(`/board/${selectedBoard.id}`)}>Cancel</button>
+					<button className="btn" onClick={() => props.history.push(`/board/${selectedBoard.id}`)}>Cancel</button>
 				</Col>
 			</Row>
 		</form>

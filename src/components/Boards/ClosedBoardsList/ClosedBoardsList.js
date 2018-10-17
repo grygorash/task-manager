@@ -8,13 +8,20 @@ const ClosedBoardsList = props => {
 	return (
 		<Fragment>
 			{closedBoards.length ? (
-				<Col md="12" className="closed-board-list">
+				<Col
+					md="12"
+					className="closed-board-list">
 					<p>Closed Boards</p>
 					<div className="list">
 						{closedBoards.map((board, i) => (
-							<div className="closed" key={i}>
+							<div
+								className="closed"
+								key={i}>
 								<div className="status">closed</div>
-								<Link className="btn" to={`/board/${board.id}`} onClick={() => onSelectBoard(board)}>
+								<Link
+									className="btn"
+									to={`/board/${board.id}`}
+									onClick={() => onSelectBoard(board)}>
 									<p>Title: <span>{board.boardTitle}</span></p>
 									<p>Start Date: <span>{moment(board.startDate).format('MMM Do YYYY')}</span></p>
 									<p>End Date: <span>{board.endDate ? moment(board.endDate).format('MMM Do YYYY') : '-'}</span></p>
