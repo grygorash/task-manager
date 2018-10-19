@@ -1,4 +1,4 @@
-.task-form, .developer-form {
+.task-form, .developer-form, .task-view {
 	padding: 20px;
 	max-width: 800px;
 	width: 100%;
@@ -31,6 +31,20 @@
 	.btn {
 		margin-top: 10px;
 		width: 100%;
+	}
+}
+
+.task-view {
+	.btn {
+		margin-top: 20px;
+	}
+	p {
+		text-align: center;
+		padding: 10px 0;
+		border-bottom: 1px solid #fa6e6e;
+		span {
+			font-size: 14px;
+		}
 	}
 }
 

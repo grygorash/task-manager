@@ -10,7 +10,7 @@ import {
 	ADD_DEV,
 	CLOSE_BOARD,
 	REMOVE_BOARD,
-	CHANGE_FILTER,
+	CHANGE_FILTER, SELECT_TASK,
 } from '../actionTypes';
 
 export const fetchInitialState = () => async dispatch => {
@@ -21,13 +21,15 @@ export const fetchInitialState = () => async dispatch => {
 		const tasks = await [];
 		const developers = await [];
 		const selectedBoard = await {};
+		const selectedTask = await {};
 		if (!localStorage.getItem('boards')) {
 			dispatch({
 				         type: FETCH_SUCCESS,
 				         boards,
 				         tasks,
 				         developers,
-				         selectedBoard
+				         selectedBoard,
+				         selectedTask
 			         });
 		} else {
 			dispatch({
@@ -35,7 +37,8 @@ export const fetchInitialState = () => async dispatch => {
 				         boards: JSON.parse(localStorage.getItem('boards')),
 				         tasks: JSON.parse(localStorage.getItem('tasks')),
 				         developers: JSON.parse(localStorage.getItem('developers')),
-				         selectedBoard: JSON.parse(localStorage.getItem('selectedBoard'))
+				         selectedBoard: JSON.parse(localStorage.getItem('selectedBoard')),
+				         selectedTask: JSON.parse(localStorage.getItem('selectedTask'))
 			         });
 		}
 	}
@@ -52,6 +55,13 @@ export const addSelectedBoard = board => {
 	return {
 		type: SELECT_BOARD,
 		board
+	};
+};
+
+export const addSelectedTask = task => {
+	return {
+		type: SELECT_TASK,
+		task
 	};
 };
 

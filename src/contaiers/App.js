@@ -15,7 +15,7 @@ import {
 	changeFilter,
 	changeProgress,
 	closeBoard,
-	removeBoard
+	removeBoard, addSelectedTask
 } from '../actions';
 import {
 	getActiveBoardTasks,
@@ -26,7 +26,7 @@ import {
 	getLoadingStatus,
 	getAllTasks, getBoards,
 	getSelectedBoard,
-	getDevelopers
+	getDevelopers, getSelectedTask
 } from '../selectors';
 import Loader from '../components/Loader/Loader';
 import Boards from '../components/Boards/Boards';
@@ -36,6 +36,7 @@ import DeveloperCreate from '../components/DeveloperCreate/DeveloperCreate';
 
 import 'react-datepicker/dist/react-datepicker.css';
 import './App.css';
+import TaskView from '../components/TaskView/TaskView';
 
 class App extends Component {
 	constructor(props) {
@@ -75,6 +76,7 @@ class App extends Component {
 		localStorage.setItem('tasks', JSON.stringify(this.props.getAllTasks));
 		localStorage.setItem('developers', JSON.stringify(this.props.developers));
 		localStorage.setItem('selectedBoard', JSON.stringify(this.props.selectedBoard));
+		localStorage.setItem('selectedTask', JSON.stringify(this.props.selectedTask));
 	}
 
 	handleBoardTitleChange = value => {
@@ -405,6 +407,11 @@ class App extends Component {
 		this.props.addSelectedBoard(board);
 	};
 
+	handleSelectTask = task => {
+		this.props.addSelectedTask(task);
+		this.props.history.push(`${task.boardId}/task/${task.id}`);
+	};
+
 	handleCloseBoard = board => {
 		this.props.closeBoard(board);
 		this.props.history.push('/');
@@ -425,6 +432,7 @@ class App extends Component {
 			handleRemoveBoard,
 			handleBoardTitleChange,
 			handleSelectBoard,
+			handleSelectTask,
 			handleAddDev,
 			handleDevNameChange,
 			handleDevEmailChange,
@@ -438,6 +446,7 @@ class App extends Component {
 			getBoardsStatus,
 			loaded,
 			selectedBoard,
+			selectedTask,
 			getActiveBoardTasks,
 			getActiveBoardDevelopers,
 			getTasksByFilter
@@ -480,6 +489,7 @@ class App extends Component {
 										onCloseBoard={handleCloseBoard}
 										onRemoveBoard={handleRemoveBoard}
 										onFilterChange={handleFilterChange}
+										onSelectTask={handleSelectTask}
 									/>}
 							/>
 							<Route
@@ -512,6 +522,14 @@ class App extends Component {
 										onDevEmailChange={handleDevEmailChange}
 									/>}
 							/>
+							<Route
+								path="/board/:boardId/task/:taskId"
+								render={() =>
+									<TaskView
+										selectedTask={selectedTask}
+									/>
+								}
+							/>
 						</Switch>
 					</Container>
 				) : <Loader />}
@@ -524,6 +542,7 @@ const mapStateToProps = state => ({
 	loaded: getLoadingStatus(state),
 	boards: getBoards(state),
 	selectedBoard: getSelectedBoard(state),
+	selectedTask: getSelectedTask(state),
 	getAllTasks: getAllTasks(state),
 	tasksByProgress: getTasksByProgress(state),
 	developers: getDevelopers(state),
@@ -540,6 +559,7 @@ const mapDispatchToProps = dispatch => ({
 	addTask: bindActionCreators(addTask, dispatch),
 	addDev: bindActionCreators(addDev, dispatch),
 	addSelectedBoard: bindActionCreators(addSelectedBoard, dispatch),
+	addSelectedTask: bindActionCreators(addSelectedTask, dispatch),
 	changeProgress: bindActionCreators(changeProgress, dispatch),
 	closeBoard: bindActionCreators(closeBoard, dispatch),
 	changeFilter: bindActionCreators(changeFilter, dispatch)

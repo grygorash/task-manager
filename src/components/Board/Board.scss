@@ -1,6 +1,5 @@
 .board {
 	padding: 20px 0 0;
-	background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 1%, #22242a 20%);
 	.create {
 		display: flex;
 		justify-content: flex-end;
@@ -37,14 +36,35 @@
 				transition: all .3s;
 				cursor: pointer;
 				position: relative;
+				.btn {
+					opacity: 0;
+					visibility: hidden;
+					position: absolute;
+					height: 30px;
+					padding: 0;
+					width: 100px;
+					right: 10px;
+					bottom: 10px;
+					box-shadow: none;
+					letter-spacing: .7px;
+					font-size: 12px;
+					&:hover{
+						box-shadow: none;
+					}
+				}
 				&:hover {
 					box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.1);
+					.btn{
+						opacity: 1;
+						visibility: visible;
+					}
 				}
 				p {
 					margin: 5px 0;
 					letter-spacing: .7px;
 					span {
 						font-weight: 700;
+						color: #aaadb3;
 					}
 				}
 				.priority {
@@ -56,30 +76,18 @@
 			.backlog-task {
 				border-left: 8px solid #fa6e6e;
 				color: #fa6e6e;
-				span {
-					color: #aaadb3;
-				}
 			}
 			.develop-task {
 				border-left: 8px solid #fcac79;
 				color: #fcac79;
-				span {
-					color: #aaadb3;
-				}
 			}
 			.test-task {
 				border-left: 8px solid #cc96ef;
 				color: #cc96ef;
-				span {
-					color: #aaadb3;
-				}
 			}
 			.done-task {
 				border-left: 8px solid #38e2bd;
 				color: #38e2bd;
-				span {
-					color: #aaadb3;
-				}
 			}
 
 		}

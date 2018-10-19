@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Col, Row } from 'reactstrap';
 
 import Header from './Header/Header';
@@ -13,6 +13,7 @@ const Board = props => {
 	const {
 		activeBoardTasks,
 		tasksByProgress,
+		tasksByFilter,
 		developers,
 		onDrop,
 		selectedBoard,
@@ -20,7 +21,7 @@ const Board = props => {
 		onRemoveBoard,
 		onFilterChange,
 		onDeveloperFilterChange,
-		tasksByFilter
+		onSelectTask
 	} = props;
 	return (
 		<Row
@@ -36,24 +37,28 @@ const Board = props => {
 				<h3>> Backlog (<span>{tasksByFilter.backlog.length}</span>)</h3>
 				<BacklogTasks
 					backlogTasks={tasksByFilter.backlog}
+					onSelectTask={onSelectTask}
 					onDrop={onDrop} />
 			</Col>
 			<Col md="3" className="develop">
 				<h3>> Develop (<span>{tasksByFilter.develop.length}</span>)</h3>
 				<DevelopTasks
 					developTasks={tasksByFilter.develop}
+					onSelectTask={onSelectTask}
 					onDrop={onDrop} />
 			</Col>
 			<Col md="3" className="test">
 				<h3>> Test (<span>{tasksByFilter.test.length}</span>)</h3>
 				<TestTasks
 					testTasks={tasksByFilter.test}
+					onSelectTask={onSelectTask}
 					onDrop={onDrop} />
 			</Col>
 			<Col md="3" className="done">
 				<h3>> Done Tasks (<span>{tasksByFilter.done.length}</span>)</h3>
 				<DoneTasks
 					doneTasks={tasksByFilter.done}
+					onSelectTask={onSelectTask}
 					onDrop={onDrop} />
 			</Col> <Col md="6" className="total">
 			<p>

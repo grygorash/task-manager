@@ -3,6 +3,7 @@ import { createSelector } from 'reselect';
 export const getLoadingStatus = state => state.loaded;
 export const getBoards = state => state.boards;
 export const getSelectedBoard = state => state.selectedBoard;
+export const getSelectedTask = state => state.selectedTask;
 export const getAllTasks = state => state.tasks;
 export const getDevelopers = state => state.developers;
 

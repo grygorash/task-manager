@@ -30,7 +30,7 @@ function collect(connect, monitor) {
 }
 
 const Task = props => {
-	const {task, isDragging, connectDragSource, ownPriority} = props;
+	const {task, isDragging, connectDragSource, ownPriority, onSelectTask} = props;
 	const opacity = isDragging ? 0 : 1;
 	return connectDragSource(
 		<div className={`${ownPriority}-task`} style={{opacity}}>
@@ -46,15 +46,15 @@ const Task = props => {
 				<span className={`${ownPriority}-value`}>Task №: </span>
 				{task.taskNumber}
 			</p>
-			<p className={`${ownPriority}-info`}>
+			<p className={`${ownPriority}-info ellipsis`}>
 				<span className={`${ownPriority}-value`}>Title: </span>
 				{task.title}
 			</p>
-			<p className={`${ownPriority}-info`}>
+			<p className={`${ownPriority}-info ellipsis`}>
 				<span className={`${ownPriority}-value`}>Description: </span>
 				{task.description}
 			</p>
-			<p className={`${ownPriority}-info`}>
+			<p className={`${ownPriority}-info ellipsis`}>
 				<span className={`${ownPriority}-value`}>Developer: </span>
 				{task.developer}
 			</p>
@@ -66,6 +66,7 @@ const Task = props => {
 				<span className={`${ownPriority}-value`}>End Date: </span>
 				{moment(task.endDate).format('MMM Do YYYY')}
 			</p>
+			<button className="btn" onClick={() => onSelectTask(task)}>View<span>Task</span></button>
 		</div>
 	);
 };

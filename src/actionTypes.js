@@ -4,12 +4,15 @@ export const FETCH_LOCAL_SUCCESS = 'FETCH_LOCAL_SUCCESS';
 export const FETCH_FAILURE = 'FETCH_FAILURE';
 
 export const ADD_BOARD = 'ADD_BOARD';
+export const CLOSE_BOARD = 'CLOSE_BOARD';
 export const REMOVE_BOARD = 'REMOVE_BOARD';
-export const ADD_TASK = 'ADD_TASK';
+
 export const ADD_DEV = 'ADD_DEV';
+export const ADD_TASK = 'ADD_TASK';
+
 export const CHANGE_PROGRESS = 'CHANGE_PROGRESS';
+export const CHANGE_FILTER = 'CHANGE_FILTER';
 
 export const SELECT_BOARD = 'SELECT_BOARD';
-export const CLOSE_BOARD = 'CLOSE_BOARD';
+export const SELECT_TASK = 'SELECT_TASK';
 
-export const CHANGE_FILTER = 'CHANGE_FILTER';

@@ -11,7 +11,7 @@ const collect = function(connect, monitor) {
 };
 
 const DoneTasks = props => {
-	const {doneTasks, connectDropTarget, hovered, onDrop} = props;
+	const {doneTasks, connectDropTarget, hovered, onDrop, onSelectTask} = props;
 	return connectDropTarget(
 		<div className={hovered ? 'done-list drop-hover' : 'done-list'}>
 			{doneTasks ? doneTasks.map((task, i) => (
@@ -23,7 +23,8 @@ const DoneTasks = props => {
 					                           secondPriority="backlog"
 					                           thirdPriority="develop"
 					                           fourthPriority="test"
-					                           onDrop={onDrop} />
+					                           onDrop={onDrop}
+					                           onSelectTask={onSelectTask}/>
 			                           )
 			) : null}
 		</div>
