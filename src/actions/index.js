@@ -10,26 +10,19 @@ import {
 	ADD_DEV,
 	CLOSE_BOARD,
 	REMOVE_BOARD,
-	CHANGE_FILTER, SELECT_TASK,
+	CHANGE_FILTER,
+	SELECT_TASK,
 } from '../actionTypes';
+import { initialState } from '../reducers';
 
 export const fetchInitialState = () => async dispatch => {
 	dispatch({type: FETCH_START});
 
 	try {
-		const boards = await [];
-		const tasks = await [];
-		const developers = await [];
-		const selectedBoard = await {};
-		const selectedTask = await {};
 		if (!localStorage.getItem('boards')) {
 			dispatch({
 				         type: FETCH_SUCCESS,
-				         boards,
-				         tasks,
-				         developers,
-				         selectedBoard,
-				         selectedTask
+				         ...initialState
 			         });
 		} else {
 			dispatch({

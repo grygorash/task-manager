@@ -8,57 +8,57 @@ export const getAllTasks = state => state.tasks;
 export const getDevelopers = state => state.developers;
 
 export const getActiveBoardTasks = createSelector(getSelectedBoard, getAllTasks, (board, tasks) => {
-	return tasks ? tasks.filter(task => task.boardId === board.id) : null;
+	return tasks.filter(task => task.boardId === board.id);
 });
 
 export const getTasksByProgress = createSelector(getActiveBoardTasks, tasks => {
 	return {
-		backlog: tasks ? tasks.filter(task => task.progress === 'backlog') : null,
-		develop: tasks ? tasks.filter(task => task.progress === 'develop') : null,
-		test: tasks ? tasks.filter(task => task.progress === 'test') : null,
-		done: tasks ? tasks.filter(task => task.progress === 'done') : null
+		backlog: tasks.filter(task => task.progress === 'backlog'),
+		develop: tasks.filter(task => task.progress === 'develop'),
+		test: tasks.filter(task => task.progress === 'test'),
+		done: tasks.filter(task => task.progress === 'done')
 	};
 });
 
 export const getTasksByFilter = createSelector(getSelectedBoard, getActiveBoardTasks, (board, tasks) => {
-	if (board ? board.filterByPriority === 'none' && board.filterByDeveloper !== 'none' : null) {
+	if (board.filterByPriority === 'none' && board.filterByDeveloper !== 'none') {
 		return {
-			backlog: tasks ? tasks.filter(task => task.progress === 'backlog').filter(task => task.developer === board.filterByDeveloper) : null,
-			develop: tasks ? tasks.filter(task => task.progress === 'develop').filter(task => task.developer === board.filterByDeveloper) : null,
-			test: tasks ? tasks.filter(task => task.progress === 'test').filter(task => task.developer === board.filterByDeveloper) : null,
-			done: tasks ? tasks.filter(task => task.progress === 'done').filter(task => task.developer === board.filterByDeveloper) : null
+			backlog: tasks.filter(task => task.progress === 'backlog').filter(task => task.developer === board.filterByDeveloper),
+			develop: tasks.filter(task => task.progress === 'develop').filter(task => task.developer === board.filterByDeveloper),
+			test: tasks.filter(task => task.progress === 'test').filter(task => task.developer === board.filterByDeveloper),
+			done: tasks.filter(task => task.progress === 'done').filter(task => task.developer === board.filterByDeveloper)
 		};
-	} else if (board ? board.filterByDeveloper === 'none' && board.filterByPriority !== 'none' : null) {
+	} else if (board.filterByDeveloper === 'none' && board.filterByPriority !== 'none') {
 		return {
-			backlog: tasks ? tasks.filter(task => task.progress === 'backlog').filter(task => task.priority === board.filterByPriority) : null,
-			develop: tasks ? tasks.filter(task => task.progress === 'develop').filter(task => task.priority === board.filterByPriority) : null,
-			test: tasks ? tasks.filter(task => task.progress === 'test').filter(task => task.priority === board.filterByPriority) : null,
-			done: tasks ? tasks.filter(task => task.progress === 'done').filter(task => task.priority === board.filterByPriority) : null
+			backlog: tasks.filter(task => task.progress === 'backlog').filter(task => task.priority === board.filterByPriority),
+			develop: tasks.filter(task => task.progress === 'develop').filter(task => task.priority === board.filterByPriority),
+			test: tasks.filter(task => task.progress === 'test').filter(task => task.priority === board.filterByPriority),
+			done: tasks.filter(task => task.progress === 'done').filter(task => task.priority === board.filterByPriority)
 		};
-	} else if (board ? board.filterByDeveloper !== 'none' && board.filterByPriority !== 'none' : null) {
+	} else if (board.filterByDeveloper !== 'none' && board.filterByPriority !== 'none') {
 		return {
-			backlog: tasks ? tasks.filter(task => task.progress === 'backlog').filter(task => task.priority === board.filterByPriority).filter(task => task.developer === board.filterByDeveloper) : null,
-			develop: tasks ? tasks.filter(task => task.progress === 'develop').filter(task => task.priority === board.filterByPriority).filter(task => task.developer === board.filterByDeveloper) : null,
-			test: tasks ? tasks.filter(task => task.progress === 'test').filter(task => task.priority === board.filterByPriority).filter(task => task.developer === board.filterByDeveloper) : null,
-			done: tasks ? tasks.filter(task => task.progress === 'done').filter(task => task.priority === board.filterByPriority).filter(task => task.developer === board.filterByDeveloper) : null
+			backlog: tasks.filter(task => task.progress === 'backlog').filter(task => task.priority === board.filterByPriority).filter(task => task.developer === board.filterByDeveloper),
+			develop: tasks.filter(task => task.progress === 'develop').filter(task => task.priority === board.filterByPriority).filter(task => task.developer === board.filterByDeveloper),
+			test: tasks.filter(task => task.progress === 'test').filter(task => task.priority === board.filterByPriority).filter(task => task.developer === board.filterByDeveloper),
+			done: tasks.filter(task => task.progress === 'done').filter(task => task.priority === board.filterByPriority).filter(task => task.developer === board.filterByDeveloper)
 		};
 	} else {
 		return {
-			backlog: tasks ? tasks.filter(task => task.progress === 'backlog') : null,
-			develop: tasks ? tasks.filter(task => task.progress === 'develop') : null,
-			test: tasks ? tasks.filter(task => task.progress === 'test') : null,
-			done: tasks ? tasks.filter(task => task.progress === 'done') : null
+			backlog: tasks.filter(task => task.progress === 'backlog'),
+			develop: tasks.filter(task => task.progress === 'develop'),
+			test: tasks.filter(task => task.progress === 'test'),
+			done: tasks.filter(task => task.progress === 'done')
 		};
 	}
 });
 
 export const getActiveBoardDevelopers = createSelector(getSelectedBoard, getDevelopers, (board, developers) => {
-	return developers ? developers.filter(developer => developer.boardId === board.id) : null;
+	return developers.filter(developer => developer.boardId === board.id);
 });
 
 export const getBoardsStatus = createSelector(getBoards, boards => {
 	return {
-		open: boards ? boards.filter(board => board.status === 'open') : null,
-		closed: boards ? boards.filter(board => board.status === 'closed') : null
+		open: boards.filter(board => board.status === 'open'),
+		closed: boards.filter(board => board.status === 'closed')
 	};
 });

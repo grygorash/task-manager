@@ -14,7 +14,14 @@ import {
 } from '../actionTypes';
 import moment from 'moment';
 
-const initialState = {};
+export const initialState = {
+	boards: [],
+	tasks: [],
+	developers: [],
+	selectedBoard: {},
+	selectedTask: {},
+	loaded: false
+};
 
 export default function rootReducer(state = initialState, action) {
 	switch (action.type) {
