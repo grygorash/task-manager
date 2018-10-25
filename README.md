@@ -1,4 +1,4 @@
-# Form React.js
+# dNd Boards.js
 ## Install
 1. `npm i`
 2. `npm start`
